@@ -9,8 +9,6 @@ public class SimonGame : MonoBehaviour
     [SerializeField] [Range(.1f, 3)] private float timeBetweenFeedback;
     [SerializeField] [Range(.2f, 5)] private float timeLimit;
     
-    
-
     private List<FeedbackContainer> _currentSequence;
     private int _numContainers;
     private bool _isTimeUp;
@@ -37,6 +35,8 @@ public class SimonGame : MonoBehaviour
 
     private IEnumerator PlaySequenceCoroutine()
     {
+        _currentSequence.Add(GetRandomContainer());
+        
         foreach (var feedbackContainer in _currentSequence)
         {
             feedbackContainer.Play();
