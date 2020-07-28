@@ -11,6 +11,12 @@ public class simonGame : MonoBehaviour
     public GameObject cube4;
     public GameObject cube5;
 
+    public GameObject leftHand;
+    public GameObject rightHand;
+
+    public Material handEnabled;
+    public Material handDisabled;
+
     public Material cube1color;
     public Material cube1beep;
     public Material cube2color;
@@ -69,6 +75,7 @@ public class simonGame : MonoBehaviour
 
             if (seq[z + 1] == 0)
             {
+                //disableHands();
                 i++;
                 addscore();
                 //levelUp();
@@ -93,7 +100,7 @@ public class simonGame : MonoBehaviour
         else if (pushed > 0 && pushed != current)
         {
             gameover.text = "Game Over";
-            //Time.timeScale = 0f;
+            this.GetComponent<simonGame>().enabled = false;
         }
 
     }
@@ -103,6 +110,7 @@ public class simonGame : MonoBehaviour
         while (seq[a] != 0)
         {
             yield return new WaitForSeconds(timeBetweenBeep);
+            disableHands();
             if (seq[a] == 1)
             {
                 cube1.GetComponent<Renderer>().material = cube1beep;
@@ -148,12 +156,29 @@ public class simonGame : MonoBehaviour
                 a++;
             }
         }
+        enableHands();
     }
 
     void addscore()
     {
         round++;
         number.text = round.ToString();
+    }
+
+    void disableHands()
+    {
+        leftHand.GetComponent<BoxCollider>().isTrigger = false;
+        rightHand.GetComponent<BoxCollider>().isTrigger = false;
+        leftHand.GetComponent<Renderer>().material = handDisabled;
+        rightHand.GetComponent<Renderer>().material = handDisabled;
+    }
+
+    void enableHands()
+    {
+        leftHand.GetComponent<BoxCollider>().isTrigger = true;
+        rightHand.GetComponent<BoxCollider>().isTrigger = true;
+        leftHand.GetComponent<Renderer>().material = handEnabled;
+        rightHand.GetComponent<Renderer>().material = handEnabled;
     }
 
     void levelUp()

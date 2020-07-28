@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/mainMenu.unity
+    path: Assets/_ProjectFolder/Scenes/mainMenu.unity
     guid: db1b654e92062254ca5fb31c94b1ed6c
   - enabled: 1
-    path: Assets/Scenes/simonThree.unity
+    path: Assets/_ProjectFolder/Scenes/simonThree.unity
     guid: f6c6a131ed8dbac418c04bdf8a242aa2
   - enabled: 1
-    path: Assets/Scenes/simonFour.unity
+    path: Assets/_ProjectFolder/Scenes/simonFour.unity
     guid: 6e1d7fa3e1d009f4087ec4d0887a0e2e
   - enabled: 1
-    path: Assets/Scenes/simonFive.unity
+    path: Assets/_ProjectFolder/Scenes/simonFive.unity
     guid: d0f2b2074b4fd674ca1edfce3f3ef823
   m_configObjects: {}
