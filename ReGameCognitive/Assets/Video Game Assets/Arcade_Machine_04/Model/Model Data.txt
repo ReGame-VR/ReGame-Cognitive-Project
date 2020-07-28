@@ -1,0 +1,7 @@
+Model Data
+
+Verts: 4.181
+Faces: 7.933
+Tris: 7.933
+
+Textures: 4096x4096

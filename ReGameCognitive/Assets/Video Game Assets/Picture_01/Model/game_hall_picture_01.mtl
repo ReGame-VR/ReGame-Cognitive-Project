@@ -1,0 +1,13 @@
+# Blender MTL File: 'game_hall_picture_01_optimized.blend'
+# Material Count: 1
+
+newmtl _auto_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.164706 0.113725 0.098039
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd I:\3D_Asset_Packages\For Sale\80s_Video_Game_Hall\Picture_01\picture_01_optimized\_auto_.png
