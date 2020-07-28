@@ -9,6 +9,6 @@ public class loadScene : MonoBehaviour
 
     private void OnTriggerEnter()
     {
-        SceneManager.LoadScene(sceneToLoad.name);
+        SceneManager.LoadScene("simonThree");
     }
 }
