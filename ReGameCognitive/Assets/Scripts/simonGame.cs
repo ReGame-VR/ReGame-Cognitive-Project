@@ -93,7 +93,7 @@ public class simonGame : MonoBehaviour
         else if (pushed > 0 && pushed != current)
         {
             gameover.text = "Game Over";
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
         }
 
     }
