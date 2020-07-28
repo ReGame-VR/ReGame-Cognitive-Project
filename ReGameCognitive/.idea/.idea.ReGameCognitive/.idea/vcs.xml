@@ -2,7 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Assets/VRTK-master/VRTK" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Assets/VRTK-master/VRTK/Dependencies/Zinnia.Unity" vcs="Git" />
   </component>
 </project>
