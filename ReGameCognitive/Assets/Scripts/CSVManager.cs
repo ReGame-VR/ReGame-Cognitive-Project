@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Sirenix.OdinInspector;
 
 public class CSVManager : MonoBehaviour
 {
@@ -14,13 +15,19 @@ public class CSVManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Application.isEditor)    //Editor
+        //Non-Quest version path
+        //_path = "Assets/Resources/" + REPORT_FILE_NAME;
+        
+        //Quest Path as of 07/28/2020
+        //_path = Application.persistentDataPath + "/" + REPORT_FILE_NAME;
+
+        if (Application.isEditor)
         {
             _path = "Assets/Resources/";
         }
         else
         {
-            _path = Application.persistentDataPath + "/";    //Quest
+            _path = Application.persistentDataPath + "/";
         }
     }
 
@@ -132,5 +139,15 @@ public class CSVManager : MonoBehaviour
     private string GetFilePath()
     {
         return _path;
+    }
+
+    private void ClearData()
+    {
+        if (_dictionary == null) return;
+        
+        foreach (var key in _dictionary.Keys)
+        {
+            _dictionary[key] = null;
+        }
     }
 }
