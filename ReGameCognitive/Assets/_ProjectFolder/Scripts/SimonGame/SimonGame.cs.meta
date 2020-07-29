@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: e5b972e53fd1a32409a782b7ab315f7f
+=======
+guid: aebe4871298be3c4db655b0754ce1a7f
+>>>>>>> parent of 505c12d... Organized folder structure
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

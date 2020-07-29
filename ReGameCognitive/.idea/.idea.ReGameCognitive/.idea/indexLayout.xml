@@ -16,7 +16,6 @@
       <Path>Library/PackageCache/com.unity.xr.legacyinputhelpers@2.1.4</Path>
       <Path>Library/PackageCache/com.unity.xr.oculus.android@2.38.6</Path>
       <Path>Library/PackageCache/com.unity.xr.oculus.standalone@2.38.4</Path>
-      <Path>Library/PackageCache/com.unity.xr.openvr.standalone@2.0.5</Path>
       <Path>Packages</Path>
       <Path>ProjectSettings</Path>
     </explicitIncludes>
