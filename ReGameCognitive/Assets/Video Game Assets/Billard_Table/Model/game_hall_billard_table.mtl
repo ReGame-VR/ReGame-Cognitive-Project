@@ -1,0 +1,13 @@
+# Blender MTL File: 'game_hall_billard_table_optimized.blend'
+# Material Count: 1
+
+newmtl _auto_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.129412 0.109804 0.074510
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd game_hall_billard_table__color.png

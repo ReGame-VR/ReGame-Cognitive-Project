@@ -1,0 +1,13 @@
+# Blender MTL File: 'game_hall_billard_triangle_optimized.blend'
+# Material Count: 1
+
+newmtl _auto_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.211765 0.207843 0.207843
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd I:\3D_Asset_Packages\For Sale\80s_Video_Game_Hall\Billard_Triangle\billard_triangle_optimized\_auto_.png

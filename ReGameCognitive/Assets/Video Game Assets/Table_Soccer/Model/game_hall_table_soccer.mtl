@@ -1,0 +1,24 @@
+# Blender MTL File: 'game_hall_table_soccer_optimized.blend'
+# Material Count: 2
+
+newmtl _auto_
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.215686 0.184314 0.168627
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd I:\3D_Asset_Packages\For Sale\80s_Video_Game_Hall\Table_Soccer\table_soccer_optimized\_auto_.png
+
+newmtl _auto__NONE
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.215686 0.184314 0.168627
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd game_hall_table_soccer__color.png

@@ -1,0 +1,9 @@
+Model Data
+
+Verts: 4.904
+Faces: 9.165
+Tris: 9.165
+
+Textures: 4096x4096
+
+You have to create a Multi-Material with 2 Materials

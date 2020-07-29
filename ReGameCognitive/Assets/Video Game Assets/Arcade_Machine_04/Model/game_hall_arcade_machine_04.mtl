@@ -1,0 +1,23 @@
+# Blender MTL File: 'game_hall_arcade_machine_04_optimized.blend'
+# Material Count: 2
+
+newmtl FrontColor
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl _auto_1
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.137255 0.121569 0.117647
+Ks 0.330000 0.330000 0.330000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd I:\3D_Asset_Packages\For Sale\80s_Video_Game_Hall\Arcade_Machine_04\arcade_machine_04_optimized\_auto_1.png

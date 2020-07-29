@@ -1,0 +1,11 @@
+newmtl FrontColor
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd game_hall_arcade_machine_03_glass__color.png
+map_Ks game_hall_arcade_machine_03_glass__gloss.png
+map_bump game_hall_arcade_machine_03_glass__nmap.png
