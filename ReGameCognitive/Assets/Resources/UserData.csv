@@ -1,0 +1,8 @@
+userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInStudy,studyCompleted,sequencesCompleted,correctSequences,sequences
+4c26b503fd264c628e79e214bec7c88d,7/28/2020 8:20:09 PM,,7/29/2020 3:20:09 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+1a5475cb68c34da3817df18829bd433b,7/28/2020 8:23:19 PM,,7/29/2020 3:23:19 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+58fd764262e44719ae1cf2482623ec63,7/28/2020 8:25:52 PM,,7/29/2020 3:25:52 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+0a62f5ac3c20469282355b3911a86f81,7/28/2020 8:27:41 PM,,7/29/2020 3:27:41 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+c67711370f954abc809548cd524a9758,7/28/2020 8:28:37 PM,,7/29/2020 3:28:37 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+60c25e9920704137aa802731c1c04920,7/28/2020 8:29:48 PM,,7/29/2020 3:29:48 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
+7bd55f680fdb43fdacbdc46c23473183,7/28/2020 8:29:59 PM,,7/29/2020 3:29:59 AM,,,False,0,0,System.Collections.Generic.List`1[System.String]
