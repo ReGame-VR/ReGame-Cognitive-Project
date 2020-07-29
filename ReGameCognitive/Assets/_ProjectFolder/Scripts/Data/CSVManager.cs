@@ -1,96 +1,153 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Sirenix.OdinInspector;
 
-public class CSVManager : MonoBehaviour {
-    
-    private string path;
-    public string reportFileName = "Data.csv";
-    private string reportSeparator = ",";
-    
-    private string[] reportHeaders = new string[7] {
-        "Participant ID",
-        "Date",
-        "Time",
-        "Level",
-        "Throw Number",
-        "Error",
-        "Success(Y/N)"
-    };
+public class CSVManager : MonoBehaviour
+{
+    private List<string> _reportHeaders;
+    private Dictionary<string, string> _dictionary;
+    private string _path;
 
-#region Interactions
-
-    public void AppendToReport(string[] strings) {
-        VerifyFile();
-        using (StreamWriter sw = File.AppendText(path)) {
-            string finalString = "";
-            for (int i = 0; i < strings.Length; i++) {
-                if (finalString != "") {
-                    finalString += reportSeparator;
-                }
-                finalString += strings[i];
-            }
-            sw.WriteLine(finalString);
-        }
-    }
-
-    private void CreateReport() {
-        using (StreamWriter sw = File.CreateText(path)) {
-            string finalString = "";
-            for (int i = 0; i < reportHeaders.Length; i++) {
-                if (finalString != "") {
-                    finalString += reportSeparator;
-                }
-                finalString += reportHeaders[i];
-            }
-            sw.WriteLine(finalString);
-        }
-    }
-
-    public string[] DataInputToArray(string partId, string date, string time, string level, string throwNum, string error, string success)
-    {
-        string[] data = new string[7];
-        data[0] = partId;
-        data[1] = date;
-        data[2] = time;
-        data[3] = level;
-        data[4] = throwNum;
-        data[5] = error;
-        data[6] = success;
-
-        return data;
-    }
-
-#endregion
-
-
-#region Operations
-
-    private void VerifyFile() {
-        string file = GetFilePath();
-        if (!File.Exists(file)) {
-            CreateReport();
-        }
-    }
+    private const string REPORT_SEPARATOR = ",";
+    private const string REPORT_FILE_NAME = "Data.csv";
 
     private void Awake()
     {
         //Non-Quest version path
-        //path = "Assets/Resources/ResultsLog.csv";
+        //_path = "Assets/Resources/" + REPORT_FILE_NAME;
         
         //Quest Path as of 07/28/2020
-        path = Application.persistentDataPath + "/" + reportFileName;
+        //_path = Application.persistentDataPath + "/" + REPORT_FILE_NAME;
+
+        if (Application.isEditor)
+        {
+            _path = "Assets/Resources/";
+        }
+        else
+        {
+            _path = Application.persistentDataPath + "/";
+        }
     }
 
-    #endregion
-
-
-#region Queries
-
-    private string GetFilePath() {
-        return path;
+    public void Initialize(object dataObject)
+    {
+        if (dataObject == null) return;
+        
+        _path += dataObject.GetType().Name + REPORT_FILE_NAME;
+        InitializeHeaders(dataObject);
+        InitializeDictionary();
     }
 
-#endregion
+    public void UpdateData(object dataObject)
+    {
+        var fields = dataObject.GetType().GetFields();
+        foreach (var field in fields)
+        {
+            AddData(field.Name, field.GetValue(dataObject).ToString());
+        }
+    }
 
+    public void AppendReport()
+    {
+        var dictionaryValues = new List<string>();
+        foreach (var value in _dictionary.Values)
+        {
+            dictionaryValues.Add(value);
+        }
+        
+        AppendToReport(dictionaryValues);
+        InitializeDictionary();
+    }
+    
+    
+    private void InitializeDictionary()
+    {
+        _dictionary = new Dictionary<string, string>();
+        foreach (var header in _reportHeaders)
+        {
+            _dictionary.Add(header, null);
+        }
+    }
+    
+    private void InitializeHeaders(object dataObject)
+    {
+        _reportHeaders = new List<string>();
+        var fields = dataObject.GetType().GetFields();
+        foreach (var field in fields)
+        {
+            _reportHeaders.Add(field.Name);
+        }
+    }
+    
+    private void AddData(string header, string entry)
+    {
+        if (!_dictionary.ContainsKey(header)) return;
+
+        _dictionary[header] = entry;
+    }
+
+    private void AppendToReport(IEnumerable<string> lineOfData)
+    {
+        VerifyFile();
+        using (var streamWriter = File.AppendText(_path))
+        {
+            string finalString = "";
+            foreach (var entry in lineOfData)
+            {
+                if (finalString != "")
+                {
+                    finalString += REPORT_SEPARATOR;
+                }
+
+                finalString += entry;
+            }
+
+            streamWriter.WriteLine(finalString);
+        }
+    }
+
+    private void CreateReport()
+    {
+        using (var streamWriter = File.CreateText(_path))
+        {
+            var finalString = "";
+            foreach (var header in _reportHeaders)
+            {
+                if (finalString != "")
+                {
+                    finalString += REPORT_SEPARATOR;
+                }
+
+                finalString += header;
+            }
+
+            streamWriter.WriteLine(finalString);
+        }
+    }
+
+    private void VerifyFile()
+    {
+        string file = GetFilePath();
+        if (!File.Exists(file))
+        {
+            CreateReport();
+        }
+    }
+
+    private string GetFilePath()
+    {
+        return _path;
+    }
+
+    private void ClearData()
+    {
+        if (_dictionary == null) return;
+        
+        foreach (var key in _dictionary.Keys)
+        {
+            _dictionary[key] = null;
+        }
+    }
 }
