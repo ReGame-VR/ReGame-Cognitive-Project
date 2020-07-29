@@ -1,5 +1,17 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: aebe4871298be3c4db655b0754ce1a7f
+=======
+<<<<<<<< HEAD:ReGameCognitive/Assets/_ProjectFolder/Scripts/SimonGame/SimonGame.cs.meta
+guid: 09a38e38465c021409d001d2f71d5752
+========
+<<<<<<< HEAD
+guid: e5b972e53fd1a32409a782b7ab315f7f
+=======
+guid: aebe4871298be3c4db655b0754ce1a7f
+>>>>>>> parent of 505c12d... Organized folder structure
+>>>>>>>> master:ReGameCognitive/Assets/_ProjectFolder/Scripts/SimonGame/SequenceGame.cs.meta
+>>>>>>> master
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

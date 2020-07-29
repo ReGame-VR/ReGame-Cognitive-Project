@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class User
+public class Session
 {
     public string userId;
     public string localStartTime = "";
@@ -11,11 +11,12 @@ public class User
     public string utcStartTime = "";
     public string utcEndTime = "";
     public string timeInStudy = "";
-    public bool studyCompleted = false;
+    public bool sessionCompleted = false;
+    public int currentSequence;
     public int sequencesCompleted;
     public int correctSequences;
     public List<string> sequences = new List<string>();
-    
+
     public float SuccessPercentage
     {
         get
@@ -26,10 +27,16 @@ public class User
         }
     }
     
-    public User()
+    public Session(User user)
     {
-        userId = GenerateRandomUserId();
+        if (user == null) return;
+        
+        //Data from user
+        currentSequence = user.sequencesCompleted;
+        userId = user.userId;
+        
         SetStartTime();
+        sequences = new List<string>();
     }
     
     public void SetEndTime()
@@ -37,15 +44,10 @@ public class User
         localEndTime = DateTime.Now.ToString();
         utcEndTime = DateTime.UtcNow.ToString();
     }
-
+    
     private void SetStartTime()
     {
         localStartTime = DateTime.Now.ToString();
         utcStartTime = DateTime.UtcNow.ToString();
-    }
-
-    private static string GenerateRandomUserId()
-    {
-        return Guid.NewGuid().ToString("N");
     }
 }
