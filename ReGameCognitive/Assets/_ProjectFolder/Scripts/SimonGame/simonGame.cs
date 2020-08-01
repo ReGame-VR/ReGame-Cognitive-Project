@@ -75,7 +75,6 @@ public class simonGame : MonoBehaviour
 
             if (seq[z + 1] == 0)
             {
-                //disableHands();
                 i++;
                 addscore();
                 //levelUp();
