@@ -17,19 +17,21 @@ public class FinalSimon : MonoBehaviour
     public int litCubeIndex;
     public GameObject[] Hands;
     public Material[] HandColors;
-    public float CurrentTime;
-    public float StartingTime;
+    public float timeRemaining;
+    public float timeLimit;
     public TextMesh CountdownNumberText;
     public TextMesh RoundText;
     public GameObject SimonGame;
     public GameObject buttonColliderParent;
     public GameObject StopLights;
 
+    private float _timeInSequence;
+
     // Start is called before the first frame update
     void OnEnable()
     {
         currentSequenceIndex = 0;
-        CurrentTime = StartingTime;
+        timeRemaining = timeLimit;
         DisableHands();
         HowManyCubes();
         SetupSequence();
@@ -133,12 +135,13 @@ public class FinalSimon : MonoBehaviour
 
     public void Timer()
     {
-        CurrentTime -= 1 * Time.deltaTime;
-        string mintues = ((int)CurrentTime / 60).ToString();
-        string seconds = (CurrentTime % 60).ToString("00");
+        timeRemaining -= Time.deltaTime;
+        _timeInSequence += Time.deltaTime;
+        string mintues = ((int)timeRemaining / 60).ToString();
+        string seconds = (timeRemaining % 60).ToString("00");
         CountdownNumberText.text = mintues + ":" + seconds;
 
-        if (CurrentTime <= 0)    //Restart from "Choose difficulty"
+        if (timeRemaining <= 0)    //Restart from "Choose difficulty"
         {
             buttonColliderParent.SetActive(false);
             EnableHands();
@@ -173,6 +176,19 @@ public class FinalSimon : MonoBehaviour
         var audioSource = button.GetComponent<AudioSource>();
         if (audioSource) audioSource.Stop();
     }
+    
+    public void PlayFeedback(int index, AudioClip audioClip)
+    {
+        if (Button.Length <= index) return;
+
+        var button = Button[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer) buttonRenderer.material.EnableKeyword("_EMISSION");
+        var audioSource = button.GetComponent<AudioSource>();
+        if (audioSource) audioSource.PlayOneShot(audioClip);
+    }
 
     IEnumerator PlaySequence()
     {
@@ -196,6 +212,7 @@ public class FinalSimon : MonoBehaviour
         }
 
         currentSequenceIndex = 0;
+        _timeInSequence = 0;
         EnableHands();
     }
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Starting : MonoBehaviour
 {
+    [SerializeField] private FinalSimon finalSimon;
+    [SerializeField] private AudioClip[] beeps;
+    
+
     public GameObject[] Cubes;
     public Material[] Color;
     public GameObject startLightGameObject;
     public GameObject Buttons;
-    public GameObject SimonGame;
 
     // Start is called before the first frame update
     void Start()
@@ -30,20 +33,19 @@ public class Starting : MonoBehaviour
         }
         
         yield return new WaitForSeconds(1);
-        Cubes[0].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[2].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[3].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        yield return new WaitForSeconds(1);
-        Cubes[4].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[5].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[6].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[7].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        yield return new WaitForSeconds(1);
-        Cubes[8].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[9].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[10].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        Cubes[11].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+        for (int i = 0; i < 3; i++)
+        {
+            if (finalSimon)
+            {
+                AudioClip beep = null;
+                if (beeps.Length > i) beep = beeps[i];
+                finalSimon.PlayFeedback(i, beeps[i]);
+                finalSimon.PlayFeedback(i + 3, beep);
+                finalSimon.PlayFeedback(i + 6, beep);
+                finalSimon.PlayFeedback(i + 9, beep);
+            }
+            yield return new WaitForSeconds(1);
+        }
         yield return new WaitForSeconds(1);
         Cubes[0].GetComponent<Renderer>().material = Color[0];
         Cubes[1].GetComponent<Renderer>().material = Color[3];
@@ -59,7 +61,7 @@ public class Starting : MonoBehaviour
         Cubes[11].GetComponent<Renderer>().material = Color[11];
         startLightGameObject.SetActive(false);
         Buttons.SetActive(true);
-        SimonGame.SetActive(true);
+        finalSimon.gameObject.SetActive(true);
     }
 
     void OnEnable()

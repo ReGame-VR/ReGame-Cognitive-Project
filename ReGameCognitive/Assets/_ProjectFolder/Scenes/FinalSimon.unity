@@ -338,6 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70cbf8b6d4895e4a86d0f132c2c374d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalSimon: {fileID: 968852912}
+  beeps:
+  - {fileID: 8300000, guid: bfe19fa98b16aef489d6c8f756dbfaf4, type: 3}
+  - {fileID: 8300000, guid: 851a3f06ca36788419ae6fcc2468ad8e, type: 3}
+  - {fileID: 8300000, guid: afcdbb118c38ec340911098667b79a87, type: 3}
   Cubes:
   - {fileID: 1618144381}
   - {fileID: 2100966999}
@@ -366,7 +371,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 71dac092addb97b4c81b8e4e9bb89703, type: 2}
   startLightGameObject: {fileID: 128127672}
   Buttons: {fileID: 736499662}
-  SimonGame: {fileID: 968852911}
 --- !u!4 &128127674
 Transform:
   m_ObjectHideFlags: 0
@@ -1002,7 +1006,7 @@ MonoBehaviour:
   FinalSimon: {fileID: 968852912}
   DifficultyButtons: {fileID: 82718748}
   StartLight: {fileID: 128127672}
-  SetTime: 120
+  timeLimit: 120
 --- !u!1 &507888078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1057,7 @@ MonoBehaviour:
   FinalSimon: {fileID: 968852912}
   DifficultyButtons: {fileID: 82718748}
   StartLight: {fileID: 128127672}
-  SetTime: 120
+  timeLimit: 120
 --- !u!65 &507888081
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1591,7 +1595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &770924654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2348,7 +2352,7 @@ MonoBehaviour:
   FinalSimon: {fileID: 968852912}
   DifficultyButtons: {fileID: 82718748}
   StartLight: {fileID: 128127672}
-  SetTime: 120
+  timeLimit: 120
 --- !u!1 &960740517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,8 +2600,8 @@ MonoBehaviour:
   HandColors:
   - {fileID: 2100000, guid: eae1d5178061eed4fbda84e15dcee839, type: 2}
   - {fileID: 2100000, guid: c114fb0d5e729da4d9b06b952896db90, type: 2}
-  CurrentTime: 0
-  StartingTime: 120
+  timeRemaining: 0
+  timeLimit: 0
   CountdownNumberText: {fileID: 143399787}
   RoundText: {fileID: 1676880474}
   SimonGame: {fileID: 968852911}
@@ -3317,7 +3321,7 @@ MonoBehaviour:
   FinalSimon: {fileID: 968852912}
   DifficultyButtons: {fileID: 82718748}
   StartLight: {fileID: 128127672}
-  SetTime: 120
+  timeLimit: 120
 --- !u!1 &1343084461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4526,7 +4530,7 @@ MonoBehaviour:
   FinalSimon: {fileID: 968852912}
   DifficultyButtons: {fileID: 82718748}
   StartLight: {fileID: 128127672}
-  SetTime: 120
+  timeLimit: 120
 --- !u!1 &1796100408
 GameObject:
   m_ObjectHideFlags: 0

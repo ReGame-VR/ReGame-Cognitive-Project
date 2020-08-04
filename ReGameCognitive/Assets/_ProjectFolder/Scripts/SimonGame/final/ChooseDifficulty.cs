@@ -9,7 +9,7 @@ public class ChooseDifficulty : MonoBehaviour
     public FinalSimon FinalSimon;
     public GameObject DifficultyButtons;
     public GameObject StartLight;
-    public float SetTime;
+    public float timeLimit;
 
 
     // Start is called before the first frame update
@@ -28,7 +28,7 @@ public class ChooseDifficulty : MonoBehaviour
     {
         FinalSimon.NumberOfButtons = DifficultyNumber;
         FinalSimon.numSequences = StartAtSequence;
-        FinalSimon.StartingTime = SetTime;
+        FinalSimon.timeLimit = timeLimit;
         DifficultyButtons.SetActive(false);
         StartLight.SetActive(true);
     }
