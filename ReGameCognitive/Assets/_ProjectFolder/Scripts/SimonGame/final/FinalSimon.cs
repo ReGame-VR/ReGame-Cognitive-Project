@@ -91,17 +91,22 @@ public class FinalSimon : MonoBehaviour
 
     private void HowManyCubes()
     {
-        while (currentSequenceIndex < NumberOfButtons)
+        for (int i = 0; i < Button.Length; i++)
         {
-            Button[currentSequenceIndex].SetActive(true);
-            currentSequenceIndex++;
-            Sequence = new int[MaxSequence];
+            if (i < NumberOfButtons)
+            {
+                Button[i].SetActive(true);
+            }
+            else
+            {
+                Button[i].SetActive(false);
+            }
         }
-        currentSequenceIndex = 0;
     }
 
     private void SetupSequence()
     {
+        Sequence = new int[MaxSequence];
         while (currentSequenceIndex < MaxSequence)
         {
             Sequence[currentSequenceIndex] = Random.Range(1, NumberOfButtons+1);    //Sequence is base 1

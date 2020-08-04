@@ -24,6 +24,11 @@ public class Starting : MonoBehaviour
 
     IEnumerator PlaySequence()
     {
+        foreach (var cube in Cubes)
+        {
+            cube.SetActive(true);
+        }
+        
         yield return new WaitForSeconds(1);
         Cubes[0].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
         Cubes[1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");

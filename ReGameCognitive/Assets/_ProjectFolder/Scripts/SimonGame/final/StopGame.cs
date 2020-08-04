@@ -27,6 +27,7 @@ public class StopGame : MonoBehaviour
         {
             Cubes[i].GetComponent<Renderer>().material = Color[2];
             Cubes[i].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+            Cubes[i].SetActive(true);
         }
 
         yield return new WaitForSeconds(4);
@@ -34,11 +35,13 @@ public class StopGame : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             Cubes[i].GetComponent<Renderer>().material = Color[i];
+            Cubes[i].SetActive(true);
         }
 
         for (int i = 5; i < 12; i++)
         {
             Cubes[i].GetComponent<Renderer>().material = Color[6];
+            Cubes[i].SetActive(false);
         }
 
         DifficultyButtons.SetActive(true);
