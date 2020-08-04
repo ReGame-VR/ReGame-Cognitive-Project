@@ -27,7 +27,7 @@ public class ChooseDifficulty : MonoBehaviour
     private void OnTriggerEnter()
     {
         FinalSimon.NumberOfButtons = DifficultyNumber;
-        FinalSimon.CurrentSequence = StartAtSequence;
+        FinalSimon.numSequences = StartAtSequence;
         FinalSimon.StartingTime = SetTime;
         DifficultyButtons.SetActive(false);
         StartLight.SetActive(true);

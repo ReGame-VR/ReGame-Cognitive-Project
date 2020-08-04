@@ -8,13 +8,13 @@ public class FinalSimon : MonoBehaviour
     public GameObject[] Button;
     public int[] Sequence;
     public int NumberOfButtons;
-    public int i = 0;
+    public int currentSequenceIndex = 0;
     public int MaxSequence;
-    public int ButtonPushed;
-    public int CurrentSequence;
+    public int buttonPushedIndex;
+    public int numSequences;
     public float TimeBetweenCubeLit;
     public float TimeCubeLit;
-    public int a;
+    public int litCubeIndex;
     public GameObject[] Hands;
     public Material[] HandColors;
     public float CurrentTime;
@@ -22,13 +22,13 @@ public class FinalSimon : MonoBehaviour
     public TextMesh CountdownNumberText;
     public TextMesh RoundText;
     public GameObject SimonGame;
-    public GameObject ButtonSwitch;
+    public GameObject buttonColliderParent;
     public GameObject StopLights;
 
     // Start is called before the first frame update
     void OnEnable()
     {
-        i = 0;
+        currentSequenceIndex = 0;
         CurrentTime = StartingTime;
         DisableHands();
         HowManyCubes();
@@ -40,62 +40,74 @@ public class FinalSimon : MonoBehaviour
     void Update()
     {
         Timer();
-        RoundText.text = (CurrentSequence+1).ToString();
+        RoundText.text = (numSequences+1).ToString();
+        
+        CheckForButtonPushed();
+    }
 
-        if (ButtonPushed == Sequence[i])
+    private void CheckForButtonPushed()
+    {
+        if (WasCorrectButtonPushed())
         {
-            if (i == CurrentSequence)
+            if (currentSequenceIndex == numSequences)
             {
-                i = 0;
-                CurrentSequence++;
+                currentSequenceIndex = 0;
+                numSequences++;
                 StartCoroutine(PlaySequence());
             }
-
             else
             {
-                i++;
+                currentSequenceIndex++;
             }
 
-            ButtonPushed = 0;
+            buttonPushedIndex = 0;
         }
-
-        else if (ButtonPushed > 0 && ButtonPushed != Sequence[i])
+        else if (WasIncorrectButtonPushed())
         {
-            if (CurrentSequence == 0)
+            if (numSequences == 0)
             {
-                ButtonPushed = 0;
-                StartCoroutine(PlaySequence());
+                buttonPushedIndex = 0;
             }
-
             else
             {
-                CurrentSequence--;
-                i = 0;
-                ButtonPushed = 0;
-                StartCoroutine(PlaySequence());
+                numSequences--;
+                currentSequenceIndex = 0;
+                buttonPushedIndex = 0;
             }
+            
+            StartCoroutine(PlaySequence());
         }
+    }
+
+    private bool WasIncorrectButtonPushed()
+    {
+        return buttonPushedIndex > 0 && buttonPushedIndex != Sequence[currentSequenceIndex];
+    }
+
+    private bool WasCorrectButtonPushed()
+    {
+        return buttonPushedIndex == Sequence[currentSequenceIndex];
     }
 
     private void HowManyCubes()
     {
-        while (i < NumberOfButtons)
+        while (currentSequenceIndex < NumberOfButtons)
         {
-            Button[i].SetActive(true);
-            i++;
+            Button[currentSequenceIndex].SetActive(true);
+            currentSequenceIndex++;
             Sequence = new int[MaxSequence];
         }
-        i = 0;
+        currentSequenceIndex = 0;
     }
 
     private void SetupSequence()
     {
-        while (i < MaxSequence)
+        while (currentSequenceIndex < MaxSequence)
         {
-            Sequence[i] = Random.Range(1, NumberOfButtons+1);
-            i++;
+            Sequence[currentSequenceIndex] = Random.Range(1, NumberOfButtons+1);    //Sequence is base 1
+            currentSequenceIndex++;
         }
-        i = 0;
+        currentSequenceIndex = 0;
     }
 
     private void DisableHands()
@@ -121,39 +133,37 @@ public class FinalSimon : MonoBehaviour
         string seconds = (CurrentTime % 60).ToString("00");
         CountdownNumberText.text = mintues + ":" + seconds;
 
-        if (CurrentTime <= 0)
+        if (CurrentTime <= 0)    //Restart from "Choose difficulty"
         {
-            ButtonSwitch.SetActive(false);
+            buttonColliderParent.SetActive(false);
             EnableHands();
             StopLights.SetActive(true);
             SimonGame.SetActive(false);
         }
-
     }
 
     IEnumerator PlaySequence()
     {
         yield return new WaitForSeconds(TimeBetweenCubeLit);
         DisableHands();
-        while (i <= CurrentSequence)
+        while (currentSequenceIndex <= numSequences)
         {
-            if (Sequence[i] == a)
+            if (Sequence[currentSequenceIndex] == litCubeIndex)
             {
                 yield return new WaitForSeconds(TimeCubeLit);
-                Button[a - 1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                Button[litCubeIndex - 1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
                 yield return new WaitForSeconds(TimeCubeLit);
-                Button[a - 1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-                i++;
-                a = 1;
+                Button[litCubeIndex - 1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                currentSequenceIndex++;
+                litCubeIndex = 1;
             }
-
             else
             {
-                a++;
+                litCubeIndex++;
             }
         }
 
-        i = 0;
+        currentSequenceIndex = 0;
         EnableHands();
     }
 }

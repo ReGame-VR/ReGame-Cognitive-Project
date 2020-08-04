@@ -23,12 +23,12 @@ public class SimonButton : MonoBehaviour
     private void OnTriggerEnter()
     {
         Button.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-        FinalSimon.ButtonPushed = CubeNumber;
+        FinalSimon.buttonPushedIndex = CubeNumber;
     }
 
     private void OnTriggerExit()
     {
         Button.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-        FinalSimon.ButtonPushed = 0;
+        FinalSimon.buttonPushedIndex = 0;
     }
 }

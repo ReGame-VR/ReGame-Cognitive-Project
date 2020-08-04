@@ -364,7 +364,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4d2d25d6bae08e341a7ef784de6e547d, type: 2}
   - {fileID: 2100000, guid: 924ec927fe95dba4caa31548b31538bf, type: 2}
   - {fileID: 2100000, guid: 71dac092addb97b4c81b8e4e9bb89703, type: 2}
-  kaka: {fileID: 128127672}
+  startLightGameObject: {fileID: 128127672}
   Buttons: {fileID: 736499662}
   SimonGame: {fileID: 968852911}
 --- !u!4 &128127674
@@ -2195,13 +2195,13 @@ MonoBehaviour:
   - {fileID: 1322964451}
   Sequence: 
   NumberOfButtons: 12
-  i: 0
+  currentSequenceIndex: 0
   MaxSequence: 25
-  ButtonPushed: 0
-  CurrentSequence: 0
+  buttonPushedIndex: 0
+  numSequences: 0
   TimeBetweenCubeLit: 0.5
   TimeCubeLit: 0.5
-  a: 1
+  litCubeIndex: 0
   Hands:
   - {fileID: 1158529858}
   - {fileID: 837152717}
@@ -2213,7 +2213,7 @@ MonoBehaviour:
   CountdownNumberText: {fileID: 143399787}
   RoundText: {fileID: 1676880474}
   SimonGame: {fileID: 968852911}
-  ButtonSwitch: {fileID: 736499662}
+  buttonColliderParent: {fileID: 736499662}
   StopLights: {fileID: 770924653}
 --- !u!4 &968852913
 Transform:

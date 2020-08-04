@@ -6,7 +6,7 @@ public class Starting : MonoBehaviour
 {
     public GameObject[] Cubes;
     public Material[] Color;
-    public GameObject kaka;
+    public GameObject startLightGameObject;
     public GameObject Buttons;
     public GameObject SimonGame;
 
@@ -52,13 +52,14 @@ public class Starting : MonoBehaviour
         Cubes[9].GetComponent<Renderer>().material = Color[5];
         Cubes[10].GetComponent<Renderer>().material = Color[8];
         Cubes[11].GetComponent<Renderer>().material = Color[11];
-        kaka.SetActive(false);
+        startLightGameObject.SetActive(false);
         Buttons.SetActive(true);
         SimonGame.SetActive(true);
     }
 
     void OnEnable()
     {
+        //Sets colors: Red, Yellow, Green
         Cubes[0].GetComponent<Renderer>().material = Color[2];
         Cubes[1].GetComponent<Renderer>().material = Color[2];
         Cubes[2].GetComponent<Renderer>().material = Color[2];
