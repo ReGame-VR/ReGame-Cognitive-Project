@@ -39,7 +39,7 @@ public class SimonGame : MonoBehaviour
         
         foreach (var feedbackContainer in _currentSequence)
         {
-            feedbackContainer.Play();
+            feedbackContainer.Play(false);
             yield return new WaitForSeconds(timeBetweenFeedback);
         }
     }

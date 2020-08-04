@@ -5,80 +5,80 @@ using UnityEngine;
 public class Starting : MonoBehaviour
 {
     [SerializeField] private FinalSimon finalSimon;
-    [SerializeField] private AudioClip[] beeps;
-    
+    [SerializeField] private Feedback greenfeedback;
+    [SerializeField] private Feedback yellowfeedback;
+    [SerializeField] private Feedback redfeedback;
 
     public GameObject[] Cubes;
-    public Material[] Color;
     public GameObject startLightGameObject;
     public GameObject Buttons;
 
+    private List<Feedback> _feedbacks = new List<Feedback>();
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        _feedbacks = new List<Feedback>()
+        {
+            redfeedback,
+            yellowfeedback,
+            greenfeedback,
+        };
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnEnable()
     {
-        
+        SetColumnColors();
+        StartCoroutine(PlaySequence());
     }
-
+    
     IEnumerator PlaySequence()
     {
-        foreach (var cube in Cubes)
-        {
-            cube.SetActive(true);
-        }
+        EnableCubes();
         
         yield return new WaitForSeconds(1);
         for (int i = 0; i < 3; i++)
         {
             if (finalSimon)
             {
-                AudioClip beep = null;
-                if (beeps.Length > i) beep = beeps[i];
-                finalSimon.PlayFeedback(i, beeps[i]);
-                finalSimon.PlayFeedback(i + 3, beep);
-                finalSimon.PlayFeedback(i + 6, beep);
-                finalSimon.PlayFeedback(i + 9, beep);
+                PlayColumnFeedback(i);
             }
             yield return new WaitForSeconds(1);
         }
         yield return new WaitForSeconds(1);
-        Cubes[0].GetComponent<Renderer>().material = Color[0];
-        Cubes[1].GetComponent<Renderer>().material = Color[3];
-        Cubes[2].GetComponent<Renderer>().material = Color[6];
-        Cubes[3].GetComponent<Renderer>().material = Color[9];
-        Cubes[4].GetComponent<Renderer>().material = Color[1];
-        Cubes[5].GetComponent<Renderer>().material = Color[4];
-        Cubes[6].GetComponent<Renderer>().material = Color[7];
-        Cubes[7].GetComponent<Renderer>().material = Color[10];
-        Cubes[8].GetComponent<Renderer>().material = Color[2];
-        Cubes[9].GetComponent<Renderer>().material = Color[5];
-        Cubes[10].GetComponent<Renderer>().material = Color[8];
-        Cubes[11].GetComponent<Renderer>().material = Color[11];
+        
         startLightGameObject.SetActive(false);
         Buttons.SetActive(true);
         finalSimon.gameObject.SetActive(true);
     }
 
-    void OnEnable()
+    private void EnableCubes()
     {
-        //Sets colors: Red, Yellow, Green
-        Cubes[0].GetComponent<Renderer>().material = Color[2];
-        Cubes[1].GetComponent<Renderer>().material = Color[2];
-        Cubes[2].GetComponent<Renderer>().material = Color[2];
-        Cubes[3].GetComponent<Renderer>().material = Color[2];
-        Cubes[4].GetComponent<Renderer>().material = Color[3];
-        Cubes[5].GetComponent<Renderer>().material = Color[3];
-        Cubes[6].GetComponent<Renderer>().material = Color[3];
-        Cubes[7].GetComponent<Renderer>().material = Color[3];
-        Cubes[8].GetComponent<Renderer>().material = Color[1];
-        Cubes[9].GetComponent<Renderer>().material = Color[1];
-        Cubes[10].GetComponent<Renderer>().material = Color[1];
-        Cubes[11].GetComponent<Renderer>().material = Color[1];
-        StartCoroutine(PlaySequence());
+        foreach (var cube in Cubes)
+        {
+            cube.SetActive(true);
+        }
+    }
+
+    private void PlayColumnFeedback(int i)
+    {
+        finalSimon.PlayFeedback(i, _feedbacks[i], false);
+        finalSimon.PlayFeedback(i + 3, _feedbacks[i], false);
+        finalSimon.PlayFeedback(i + 6, _feedbacks[i], false);
+        finalSimon.PlayFeedback(i + 9, _feedbacks[i], false);
+    }
+
+    private void SetColumnColors()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (finalSimon)
+            {
+                finalSimon.StopFeedback(i, _feedbacks[i]);
+                finalSimon.StopFeedback(i + 3, _feedbacks[i]);
+                finalSimon.StopFeedback(i + 6, _feedbacks[i]);
+                finalSimon.StopFeedback(i + 9, _feedbacks[i]);
+            }
+        }
     }
 }

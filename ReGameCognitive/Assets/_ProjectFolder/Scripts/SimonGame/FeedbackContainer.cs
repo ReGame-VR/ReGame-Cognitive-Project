@@ -39,11 +39,11 @@ public class FeedbackContainer : MonoBehaviour
     }
     
     [Button]
-    public void Play()
+    public void Play(bool playHaptics)
     {
         if (feedback)
         {
-            feedback.Play(audioSource, material);
+            feedback.Play(audioSource, material, playHaptics);
         }
     }
 

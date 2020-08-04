@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class StopGame : MonoBehaviour
 {
+    [SerializeField] private FinalSimon finalSimon;
+    [SerializeField] private Feedback stopFeedback;
+
     public GameObject[] Cubes;
     public Material[] Color;
     public GameObject DifficultyButtons;
@@ -23,29 +26,45 @@ public class StopGame : MonoBehaviour
 
     IEnumerator PlaySequence()
     {
-        for (int i = 0; i < 12; i++)
-        {
-            Cubes[i].GetComponent<Renderer>().material = Color[2];
-            Cubes[i].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-            Cubes[i].SetActive(true);
-        }
+        LightUpStopCubes();
 
         yield return new WaitForSeconds(4);
 
-        for (int i = 0; i < 5; i++)
+        SetupDifficultyButtons();
+        StopLights.SetActive(false);
+    }
+
+    private void LightUpStopCubes()
+    {
+        for (int i = 0; i < 12; i++)
         {
-            Cubes[i].GetComponent<Renderer>().material = Color[i];
+            finalSimon.PlayFeedback(i, stopFeedback, false);
             Cubes[i].SetActive(true);
         }
+    }
 
+    private void SetupDifficultyButtons()
+    {
+        EnableDifficultyCubes();
+        DisableNonDifficultyCubes();
+        DifficultyButtons.SetActive(true);
+    }
+
+    private void DisableNonDifficultyCubes()
+    {
         for (int i = 5; i < 12; i++)
         {
-            Cubes[i].GetComponent<Renderer>().material = Color[6];
             Cubes[i].SetActive(false);
         }
+    }
 
-        DifficultyButtons.SetActive(true);
-        StopLights.SetActive(false);
+    private void EnableDifficultyCubes()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            finalSimon.PlaySilentFeedback(i);
+            Cubes[i].SetActive(true);
+        }
     }
 
     void OnEnable()
