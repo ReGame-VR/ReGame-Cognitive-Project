@@ -141,6 +141,33 @@ public class FinalSimon : MonoBehaviour
             SimonGame.SetActive(false);
         }
     }
+    
+    
+    public void PlayFeedback(int index)
+    {
+        if (Button.Length <= index) return;
+
+        var button = Button[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer) buttonRenderer.material.EnableKeyword("_EMISSION");
+        var audioSource = button.GetComponent<AudioSource>();
+        if (audioSource) audioSource.Play();
+    }
+    
+    public void StopFeedback(int index)
+    {
+        if (Button.Length < index) return;
+
+        var button = Button[index];
+        if (!button) return;
+        
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer) buttonRenderer.material.DisableKeyword("_EMISSION");
+        var audioSource = button.GetComponent<AudioSource>();
+        if (audioSource) audioSource.Stop();
+    }
 
     IEnumerator PlaySequence()
     {
@@ -151,9 +178,9 @@ public class FinalSimon : MonoBehaviour
             if (Sequence[currentSequenceIndex] == litCubeIndex)
             {
                 yield return new WaitForSeconds(TimeCubeLit);
-                Button[litCubeIndex - 1].GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                PlayFeedback(litCubeIndex - 1);
                 yield return new WaitForSeconds(TimeCubeLit);
-                Button[litCubeIndex - 1].GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                StopFeedback(litCubeIndex - 1);
                 currentSequenceIndex++;
                 litCubeIndex = 1;
             }
