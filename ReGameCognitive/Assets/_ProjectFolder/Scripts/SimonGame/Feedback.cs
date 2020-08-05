@@ -9,7 +9,7 @@ public class Feedback : ScriptableObject
     [Range(0, 1)] public float hapticAmplitude;
 
 
-    public void Play(AudioSource audioSource, Material material)
+    public void Play(AudioSource audioSource, Material material, bool playHaptics)
     {
         if (audioSource)
         {
@@ -22,8 +22,11 @@ public class Feedback : ScriptableObject
             material.color = litColor;
         }
         
-        ControllerHaptics.ActivateHaptics(hapticAmplitude, 1, true);
-        ControllerHaptics.ActivateHaptics(hapticAmplitude, 1, false);
+        if (playHaptics)
+        {
+            ControllerHaptics.ActivateHaptics(hapticAmplitude, 1, true);
+            ControllerHaptics.ActivateHaptics(hapticAmplitude, 1, false);
+        }
     }
 
     public void Stop(AudioSource audioSource, Material material)
@@ -36,8 +39,9 @@ public class Feedback : ScriptableObject
         if (material)
         {
             material.color = unlitColor;
+            Debug.Log("changed material");
         }
-        
+
         ControllerHaptics.ActivateHaptics(0, 0, true);
         ControllerHaptics.ActivateHaptics(0, 0, false);
     }

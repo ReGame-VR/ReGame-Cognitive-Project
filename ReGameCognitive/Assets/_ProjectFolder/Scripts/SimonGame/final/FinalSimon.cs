@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FinalSimon : MonoBehaviour
 {
+    [SerializeField] private Feedback[] feedbacks;
+    
     public GameObject[] Button;
     public int[] Sequence;
     public int NumberOfButtons;
@@ -17,22 +19,20 @@ public class FinalSimon : MonoBehaviour
     public int litCubeIndex;
     public GameObject[] Hands;
     public Material[] HandColors;
-    public float CurrentTime;
-    public float StartingTime;
+    public float timeRemaining;
+    public float timeLimit;
     public TextMesh CountdownNumberText;
     public TextMesh RoundText;
     public GameObject SimonGame;
     public GameObject buttonColliderParent;
     public GameObject StopLights;
 
+    private float _timeInSequence;
+
     // Start is called before the first frame update
     void OnEnable()
     {
-        currentSequenceIndex = 0;
-        CurrentTime = StartingTime;
-        DisableHands();
-        HowManyCubes();
-        SetupSequence();
+        Initialize();
         StartCoroutine(PlaySequence());
     }
 
@@ -43,6 +43,24 @@ public class FinalSimon : MonoBehaviour
         RoundText.text = (numSequences+1).ToString();
         
         CheckForButtonPushed();
+    }
+
+    private void Initialize()
+    {
+        currentSequenceIndex = 0;
+        timeRemaining = timeLimit;
+        DisableHands();
+        SetupColors();
+        HowManyCubes();
+        SetupSequence();
+    }
+
+    private void SetupColors()
+    {
+        for (int i = 0; i < Button.Length; i++)
+        {
+            StopFeedback(i, feedbacks[i]);
+        }
     }
 
     private void CheckForButtonPushed()
@@ -91,17 +109,22 @@ public class FinalSimon : MonoBehaviour
 
     private void HowManyCubes()
     {
-        while (currentSequenceIndex < NumberOfButtons)
+        for (int i = 0; i < Button.Length; i++)
         {
-            Button[currentSequenceIndex].SetActive(true);
-            currentSequenceIndex++;
-            Sequence = new int[MaxSequence];
+            if (i < NumberOfButtons)
+            {
+                Button[i].SetActive(true);
+            }
+            else
+            {
+                Button[i].SetActive(false);
+            }
         }
-        currentSequenceIndex = 0;
     }
 
     private void SetupSequence()
     {
+        Sequence = new int[MaxSequence];
         while (currentSequenceIndex < MaxSequence)
         {
             Sequence[currentSequenceIndex] = Random.Range(1, NumberOfButtons+1);    //Sequence is base 1
@@ -128,12 +151,13 @@ public class FinalSimon : MonoBehaviour
 
     public void Timer()
     {
-        CurrentTime -= 1 * Time.deltaTime;
-        string mintues = ((int)CurrentTime / 60).ToString();
-        string seconds = (CurrentTime % 60).ToString("00");
+        timeRemaining -= Time.deltaTime;
+        _timeInSequence += Time.deltaTime;
+        string mintues = ((int)timeRemaining / 60).ToString();
+        string seconds = (timeRemaining % 60).ToString("00");
         CountdownNumberText.text = mintues + ":" + seconds;
 
-        if (CurrentTime <= 0)    //Restart from "Choose difficulty"
+        if (timeRemaining <= 0)    //Restart from "Choose difficulty"
         {
             buttonColliderParent.SetActive(false);
             EnableHands();
@@ -141,9 +165,8 @@ public class FinalSimon : MonoBehaviour
             SimonGame.SetActive(false);
         }
     }
-    
-    
-    public void PlayFeedback(int index)
+
+    public void PlaySilentFeedback(int index)
     {
         if (Button.Length <= index) return;
 
@@ -151,9 +174,43 @@ public class FinalSimon : MonoBehaviour
         if (!button) return;
 
         var buttonRenderer = button.GetComponent<Renderer>();
-        if (buttonRenderer) buttonRenderer.material.EnableKeyword("_EMISSION");
-        var audioSource = button.GetComponent<AudioSource>();
-        if (audioSource) audioSource.Play();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            feedbacks[index].Play(null, material, false);
+        }
+    }
+    
+    public void PlayFeedback(int index, bool playHaptics)
+    {
+        if (Button.Length <= index) return;
+
+        var button = Button[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedbacks[index].Play(audioSource, material, playHaptics);
+        }
+    }
+    
+    public void PlayFeedback(int index, Feedback feedback, bool playHaptics)
+    {
+        if (Button.Length <= index) return;
+
+        var button = Button[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedback.Play(audioSource, material, playHaptics);
+        }
     }
     
     public void StopFeedback(int index)
@@ -164,9 +221,28 @@ public class FinalSimon : MonoBehaviour
         if (!button) return;
         
         var buttonRenderer = button.GetComponent<Renderer>();
-        if (buttonRenderer) buttonRenderer.material.DisableKeyword("_EMISSION");
-        var audioSource = button.GetComponent<AudioSource>();
-        if (audioSource) audioSource.Stop();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedbacks[index].Stop(audioSource, material);
+        }
+    }
+    
+    public void StopFeedback(int index, Feedback feedback)
+    {
+        if (Button.Length < index) return;
+
+        var button = Button[index];
+        if (!button) return;
+        
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedback.Stop(audioSource, material);
+        }
     }
 
     IEnumerator PlaySequence()
@@ -177,10 +253,11 @@ public class FinalSimon : MonoBehaviour
         {
             if (Sequence[currentSequenceIndex] == litCubeIndex)
             {
+                var currentIndex = litCubeIndex - 1;
                 yield return new WaitForSeconds(TimeCubeLit);
-                PlayFeedback(litCubeIndex - 1);
+                PlayFeedback(currentIndex, feedbacks[currentIndex], false);
                 yield return new WaitForSeconds(TimeCubeLit);
-                StopFeedback(litCubeIndex - 1);
+                StopFeedback(currentIndex, feedbacks[currentIndex]);
                 currentSequenceIndex++;
                 litCubeIndex = 1;
             }
@@ -191,6 +268,7 @@ public class FinalSimon : MonoBehaviour
         }
 
         currentSequenceIndex = 0;
+        _timeInSequence = 0;
         EnableHands();
     }
 }
