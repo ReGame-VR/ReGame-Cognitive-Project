@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +11,11 @@ public class ChooseDifficulty : MonoBehaviour
     public GameObject DifficultyButtons;
     public GameObject StartLight;
     public float timeLimit;
+    public LevelColors levelColors;
 
-
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider other)
     {
+        levelColors.ChangeAllObjectsMaterial();
         FinalSimon.NumberOfButtons = DifficultyNumber;
         FinalSimon.numSequences = StartAtSequence;
         FinalSimon.timeLimit = timeLimit;

@@ -39,7 +39,6 @@ public class Feedback : ScriptableObject
         if (material)
         {
             material.color = unlitColor;
-            Debug.Log("changed material");
         }
 
         ControllerHaptics.ActivateHaptics(0, 0, true);
