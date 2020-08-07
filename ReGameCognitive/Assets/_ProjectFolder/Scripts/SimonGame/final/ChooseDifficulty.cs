@@ -15,11 +15,16 @@ public class ChooseDifficulty : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        levelColors.ChangeAllObjectsMaterial();
-        FinalSimon.NumberOfButtons = DifficultyNumber;
-        FinalSimon.numSequences = StartAtSequence;
-        FinalSimon.timeLimit = timeLimit;
-        DifficultyButtons.SetActive(false);
-        StartLight.SetActive(true);
+        if (levelColors) levelColors.ChangeAllObjectsMaterial();
+
+        if (FinalSimon)
+        {
+            FinalSimon.NumberOfButtons = DifficultyNumber;
+            FinalSimon.numSequences = StartAtSequence;
+            FinalSimon.timeLimit = timeLimit;
+        }
+        
+        if (DifficultyButtons) DifficultyButtons.SetActive(false);
+        if (StartLight) StartLight.SetActive(true);
     }
 }
