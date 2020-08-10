@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelColors : MonoBehaviour
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/LevelColors", order = 1)]
+public class LevelColors : ScriptableObject
 {
-    public List<GameObject> objectsToChange = new List<GameObject>();
-    public Material levelMaterial;
-    public GameObject levelCube;
+    [SerializeField] private Material levelMaterial;
+
+    public void SetLevelColor(Transform parentTransform)
+    {
+        if (!parentTransform) return;
+        
+        var childCount = parentTransform.childCount;
+        for (int i = 0; i < childCount; i++)
+        {
+            var child = parentTransform.GetChild(i);
+            SwapMaterial(child.gameObject);
+            SetLevelColor(child);
+        }
+    }
 
     private void SwapMaterial(GameObject objectToChange)
     {
@@ -21,13 +33,5 @@ public class LevelColors : MonoBehaviour
             oldMaterials[i] = levelMaterial;
         }
         meshRenderer.materials = oldMaterials;
-    }
-
-    public void ChangeAllObjectsMaterial()
-    {
-        foreach (var t in objectsToChange)
-        {
-            SwapMaterial(t);
-        }
     }
 }
