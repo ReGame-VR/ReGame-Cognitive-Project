@@ -31,6 +31,7 @@ public class FinalSimon : MonoBehaviour
     private int _litCubeIndex;
     private float _timeRemaining;
     private float _timeLimit;
+    private int _round;
     
     private const int NULL_BUTTON_INDEX = -1;
     
@@ -46,14 +47,89 @@ public class FinalSimon : MonoBehaviour
     void Update()
     {
         Timer();
-        roundText.text = (_numSequences + 1).ToString();
+        roundText.text = (_round).ToString();
         
         CheckForButtonPushed();
+    }
+    
+    public void ButtonPress(ButtonData buttonData)
+    {
+        _buttonPushedIndex = buttonData.cubeNumber;
+        PlayFeedback(buttonData.cubeNumber, true);
+    }
+
+    public void ButtonRelease(ButtonData buttonData)
+    {
+        _buttonPushedIndex = NULL_BUTTON_INDEX;
+        StopFeedback(buttonData.cubeNumber);
+    }
+
+    public void PlaySilentFeedback(int index)
+    {
+        if (buttonGameObjects.Length <= index) return;
+
+        var button = buttonGameObjects[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            feedbacks[index].Play(null, material, false);
+        }
+    }
+    
+    public void StopFeedback(int index, Feedback feedback)
+    {
+        if (buttonGameObjects.Length < index) return;
+
+        var button = buttonGameObjects[index];
+        if (!button) return;
+        
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedback.Stop(audioSource, material);
+        }
+    }
+
+    public void PlayFeedback(int index, Feedback feedback, bool playHaptics)
+    {
+        if (buttonGameObjects.Length <= index) return;
+
+        var button = buttonGameObjects[index];
+        if (!button) return;
+
+        var buttonRenderer = button.GetComponent<Renderer>();
+        if (buttonRenderer)
+        {
+            var material = buttonRenderer.material;
+            var audioSource = button.GetComponent<AudioSource>();
+            feedback.Play(audioSource, material, playHaptics);
+        }
+    }
+    
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        if (!difficulty) return;
+        
+        difficulty.levelColors.SetLevelColor(wallParentTransform);
+
+        _numberOfButtons = difficulty.numberOfButtons;
+        _numSequences = difficulty.baseSequence;
+        _timeLimit = difficulty.sessionTimeLimit;
+        _maxSequence = difficulty.maxSequence;
+        
+        if (difficultyButtonParent) difficultyButtonParent.SetActive(false);
+        if (startLightGameObject) startLightGameObject.SetActive(true);
     }
 
     private void Initialize()
     {
         _currentSequenceIndex = 0;
+        _round = 1;
         _timeRemaining = _timeLimit;
         _buttonPushedIndex = NULL_BUTTON_INDEX;
         DisableHands();
@@ -72,9 +148,11 @@ public class FinalSimon : MonoBehaviour
 
     private void CheckForButtonPushed()
     {
+        if (!WasButtonPushed()) return;
+        
         if (WasCorrectButtonPushed())
         {
-            if (_currentSequenceIndex == _numSequences)
+            if (_currentSequenceIndex == _numSequences)    // Is last sequence
             {
                 _currentSequenceIndex = 0;
                 _numSequences++;
@@ -84,38 +162,40 @@ public class FinalSimon : MonoBehaviour
             {
                 _currentSequenceIndex++;
             }
-
-            _buttonPushedIndex = NULL_BUTTON_INDEX;
         }
         else if (WasIncorrectButtonPushed())
         {
-            if (_numSequences == 0)
+            if (_numSequences == 0)    // Only one sequence
             {
                 _buttonPushedIndex = NULL_BUTTON_INDEX;
             }
             else
             {
                 _numSequences--;
-                _currentSequenceIndex = 0;
-                _buttonPushedIndex = NULL_BUTTON_INDEX;
             }
             
+            _currentSequenceIndex = 0;
             StartCoroutine(PlaySequence());
         }
+
+        _round++;
+        _buttonPushedIndex = NULL_BUTTON_INDEX;
+    }
+
+    private bool WasButtonPushed()
+    {
+        return _buttonPushedIndex > NULL_BUTTON_INDEX && 
+               _sequence.Length > 0;
     }
 
     private bool WasIncorrectButtonPushed()
     {
-        return _buttonPushedIndex > NULL_BUTTON_INDEX && 
-               _sequence.Length > 0 && 
-               _buttonPushedIndex != _sequence[_currentSequenceIndex];
+        return  _buttonPushedIndex != _sequence[_currentSequenceIndex];
     }
 
     private bool WasCorrectButtonPushed()
     {
-        return _buttonPushedIndex > NULL_BUTTON_INDEX && 
-               _sequence.Length > 0 && 
-               _buttonPushedIndex == _sequence[_currentSequenceIndex];
+        return _buttonPushedIndex == _sequence[_currentSequenceIndex];
     }
 
     private void HowManyCubes()
@@ -160,7 +240,7 @@ public class FinalSimon : MonoBehaviour
         hands[1].GetComponent<Renderer>().material = handColors[0]; ;
     }
 
-    public void Timer()
+    private void Timer()
     {
         _timeRemaining -= Time.deltaTime;
         _timeInSequence += Time.deltaTime;
@@ -177,34 +257,7 @@ public class FinalSimon : MonoBehaviour
         }
     }
 
-    public void ButtonPress(ButtonData buttonData)
-    {
-        _buttonPushedIndex = buttonData.cubeNumber;
-        PlayFeedback(buttonData.cubeNumber, true);
-    }
-
-    public void ButtonRelease(ButtonData buttonData)
-    {
-        _buttonPushedIndex = NULL_BUTTON_INDEX;
-        StopFeedback(buttonData.cubeNumber);
-    }
-
-    public void PlaySilentFeedback(int index)
-    {
-        if (buttonGameObjects.Length <= index) return;
-
-        var button = buttonGameObjects[index];
-        if (!button) return;
-
-        var buttonRenderer = button.GetComponent<Renderer>();
-        if (buttonRenderer)
-        {
-            var material = buttonRenderer.material;
-            feedbacks[index].Play(null, material, false);
-        }
-    }
-    
-    public void PlayFeedback(int index, bool playHaptics)
+    private void PlayFeedback(int index, bool playHaptics)
     {
         if (buttonGameObjects.Length <= index) return;
 
@@ -219,24 +272,8 @@ public class FinalSimon : MonoBehaviour
             feedbacks[index].Play(audioSource, material, playHaptics);
         }
     }
-    
-    public void PlayFeedback(int index, Feedback feedback, bool playHaptics)
-    {
-        if (buttonGameObjects.Length <= index) return;
 
-        var button = buttonGameObjects[index];
-        if (!button) return;
-
-        var buttonRenderer = button.GetComponent<Renderer>();
-        if (buttonRenderer)
-        {
-            var material = buttonRenderer.material;
-            var audioSource = button.GetComponent<AudioSource>();
-            feedback.Play(audioSource, material, playHaptics);
-        }
-    }
-    
-    public void StopFeedback(int index)
+    private void StopFeedback(int index)
     {
         if (buttonGameObjects.Length < index) return;
 
@@ -251,39 +288,8 @@ public class FinalSimon : MonoBehaviour
             feedbacks[index].Stop(audioSource, material);
         }
     }
-    
-    public void StopFeedback(int index, Feedback feedback)
-    {
-        if (buttonGameObjects.Length < index) return;
 
-        var button = buttonGameObjects[index];
-        if (!button) return;
-        
-        var buttonRenderer = button.GetComponent<Renderer>();
-        if (buttonRenderer)
-        {
-            var material = buttonRenderer.material;
-            var audioSource = button.GetComponent<AudioSource>();
-            feedback.Stop(audioSource, material);
-        }
-    }
-
-    public void SetDifficulty(Difficulty difficulty)
-    {
-        if (!difficulty) return;
-        
-        difficulty.levelColors.SetLevelColor(wallParentTransform);
-
-        _numberOfButtons = difficulty.numberOfButtons;
-        _numSequences = difficulty.baseSequence;
-        _timeLimit = difficulty.sessionTimeLimit;
-        _maxSequence = difficulty.maxSequence;
-        
-        if (difficultyButtonParent) difficultyButtonParent.SetActive(false);
-        if (startLightGameObject) startLightGameObject.SetActive(true);
-    }
-
-    IEnumerator PlaySequence()
+    private IEnumerator PlaySequence()
     {
         yield return new WaitForSeconds(timeBetweenCubeLit);
         DisableHands();
