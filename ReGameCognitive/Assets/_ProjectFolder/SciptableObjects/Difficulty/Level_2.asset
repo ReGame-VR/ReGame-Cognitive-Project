@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 2
   numberOfButtons: 6
-  baseSequence: 2
+  baseSequence: 0
   maxSequence: 20
   sessionTimeLimit: 120
   levelColors: {fileID: 11400000, guid: 9668711e9633d1b499532c6499854ff0, type: 2}

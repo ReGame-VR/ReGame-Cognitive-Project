@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 809c61779093df947afe3e1950a5879f, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &10223190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -928,7 +928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 138739327}
   m_Layer: 0
-  m_Name: Button Colliders
+  m_Name: ButtonColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,7 +958,7 @@ Transform:
   - {fileID: 630011230}
   - {fileID: 1874883541}
   m_Father: {fileID: 1445968374}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &140102677
 GameObject:
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 080c7eca006f7e44d86e69d4cf797012, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &140102680
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,6 @@ GameObject:
   - component: {fileID: 145860832}
   - component: {fileID: 145860831}
   - component: {fileID: 145860830}
-  - component: {fileID: 145860829}
   - component: {fileID: 145860828}
   m_Layer: 0
   m_Name: Button 4
@@ -1215,19 +1214,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &145860829
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145860827}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &145860830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1300,7 +1286,6 @@ GameObject:
   - component: {fileID: 160056964}
   - component: {fileID: 160056963}
   - component: {fileID: 160056962}
-  - component: {fileID: 160056961}
   - component: {fileID: 160056960}
   m_Layer: 0
   m_Name: Button 5
@@ -1405,19 +1390,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &160056961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160056959}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &160056962
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2026,7 +1998,6 @@ GameObject:
   - component: {fileID: 249267921}
   - component: {fileID: 249267920}
   - component: {fileID: 249267919}
-  - component: {fileID: 249267918}
   - component: {fileID: 249267917}
   m_Layer: 0
   m_Name: Button 9
@@ -2131,19 +2102,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &249267918
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249267916}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &249267919
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2216,7 +2174,6 @@ GameObject:
   - component: {fileID: 258021064}
   - component: {fileID: 258021063}
   - component: {fileID: 258021062}
-  - component: {fileID: 258021061}
   - component: {fileID: 258021060}
   m_Layer: 0
   m_Name: Button 8
@@ -2321,19 +2278,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &258021061
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258021059}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &258021062
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2584,12 +2528,12 @@ GameObject:
   m_Component:
   - component: {fileID: 272027782}
   m_Layer: 0
-  m_Name: Buttons
+  m_Name: ButtonModels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &272027782
 Transform:
   m_ObjectHideFlags: 0
@@ -2751,7 +2695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2960,7 +2904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 521f4c54f3ae0bd479e7d62db232ac37, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &299294114
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3534,7 +3478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 4a9473f177a50034c8e50b7821237fe9, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &335527409
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3831,91 +3775,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc323542159fcda4fac73ba99f048d73, type: 3}
---- !u!1 &408876117
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 408876119}
-  - component: {fileID: 408876118}
-  m_Layer: 0
-  m_Name: SimonGame
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &408876118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408876117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aff14788aa148c046adc91cfc0291f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  feedbacks:
-  - {fileID: 11400000, guid: f2d579bccc1e7df47a595fa5b88f2b13, type: 2}
-  - {fileID: 11400000, guid: f0a8eacd577e8d84ab606d060395230c, type: 2}
-  - {fileID: 11400000, guid: a0f6039fa6e621b448d592478bc860ff, type: 2}
-  - {fileID: 11400000, guid: 54ddda298f986cc459388396fa6f6bad, type: 2}
-  - {fileID: 11400000, guid: 08662f3671b400947bb878e2baf4843d, type: 2}
-  - {fileID: 11400000, guid: 3a15c10c0a3452d47922396c6c9e579a, type: 2}
-  - {fileID: 11400000, guid: 44d643b6ae2358c4f967e4b112ed8483, type: 2}
-  - {fileID: 11400000, guid: 7e0644014b499f04dbde299a077bedc2, type: 2}
-  - {fileID: 11400000, guid: 680d4c9f000bf264987c79011e0cd070, type: 2}
-  - {fileID: 11400000, guid: 4207178265c017b469c9f3ef2dcc892e, type: 2}
-  - {fileID: 11400000, guid: 48645ab14d18d084aa555af295c65133, type: 2}
-  - {fileID: 11400000, guid: d9eccbf3781044048a738bf63e9381cf, type: 2}
-  wrongFeedback: {fileID: 11400000, guid: d6ac8a50158332845817f3dd37e9c270, type: 2}
-  startLightGameObject: {fileID: 796920417}
-  stopLights: {fileID: 1361928181}
-  difficultyButtonParent: {fileID: 1480304716}
-  buttonColliderParent: {fileID: 138739326}
-  hands:
-  - {fileID: 1218619021}
-  - {fileID: 901517911}
-  buttonGameObjects:
-  - {fileID: 424508993}
-  - {fileID: 1379205408}
-  - {fileID: 884602422}
-  - {fileID: 145860827}
-  - {fileID: 160056959}
-  - {fileID: 590213250}
-  - {fileID: 962034245}
-  - {fileID: 258021059}
-  - {fileID: 249267916}
-  - {fileID: 1850914978}
-  - {fileID: 481468323}
-  - {fileID: 1752242609}
-  wallParentTransform: {fileID: 1964241608}
-  countdownNumberText: {fileID: 1053979260}
-  roundText: {fileID: 1774679259}
-  handColors:
-  - {fileID: 2100000, guid: eae1d5178061eed4fbda84e15dcee839, type: 2}
-  - {fileID: 2100000, guid: c114fb0d5e729da4d9b06b952896db90, type: 2}
-  timeBetweenCubeLit: 0.5
-  timeCubeLit: 0.5
---- !u!4 &408876119
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408876117}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3997395, y: -0.023378134, z: -0.20073164}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1445968374}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &418610629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4016,7 +3875,6 @@ GameObject:
   - component: {fileID: 424508998}
   - component: {fileID: 424508997}
   - component: {fileID: 424508996}
-  - component: {fileID: 424508995}
   - component: {fileID: 424508994}
   m_Layer: 0
   m_Name: Button 1
@@ -4121,19 +3979,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &424508995
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 424508993}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &424508996
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4329,7 +4174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 258299138a8d6c54181ee9c8da86ac02, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &468231101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4354,7 +4199,6 @@ GameObject:
   - component: {fileID: 481468328}
   - component: {fileID: 481468327}
   - component: {fileID: 481468326}
-  - component: {fileID: 481468325}
   - component: {fileID: 481468324}
   m_Layer: 0
   m_Name: Button 11
@@ -4459,19 +4303,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &481468325
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481468323}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &481468326
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5223,7 +5054,6 @@ GameObject:
   - component: {fileID: 590213255}
   - component: {fileID: 590213254}
   - component: {fileID: 590213253}
-  - component: {fileID: 590213252}
   - component: {fileID: 590213251}
   m_Layer: 0
   m_Name: Button 6
@@ -5328,19 +5158,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &590213252
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590213250}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &590213253
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5712,7 +5529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: fb90dd92872f62946b0c40c92c748ad8, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &630011232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5846,7 +5663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da407741e555a024bae90b10289d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
 --- !u!65 &639909507
 BoxCollider:
@@ -6605,7 +6422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da407741e555a024bae90b10289d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
 --- !u!65 &677140603
 BoxCollider:
@@ -7428,68 +7245,6 @@ Transform:
   m_Father: {fileID: 1675832702}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!1 &796920417
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 796920418}
-  - component: {fileID: 796920419}
-  m_Layer: 0
-  m_Name: Start Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &796920418
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796920417}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.58165133, y: -0.30619752, z: -1.6189975}
-  m_LocalScale: {x: 0.2, y: 0.20000008, z: 0.20000008}
-  m_Children: []
-  m_Father: {fileID: 1445968374}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &796920419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796920417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70cbf8b6d4895e4a86d0f132c2c374d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
-  greenfeedback: {fileID: 11400000, guid: 0040718646ccfad45abc3e83a8835b30, type: 2}
-  yellowfeedback: {fileID: 11400000, guid: aea0f45a4d25e7c459c2326a19287441, type: 2}
-  redfeedback: {fileID: 11400000, guid: e23874ec188415347adab2bad50dcd2f, type: 2}
-  Cubes:
-  - {fileID: 424508993}
-  - {fileID: 145860827}
-  - {fileID: 962034245}
-  - {fileID: 1850914978}
-  - {fileID: 1379205408}
-  - {fileID: 160056959}
-  - {fileID: 258021059}
-  - {fileID: 481468323}
-  - {fileID: 884602422}
-  - {fileID: 590213250}
-  - {fileID: 249267916}
-  - {fileID: 1752242609}
-  startLightGameObject: {fileID: 796920417}
-  Buttons: {fileID: 138739326}
 --- !u!4 &833152849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4907f2924a16c8046a8d9d9c80fd0646,
@@ -7716,7 +7471,6 @@ GameObject:
   - component: {fileID: 884602427}
   - component: {fileID: 884602426}
   - component: {fileID: 884602425}
-  - component: {fileID: 884602424}
   - component: {fileID: 884602423}
   m_Layer: 0
   m_Name: Button 3
@@ -7821,19 +7575,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &884602424
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884602422}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &884602425
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8255,7 +7996,6 @@ GameObject:
   - component: {fileID: 962034250}
   - component: {fileID: 962034249}
   - component: {fileID: 962034248}
-  - component: {fileID: 962034247}
   - component: {fileID: 962034246}
   m_Layer: 0
   m_Name: Button 7
@@ -8360,19 +8100,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &962034247
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962034245}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &962034248
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8653,7 +8380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da407741e555a024bae90b10289d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
 --- !u!65 &1043107397
 BoxCollider:
@@ -9794,7 +9521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1249242768
 Transform:
   m_ObjectHideFlags: 0
@@ -10580,7 +10307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1312342687
 Transform:
   m_ObjectHideFlags: 0
@@ -11234,66 +10961,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 362329143}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1361928181
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1361928182}
-  - component: {fileID: 1361928183}
-  m_Layer: 0
-  m_Name: Stop Lights
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1361928182
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361928181}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.018348664, y: 0.5938027, z: -1.6189973}
-  m_LocalScale: {x: 0.2, y: 0.20000014, z: 0.20000014}
-  m_Children: []
-  m_Father: {fileID: 1445968374}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1361928183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361928181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 176d94646f9610f4d815564f3fe8567e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
-  stopFeedback: {fileID: 11400000, guid: fc4660e1d548e2844ac815f97323fd3e, type: 2}
-  Cubes:
-  - {fileID: 424508993}
-  - {fileID: 1379205408}
-  - {fileID: 884602422}
-  - {fileID: 145860827}
-  - {fileID: 160056959}
-  - {fileID: 590213250}
-  - {fileID: 962034245}
-  - {fileID: 258021059}
-  - {fileID: 249267916}
-  - {fileID: 1850914978}
-  - {fileID: 481468323}
-  - {fileID: 1752242609}
-  DifficultyButtons: {fileID: 1480304716}
-  StopLights: {fileID: 1361928181}
 --- !u!1001 &1375772150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11395,7 +11062,6 @@ GameObject:
   - component: {fileID: 1379205413}
   - component: {fileID: 1379205412}
   - component: {fileID: 1379205411}
-  - component: {fileID: 1379205410}
   - component: {fileID: 1379205409}
   m_Layer: 0
   m_Name: Button 2
@@ -11500,19 +11166,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1379205410
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379205408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1379205411
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11963,8 +11616,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1445968374}
+  - component: {fileID: 1445968377}
+  - component: {fileID: 1445968376}
+  - component: {fileID: 1445968375}
   m_Layer: 0
-  m_Name: '[Game]'
+  m_Name: '[SimonGame]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11982,14 +11638,130 @@ Transform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 272027782}
-  - {fileID: 1480304717}
-  - {fileID: 796920418}
   - {fileID: 138739327}
-  - {fileID: 408876119}
-  - {fileID: 1361928182}
+  - {fileID: 1480304717}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445968375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445968373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176d94646f9610f4d815564f3fe8567e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
+  stopFeedback: {fileID: 11400000, guid: fc4660e1d548e2844ac815f97323fd3e, type: 2}
+  difficultyColliderParent: {fileID: 1480304716}
+  buttonModelGameObjects:
+  - {fileID: 424508993}
+  - {fileID: 1379205408}
+  - {fileID: 884602422}
+  - {fileID: 145860827}
+  - {fileID: 160056959}
+  - {fileID: 590213250}
+  - {fileID: 962034245}
+  - {fileID: 258021059}
+  - {fileID: 249267916}
+  - {fileID: 1850914978}
+  - {fileID: 481468323}
+  - {fileID: 1752242609}
+  lightUpInterval: 4
+  startUpBuffer: 0.1
+--- !u!114 &1445968376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445968373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70cbf8b6d4895e4a86d0f132c2c374d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
+  greenFeedback: {fileID: 11400000, guid: 0040718646ccfad45abc3e83a8835b30, type: 2}
+  yellowFeedback: {fileID: 11400000, guid: aea0f45a4d25e7c459c2326a19287441, type: 2}
+  redFeedback: {fileID: 11400000, guid: e23874ec188415347adab2bad50dcd2f, type: 2}
+  buttonModelGameObjects:
+  - {fileID: 424508993}
+  - {fileID: 1379205408}
+  - {fileID: 884602422}
+  - {fileID: 145860827}
+  - {fileID: 160056959}
+  - {fileID: 590213250}
+  - {fileID: 962034245}
+  - {fileID: 258021059}
+  - {fileID: 249267916}
+  - {fileID: 1850914978}
+  - {fileID: 481468323}
+  - {fileID: 1752242609}
+  lightUpInterval: 1
+--- !u!114 &1445968377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445968373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff14788aa148c046adc91cfc0291f8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feedbacks:
+  - {fileID: 11400000, guid: f2d579bccc1e7df47a595fa5b88f2b13, type: 2}
+  - {fileID: 11400000, guid: f0a8eacd577e8d84ab606d060395230c, type: 2}
+  - {fileID: 11400000, guid: a0f6039fa6e621b448d592478bc860ff, type: 2}
+  - {fileID: 11400000, guid: 54ddda298f986cc459388396fa6f6bad, type: 2}
+  - {fileID: 11400000, guid: 08662f3671b400947bb878e2baf4843d, type: 2}
+  - {fileID: 11400000, guid: 3a15c10c0a3452d47922396c6c9e579a, type: 2}
+  - {fileID: 11400000, guid: 44d643b6ae2358c4f967e4b112ed8483, type: 2}
+  - {fileID: 11400000, guid: 7e0644014b499f04dbde299a077bedc2, type: 2}
+  - {fileID: 11400000, guid: 680d4c9f000bf264987c79011e0cd070, type: 2}
+  - {fileID: 11400000, guid: 4207178265c017b469c9f3ef2dcc892e, type: 2}
+  - {fileID: 11400000, guid: 48645ab14d18d084aa555af295c65133, type: 2}
+  - {fileID: 11400000, guid: d9eccbf3781044048a738bf63e9381cf, type: 2}
+  wrongFeedback: {fileID: 11400000, guid: d6ac8a50158332845817f3dd37e9c270, type: 2}
+  startController: {fileID: 1445968376}
+  stopController: {fileID: 1445968375}
+  wallParentTransform: {fileID: 1964241608}
+  difficultyColliderParent: {fileID: 1480304716}
+  buttonModelParent: {fileID: 272027781}
+  buttonColliderParent: {fileID: 138739326}
+  canvasGameObjects:
+  - {fileID: 1312342686}
+  - {fileID: 1249242767}
+  hands:
+  - {fileID: 1218619021}
+  - {fileID: 901517911}
+  buttonModelGameObjects:
+  - {fileID: 424508993}
+  - {fileID: 1379205408}
+  - {fileID: 884602422}
+  - {fileID: 145860827}
+  - {fileID: 160056959}
+  - {fileID: 590213250}
+  - {fileID: 962034245}
+  - {fileID: 258021059}
+  - {fileID: 249267916}
+  - {fileID: 1850914978}
+  - {fileID: 481468323}
+  - {fileID: 1752242609}
+  countdownNumberText: {fileID: 1053979260}
+  roundText: {fileID: 1774679259}
+  activatedHandMaterial: {fileID: 2100000, guid: eae1d5178061eed4fbda84e15dcee839,
+    type: 2}
+  deactivatedHandMaterial: {fileID: 2100000, guid: c114fb0d5e729da4d9b06b952896db90,
+    type: 2}
+  timeBetweenCubeLit: 0.5
+  timeCubeLit: 0.5
 --- !u!1001 &1446847848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12096,12 +11868,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1480304717}
   m_Layer: 0
-  m_Name: Difficulty Buttons
+  m_Name: DifficultyColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1480304717
 Transform:
   m_ObjectHideFlags: 0
@@ -12119,7 +11891,7 @@ Transform:
   - {fileID: 639909505}
   - {fileID: 1770200309}
   m_Father: {fileID: 1445968374}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1488387746
 PrefabInstance:
@@ -13044,6 +12816,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 220866870}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1662879196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662879199}
+  - component: {fileID: 1662879198}
+  m_Layer: 0
+  m_Name: '[StudyManager]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1662879198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662879196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74a402103bb8674ebeddb5da4684656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
+--- !u!4 &1662879199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662879196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.022746205, y: 1.539943, z: 0.5932441}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1671068789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13857,7 +13673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 806008c9f9f67ef4f93deb232676db18, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &1748427617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13882,7 +13698,6 @@ GameObject:
   - component: {fileID: 1752242614}
   - component: {fileID: 1752242613}
   - component: {fileID: 1752242612}
-  - component: {fileID: 1752242611}
   - component: {fileID: 1752242610}
   m_Layer: 0
   m_Name: Button 12
@@ -13987,19 +13802,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1752242611
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752242609}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1752242612
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -14196,7 +13998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da407741e555a024bae90b10289d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
 --- !u!65 &1770200311
 BoxCollider:
@@ -14398,7 +14200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: b2c6e0ef74c48644fba3d84ac2f5fca2, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &1808262326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14730,7 +14532,6 @@ GameObject:
   - component: {fileID: 1850914983}
   - component: {fileID: 1850914982}
   - component: {fileID: 1850914981}
-  - component: {fileID: 1850914980}
   - component: {fileID: 1850914979}
   m_Layer: 0
   m_Name: Button 10
@@ -14835,19 +14636,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &1850914980
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850914978}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1850914981
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15034,7 +14822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 80051186321438042be6f4e23362611b, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &1874883543
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15517,7 +15305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: fe3d223e7aeb60d4a9151bd02d0c2b01, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &1915767227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15936,7 +15724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: b2ee5068589ebc948b31762f3149f2d3, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &1954324007
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16282,7 +16070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da407741e555a024bae90b10289d6f77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 2d96bcc26c2ee444d95c60f2e70c4c8a, type: 2}
 --- !u!65 &2006710729
 BoxCollider:
@@ -16520,7 +16308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonData: {fileID: 11400000, guid: 6f890a110a357eb429f1b4b829d7f176, type: 2}
-  finalSimon: {fileID: 408876118}
+  simonGame: {fileID: 1445968377}
 --- !u!65 &2024246583
 BoxCollider:
   m_ObjectHideFlags: 0

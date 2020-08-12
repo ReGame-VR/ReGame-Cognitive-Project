@@ -6,20 +6,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class FinalSimon : MonoBehaviour
+public class SimonGame : MonoBehaviour
 {
     [SerializeField] private Feedback[] feedbacks;
     [SerializeField] private Feedback wrongFeedback;
-    [SerializeField] private GameObject startLightGameObject;
-    [SerializeField] private GameObject stopLights;
-    [SerializeField] private GameObject difficultyButtonParent;
-    [SerializeField] private GameObject buttonColliderParent;
-    [SerializeField] private GameObject[] hands;
-    [SerializeField] private GameObject[] buttonGameObjects;
+    [SerializeField] private StartController startController;
+    [SerializeField] private StopController stopController;
     [SerializeField] private Transform wallParentTransform;
+    [SerializeField] private GameObject difficultyColliderParent;
+    [SerializeField] private GameObject buttonModelParent;
+    [SerializeField] private GameObject buttonColliderParent;
+    [SerializeField] private GameObject[] canvasGameObjects;
+    [SerializeField] private GameObject[] hands;
+    [SerializeField] private GameObject[] buttonModelGameObjects;
     [SerializeField] private TextMesh countdownNumberText;
     [SerializeField] private TextMesh roundText;
-    [SerializeField] private Material[] handColors;
+    [SerializeField] private Material activatedHandMaterial;
+    [SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
     
@@ -34,43 +37,82 @@ public class FinalSimon : MonoBehaviour
     private float _timeRemaining;
     private float _timeLimit;
     private int _round;
+    private bool _isActive;
+    private bool _responseIsBeingProcessed;
     
     private const int NULL_BUTTON_INDEX = -1;
+
+    public delegate void StateHandler();
+    
+    public event StateHandler SessionHasStarted;
+    public event StateHandler SessionHasEnded;
     
 
-    // Start is called before the first frame update
-    void OnEnable()
-    {
-        Initialize();
-        StartCoroutine(PlaySequence());
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Timer();
-        roundText.text = (_round).ToString();
+        if (!_isActive) return;
         
+        Timer();
         CheckForButtonPushed();
+    }
+
+    [Button]
+    public void Activate()
+    {
+        if (buttonModelParent) buttonModelParent.SetActive(true);
+        if (buttonColliderParent) buttonColliderParent.SetActive(false);
+        if (stopController) stopController.PlayStopSequence();
+
+        ActivateHands();
+    }
+
+    [Button]
+    public void StartGame()
+    {
+        _isActive = true;
+        Initialize();
+        StartCoroutine(PlaySequence());
+        
+        SessionHasStarted?.Invoke();
+    }
+
+    [Button]
+    public void StopGame()
+    {
+        _isActive = false;
+        
+        if (buttonColliderParent) buttonColliderParent.SetActive(false);
+        if (stopController) stopController.PlayStopSequence();
+        
+        ToggleCanvasObjects(false);
+        ActivateHands();
+        
+        SessionHasEnded?.Invoke();
     }
     
     public void ButtonPress(ButtonData buttonData)
     {
+        if (!buttonData || 
+            _buttonPushedIndex != NULL_BUTTON_INDEX || 
+            _responseIsBeingProcessed) return;
+        
         _buttonPushedIndex = buttonData.cubeNumber;
         PlayFeedback(buttonData.cubeNumber, true);
     }
 
     public void ButtonRelease(ButtonData buttonData)
     {
+        if (!buttonData) return;
+        
         _buttonPushedIndex = NULL_BUTTON_INDEX;
         StopFeedback(buttonData.cubeNumber);
     }
 
     public void PlayFeedback(int index, Feedback feedback, bool playHaptics)
     {
-        if (buttonGameObjects.Length <= index || !feedback) return;
+        if (buttonModelGameObjects.Length <= index || !feedback) return;
 
-        var button = buttonGameObjects[index];
+        var button = buttonModelGameObjects[index];
         if (!button) return;
 
         var buttonRenderer = button.GetComponent<Renderer>();
@@ -84,9 +126,9 @@ public class FinalSimon : MonoBehaviour
     
     public void StopFeedback(int index, Feedback feedback)
     {
-        if (buttonGameObjects.Length <= index || !feedback) return;
+        if (buttonModelGameObjects.Length <= index || !feedback) return;
 
-        var button = buttonGameObjects[index];
+        var button = buttonModelGameObjects[index];
         if (!button) return;
         
         var buttonRenderer = button.GetComponent<Renderer>();
@@ -100,9 +142,9 @@ public class FinalSimon : MonoBehaviour
 
     public void PlaySilentFeedback(int index)
     {
-        if (buttonGameObjects.Length <= index) return;
+        if (buttonModelGameObjects.Length <= index) return;
 
-        var button = buttonGameObjects[index];
+        var button = buttonModelGameObjects[index];
         if (!button) return;
 
         var buttonRenderer = button.GetComponent<Renderer>();
@@ -116,7 +158,7 @@ public class FinalSimon : MonoBehaviour
     public void SetDifficulty(Difficulty difficulty)
     {
         if (!difficulty) return;
-        
+
         difficulty.levelColors.SetLevelColor(wallParentTransform);
 
         _numberOfButtons = difficulty.numberOfButtons;
@@ -124,25 +166,38 @@ public class FinalSimon : MonoBehaviour
         _timeLimit = difficulty.sessionTimeLimit;
         _maxSequence = difficulty.maxSequence;
         
-        if (difficultyButtonParent) difficultyButtonParent.SetActive(false);
-        if (startLightGameObject) startLightGameObject.SetActive(true);
+        if (difficultyColliderParent) difficultyColliderParent.SetActive(false);
+        if (startController) startController.PlayStartSequence();
     }
 
     private void Initialize()
     {
-        _currentSequenceIndex = 0;
         _round = 1;
+        if (roundText) roundText.text = (_round).ToString();
+        
+        _currentSequenceIndex = 0;
         _timeRemaining = _timeLimit;
         _buttonPushedIndex = NULL_BUTTON_INDEX;
-        DisableHands();
+        
+        DeactivateHands();
         SetupColors();
         HowManyCubes();
         SetupSequence();
+        
+        ToggleCanvasObjects(true);
+    }
+
+    private void ToggleCanvasObjects(bool state)
+    {
+        foreach (var canvasGameObject in canvasGameObjects)
+        {
+            canvasGameObject.SetActive(state);
+        }
     }
 
     private void SetupColors()
     {
-        for (int i = 0; i < buttonGameObjects.Length; i++)
+        for (int i = 0; i < buttonModelGameObjects.Length; i++)
         {
             StopFeedback(i, feedbacks[i]);
         }
@@ -150,32 +205,29 @@ public class FinalSimon : MonoBehaviour
 
     private void CheckForButtonPushed()
     {
-        if (!WasButtonPushed()) return;
-
+        if (!WasButtonPushed() || _responseIsBeingProcessed) return;
+        
+        _responseIsBeingProcessed = true;
+        
         if (WasCorrectButtonPushed())
         {
-            //Debug.Log("WasCorrectButtonPushed()");
             if (_currentSequenceIndex == _numSequences)    // Is last sequence
             {
                 //Add to sequence, play from beginning
                 _numSequences++;
-
-                _currentSequenceIndex = 0;
-                _round++;
                 StartCoroutine(StartNextRound(true));
             }
             else
             {
                 //Check for next sequence
                 _currentSequenceIndex++;
+                _responseIsBeingProcessed = false;
             }
         }
         else
         {
             _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
             
-            _currentSequenceIndex = 0;
-            _round++;
             StartCoroutine(StartNextRound(false));
         }
 
@@ -184,13 +236,20 @@ public class FinalSimon : MonoBehaviour
 
     private IEnumerator StartNextRound(bool wasCorrect)
     {
+        _currentSequenceIndex = 0;
+        _round++;
+        if (roundText) roundText.text = (_round).ToString();
+        
         yield return new WaitForSeconds(timeCubeLit);
         
-        DisableHands();
+        StopAllFeedback();
+        DeactivateHands();
         
         if (!wasCorrect) yield return StartCoroutine(WrongResponse());
-        
+
         yield return new WaitForSeconds(timeCubeLit);
+        
+        _responseIsBeingProcessed = false;
         
         StartCoroutine(PlaySequence());
     }
@@ -206,19 +265,13 @@ public class FinalSimon : MonoBehaviour
         
         yield return new WaitForSeconds(timeCubeLit);
         
-        for (int i = 0; i < _numberOfButtons; i++)
-        {
-            StopFeedback(i, wrongFeedback);
-        }
-        
-        yield return new WaitForSeconds(timeCubeLit);
-        
         SetupColors();
     }
 
     private bool WasButtonPushed()
     {
-        return _buttonPushedIndex > NULL_BUTTON_INDEX && 
+        return _buttonPushedIndex > NULL_BUTTON_INDEX &&
+               _sequence != null &&
                _sequence.Length > 0;
     }
 
@@ -229,12 +282,13 @@ public class FinalSimon : MonoBehaviour
 
     private void HowManyCubes()
     {
-        for (int i = 0; i < buttonGameObjects.Length; i++)
+        for (int i = 0; i < buttonModelGameObjects.Length; i++)
         {
             var state = i < _numberOfButtons;
-            buttonGameObjects[i].SetActive(state);
+            buttonModelGameObjects[i].SetActive(state);
         }
 
+        buttonColliderParent.SetActive(true);
         for (var i = 0; i < buttonColliderParent.transform.childCount; i++)
         {
             var state = i < _numberOfButtons;
@@ -242,57 +296,64 @@ public class FinalSimon : MonoBehaviour
         }
     }
 
-    [Button]
     private void SetupSequence()
     {
         _sequence = new int[_maxSequence];
         while (_currentSequenceIndex < _maxSequence)
         {
             _sequence[_currentSequenceIndex] = Random.Range(0, _numberOfButtons);
-            Debug.Log(_sequence[_currentSequenceIndex]);
             _currentSequenceIndex++;
         }
         _currentSequenceIndex = 0;
     }
 
-    private void DisableHands()
+    private void ActivateHands()
     {
-        hands[0].GetComponent<BoxCollider>().isTrigger = false;
-        hands[1].GetComponent<BoxCollider>().isTrigger = false;
-        hands[0].GetComponent<Renderer>().material = handColors[1];
-        hands[1].GetComponent<Renderer>().material = handColors[1];
-    }
+        if (!activatedHandMaterial) return;
+        
+        foreach (var hand in hands)
+        {
+            var collider = hand.GetComponent<Collider>();
+            if (collider) collider.enabled = true;
 
-    private void EnableHands()
+            var renderer = hand.GetComponent<Renderer>();
+            if (renderer) renderer.material = activatedHandMaterial;
+        }
+    }
+    
+    private void DeactivateHands()
     {
-        hands[0].GetComponent<BoxCollider>().isTrigger = true;
-        hands[1].GetComponent<BoxCollider>().isTrigger = true;
-        hands[0].GetComponent<Renderer>().material = handColors[0]; ;
-        hands[1].GetComponent<Renderer>().material = handColors[0]; ;
+        if (!deactivatedHandMaterial) return;
+        
+        foreach (var hand in hands)
+        {
+            var collider = hand.GetComponent<Collider>();
+            if (collider) collider.enabled = false;
+
+            var renderer = hand.GetComponent<Renderer>();
+            if (renderer) renderer.material = deactivatedHandMaterial;
+        }
     }
 
     private void Timer()
     {
         _timeRemaining -= Time.fixedDeltaTime;
         _timeInSequence += Time.fixedDeltaTime;
-        string minutes = ((int)_timeRemaining / 60).ToString();
-        string seconds = (_timeRemaining % 60).ToString("00");
+        var minutes = ((int)_timeRemaining / 60).ToString();
+        var seconds = (_timeRemaining % 60).ToString("00");
         countdownNumberText.text = minutes + ":" + seconds;
 
         if (_timeRemaining <= 0)    //Restart from "Choose difficulty"
         {
-            buttonColliderParent.SetActive(false);
-            EnableHands();
-            stopLights.SetActive(true);
-            gameObject.SetActive(false);
+            StopGame();
         }
     }
 
     private void PlayFeedback(int index, bool playHaptics)
     {
-        if (buttonGameObjects.Length <= index) return;
+        if (buttonModelGameObjects.Length <= index) return;
 
-        var button = buttonGameObjects[index];
+        var button = buttonModelGameObjects[index];
         if (!button) return;
 
         var buttonRenderer = button.GetComponent<Renderer>();
@@ -306,9 +367,9 @@ public class FinalSimon : MonoBehaviour
 
     private void StopFeedback(int index)
     {
-        if (buttonGameObjects.Length < index) return;
+        if (buttonModelGameObjects.Length < index) return;
 
-        var button = buttonGameObjects[index];
+        var button = buttonModelGameObjects[index];
         if (!button) return;
         
         var buttonRenderer = button.GetComponent<Renderer>();
@@ -323,8 +384,9 @@ public class FinalSimon : MonoBehaviour
     private IEnumerator PlaySequence()
     {
         yield return new WaitForSeconds(timeBetweenCubeLit);
-        DisableHands();
-        while (_currentSequenceIndex <= _numSequences)
+        DeactivateHands();
+        while (_currentSequenceIndex <= _numSequences &&
+               _isActive)
         {
             if (_sequence[_currentSequenceIndex] == _litCubeIndex)
             {
@@ -344,7 +406,7 @@ public class FinalSimon : MonoBehaviour
 
         _currentSequenceIndex = 0;
         _timeInSequence = 0;
-        EnableHands();
+        ActivateHands();
     }
 
     private void StopAllFeedback()

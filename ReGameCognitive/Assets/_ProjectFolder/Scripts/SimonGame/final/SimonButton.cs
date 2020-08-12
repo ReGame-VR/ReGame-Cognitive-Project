@@ -5,20 +5,20 @@ using UnityEngine;
 public class SimonButton : MonoBehaviour
 {
     [SerializeField] private ButtonData buttonData;
-    [SerializeField] private FinalSimon finalSimon;
+    [SerializeField] private SimonGame simonGame;
     
     
     private void OnTriggerEnter(Collider collider)
     {
-        if (!finalSimon) return;
+        if (!simonGame) return;
         
-        finalSimon.ButtonPress(buttonData);
+        simonGame.ButtonPress(buttonData);
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        if (!finalSimon) return;
+        if (!simonGame) return;
         
-        finalSimon.ButtonRelease(buttonData);
+        simonGame.ButtonRelease(buttonData);
     }
 }

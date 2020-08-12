@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class ChooseDifficulty : MonoBehaviour
 {
-    [SerializeField] private FinalSimon finalSimon;
+    [SerializeField] private SimonGame simonGame;
     [SerializeField] private Difficulty difficulty;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!finalSimon) return;
+        if (!simonGame) return;
         
-        finalSimon.SetDifficulty(difficulty);
+        simonGame.SetDifficulty(difficulty);
     }
 }

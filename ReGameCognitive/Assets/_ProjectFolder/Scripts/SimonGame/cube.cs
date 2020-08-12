@@ -7,7 +7,7 @@ public class cube : MonoBehaviour
     public GameObject cubeObject;
     public Material color;
     public Material colorPressed;
-    public simonGame simonGame;
+    public SimonPrototype simonPrototype;
     public int cubeNumber;
     private AudioSource beep;
 
@@ -27,12 +27,12 @@ public class cube : MonoBehaviour
     {
         cubeObject.GetComponent<Renderer>().material = colorPressed;
         beep.Play();
-        simonGame.pushed = cubeNumber;
+        simonPrototype.pushed = cubeNumber;
     }
 
     private void OnTriggerExit()
     {
         cubeObject.GetComponent<Renderer>().material = color;
-        simonGame.pushed = 0;
+        simonPrototype.pushed = 0;
     }
 }

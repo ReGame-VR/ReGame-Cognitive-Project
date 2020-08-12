@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class simonGame : MonoBehaviour
+public class SimonPrototype : MonoBehaviour
 {
     public GameObject cube1;
     public GameObject cube2;
@@ -99,7 +99,7 @@ public class simonGame : MonoBehaviour
         else if (pushed > 0 && pushed != current)
         {
             gameover.text = "Game Over";
-            this.GetComponent<simonGame>().enabled = false;
+            this.GetComponent<SimonPrototype>().enabled = false;
         }
 
     }
