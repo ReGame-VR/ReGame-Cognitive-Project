@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SimonGame : MonoBehaviour
+public class SequenceGame : MonoBehaviour
 {
     [SerializeField] private List<FeedbackContainer> feedbackContainers;
     [SerializeField] [Range(.1f, 3)] private float timeBetweenFeedback;

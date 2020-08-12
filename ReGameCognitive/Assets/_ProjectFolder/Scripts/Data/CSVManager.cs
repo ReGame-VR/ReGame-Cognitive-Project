@@ -42,6 +42,8 @@ public class CSVManager : MonoBehaviour
 
     public void UpdateData(object dataObject)
     {
+        if (dataObject == null) return;
+        
         var fields = dataObject.GetType().GetFields();
         foreach (var field in fields)
         {
@@ -51,6 +53,8 @@ public class CSVManager : MonoBehaviour
 
     public void AppendReport()
     {
+        if (_dictionary == null) return;
+        
         var dictionaryValues = new List<string>();
         foreach (var value in _dictionary.Values)
         {

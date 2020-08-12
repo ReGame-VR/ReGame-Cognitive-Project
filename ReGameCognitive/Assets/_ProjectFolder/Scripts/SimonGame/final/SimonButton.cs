@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class SimonButton : MonoBehaviour
 {
-    public FinalSimon FinalSimon;
-    public int CubeNumber;
+    [SerializeField] private ButtonData buttonData;
+    [SerializeField] private SimonGame simonGame;
     
     
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider collider)
     {
-        FinalSimon.buttonPushedIndex = CubeNumber;
-        FinalSimon.PlayFeedback(CubeNumber - 1, true);
+        if (!simonGame) return;
+        
+        simonGame.ButtonPress(buttonData);
     }
 
-    private void OnTriggerExit()
+    private void OnTriggerExit(Collider collider)
     {
-        FinalSimon.buttonPushedIndex = 0;
-        FinalSimon.StopFeedback(CubeNumber - 1);
+        if (!simonGame) return;
+        
+        simonGame.ButtonRelease(buttonData);
     }
 }

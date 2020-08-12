@@ -5,26 +5,13 @@ using UnityEngine;
 
 public class ChooseDifficulty : MonoBehaviour
 {
-    public int DifficultyNumber;
-    public int StartAtSequence;
-    public FinalSimon FinalSimon;
-    public GameObject DifficultyButtons;
-    public GameObject StartLight;
-    public float timeLimit;
-    public LevelColors levelColors;
+    [SerializeField] private SimonGame simonGame;
+    [SerializeField] private Difficulty difficulty;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (levelColors) levelColors.ChangeAllObjectsMaterial();
-
-        if (FinalSimon)
-        {
-            FinalSimon.NumberOfButtons = DifficultyNumber;
-            FinalSimon.numSequences = StartAtSequence;
-            FinalSimon.timeLimit = timeLimit;
-        }
+        if (!simonGame) return;
         
-        if (DifficultyButtons) DifficultyButtons.SetActive(false);
-        if (StartLight) StartLight.SetActive(true);
+        simonGame.SetDifficulty(difficulty);
     }
 }

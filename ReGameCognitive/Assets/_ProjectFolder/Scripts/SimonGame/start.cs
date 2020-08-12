@@ -34,6 +34,6 @@ public class start : MonoBehaviour
         getReady.text = "";
         score.text = "Round: ";
         number.text = "1";
-        simon.GetComponent<simonGame>().enabled = true;
+        simon.GetComponent<SimonPrototype>().enabled = true;
     }
 }

@@ -1,0 +1,3 @@
+userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInStudy,sessionCompleted,currentSequence,sequencesCompleted,correctSequences,sequences
+3230a9695eff4e658f257ecace2ca9f1,8/12/2020 3:31:51 PM,,8/12/2020 10:31:51 PM,,,False,0,0,0,System.Collections.Generic.List`1[System.String]
+95ddddbe24fb471a9112fafb7c946c95,8/12/2020 3:43:49 PM,,8/12/2020 10:43:49 PM,,,False,0,0,0,System.Collections.Generic.List`1[System.String]
