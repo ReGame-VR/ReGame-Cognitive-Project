@@ -15,4 +15,6 @@ MonoBehaviour:
   litColor: {r: 0.48673797, g: 1, b: 0, a: 1}
   unlitColor: {r: 0.21970485, g: 0.43529412, b: 0, a: 0.78431374}
   audioClip: {fileID: 8300000, guid: 9788a72fcf93fd34bbc2f2933449056f, type: 3}
+  volume: 1
+  pitch: 1
   hapticAmplitude: 0

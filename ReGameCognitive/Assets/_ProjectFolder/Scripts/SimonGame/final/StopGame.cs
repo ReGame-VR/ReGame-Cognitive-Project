@@ -8,23 +8,16 @@ public class StopGame : MonoBehaviour
     [SerializeField] private Feedback stopFeedback;
 
     public GameObject[] Cubes;
-    public Material[] Color;
     public GameObject DifficultyButtons;
     public GameObject StopLights;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    
+    void OnEnable()
     {
-        //StartCoroutine(PlaySequence());
+        StartCoroutine(PlaySequence());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    IEnumerator PlaySequence()
+    private IEnumerator PlaySequence()
     {
         LightUpStopCubes();
 
@@ -65,10 +58,5 @@ public class StopGame : MonoBehaviour
             finalSimon.PlaySilentFeedback(i);
             Cubes[i].SetActive(true);
         }
-    }
-
-    void OnEnable()
-    {
-        StartCoroutine(PlaySequence());
     }
 }

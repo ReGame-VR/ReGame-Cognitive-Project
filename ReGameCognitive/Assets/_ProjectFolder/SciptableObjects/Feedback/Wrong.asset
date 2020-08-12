@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a3ccb8ea97243842b61d7b832f93cfa, type: 3}
-  m_Name: R2C1
+  m_Name: Wrong
   m_EditorClassIdentifier: 
-  litColor: {r: 0.9866247, g: 1, b: 0, a: 1}
-  unlitColor: {r: 0.41761804, g: 0.43529412, b: 0, a: 0.78431374}
-  audioClip: {fileID: 8300000, guid: afcdbb118c38ec340911098667b79a87, type: 3}
-  volume: 1
+  litColor: {r: 1, g: 0, b: 0, a: 1}
+  unlitColor: {r: 0.43529412, g: 0, b: 0, a: 0.78431374}
+  audioClip: {fileID: 8300000, guid: 983da4219faf3ac4b93601dc45cdc5eb, type: 3}
+  volume: 0.5
   pitch: 1
   hapticAmplitude: 0

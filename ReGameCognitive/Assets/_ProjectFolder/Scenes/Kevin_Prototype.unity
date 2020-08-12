@@ -3873,6 +3873,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4207178265c017b469c9f3ef2dcc892e, type: 2}
   - {fileID: 11400000, guid: 48645ab14d18d084aa555af295c65133, type: 2}
   - {fileID: 11400000, guid: d9eccbf3781044048a738bf63e9381cf, type: 2}
+  wrongFeedback: {fileID: 11400000, guid: d6ac8a50158332845817f3dd37e9c270, type: 2}
   startLightGameObject: {fileID: 796920417}
   stopLights: {fileID: 1361928181}
   difficultyButtonParent: {fileID: 1480304716}
@@ -11291,19 +11292,6 @@ MonoBehaviour:
   - {fileID: 1850914978}
   - {fileID: 481468323}
   - {fileID: 1752242609}
-  Color:
-  - {fileID: 2100000, guid: b87462cda78f046499fd6d8fdbebe607, type: 2}
-  - {fileID: 2100000, guid: 80a920b51e47a8943a78d77a5593f0e4, type: 2}
-  - {fileID: 2100000, guid: 3ae5408c04440a54583d359616825edd, type: 2}
-  - {fileID: 2100000, guid: 3c7d17009887b864d8dcb8e7cba217f2, type: 2}
-  - {fileID: 2100000, guid: afbf83b33b5f765478a42b80f7630c5e, type: 2}
-  - {fileID: 2100000, guid: 7497a1fe297cf164fb5cb2b77353f0d0, type: 2}
-  - {fileID: 2100000, guid: e1612ff19dca8e045b438d4f03efa93b, type: 2}
-  - {fileID: 2100000, guid: 88041412bb266df45a761b2b50e904ab, type: 2}
-  - {fileID: 2100000, guid: 9470edb0ec2733a4fb3ee992b21832e6, type: 2}
-  - {fileID: 2100000, guid: 4d2d25d6bae08e341a7ef784de6e547d, type: 2}
-  - {fileID: 2100000, guid: 924ec927fe95dba4caa31548b31538bf, type: 2}
-  - {fileID: 2100000, guid: 71dac092addb97b4c81b8e4e9bb89703, type: 2}
   DifficultyButtons: {fileID: 1480304716}
   StopLights: {fileID: 1361928181}
 --- !u!1001 &1375772150

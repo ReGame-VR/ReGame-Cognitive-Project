@@ -6,6 +6,8 @@ public class Feedback : ScriptableObject
     public Color litColor;
     public Color unlitColor;
     public AudioClip audioClip;
+    [Range(0, 1)] public float volume;
+    [Range(-3, 3)] public float pitch;
     [Range(0, 1)] public float hapticAmplitude;
 
 
@@ -14,6 +16,8 @@ public class Feedback : ScriptableObject
         if (audioSource)
         {
             audioSource.clip = audioClip;
+            audioSource.volume = volume;
+            audioSource.pitch = pitch;
             audioSource.Play();
         }
 
