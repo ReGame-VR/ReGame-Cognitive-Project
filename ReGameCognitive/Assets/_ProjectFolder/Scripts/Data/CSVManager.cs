@@ -47,7 +47,7 @@ public class CSVManager : MonoBehaviour
         var fields = dataObject.GetType().GetFields();
         foreach (var field in fields)
         {
-            AddData(field.Name, field.GetValue(dataObject).ToString());
+            if (field.GetValue(dataObject) != null) AddData(field.Name, field.GetValue(dataObject).ToString());
         }
     }
 

@@ -10,21 +10,22 @@ public class Session
     public string localEndTime = "";
     public string utcStartTime = "";
     public string utcEndTime = "";
-    public string timeInStudy = "";
+    public string timeInSequence = "";
     public bool sessionCompleted = false;
     public int currentSequence;
-    public int sequencesCompleted;
-    public int correctSequences;
-    public List<string> sequences = new List<string>();
+    public int totalSequencesAttempted;
+    public int totalSequencesCorrect;
+    public string sequencesAttempted;
+    public string sequencesMissed;
+    public string handUsed;
+    public float sequenceSuccessPercentage;
 
-    public float SuccessPercentage
+
+    public void SetSequenceSuccessPercentage()
     {
-        get
-        {
-            if (sequencesCompleted == 0) return 0;
+        if (totalSequencesAttempted == 0) sequenceSuccessPercentage = 0;
             
-            return (float) Decimal.Divide(correctSequences, sequencesCompleted);
-        }
+        sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
     }
     
     public Session(User user)
@@ -32,11 +33,10 @@ public class Session
         if (user == null) return;
         
         //Data from user
-        currentSequence = user.sequencesCompleted;
+        currentSequence = user.totalSequencesAttempted + 1;
         userId = user.userId;
         
         SetStartTime();
-        sequences = new List<string>();
     }
     
     public void SetEndTime()

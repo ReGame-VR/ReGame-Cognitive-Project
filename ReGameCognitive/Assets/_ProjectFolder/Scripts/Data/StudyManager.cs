@@ -20,6 +20,8 @@ public class StudyManager : MonoBehaviour
         {
             simonGame.SessionHasStarted += StartSession;
             simonGame.SessionHasEnded += EndSession;
+            simonGame.RoundHasEnded += StoreData;
+            simonGame.RoundHasEnded += AppendSessionData;
         }
         
         _userCsvManager = gameObject.AddComponent<CSVManager>();
@@ -32,6 +34,8 @@ public class StudyManager : MonoBehaviour
         {
             simonGame.SessionHasStarted -= StartSession;
             simonGame.SessionHasEnded -= EndSession;
+            simonGame.RoundHasEnded -= StoreData;
+            simonGame.RoundHasEnded -= AppendSessionData;
         }
     }
 
@@ -41,14 +45,27 @@ public class StudyManager : MonoBehaviour
         _currentUser = new User();
         
         if (_userCsvManager) _userCsvManager.Initialize(_currentUser);
-        if (simonGame) simonGame.Activate();
+        
+        if (simonGame)
+        {
+            simonGame.SetUser(_currentUser);
+            simonGame.Activate();
+        }
     }
     
     [Button]
     private void EndStudy()
     {
+        if (_userCsvManager == null) return;
+        
+        if (_currentUser != null)
+        {
+            _currentUser.SetEndTime();
+            _currentUser.studyCompleted = true;
+        }
+        
         StoreData();
-        if (_userCsvManager) _userCsvManager.AppendReport();
+        _userCsvManager.AppendReport();
     }
 
     private void StartSession()
@@ -56,6 +73,7 @@ public class StudyManager : MonoBehaviour
         _currentSession = new Session(_currentUser);
         
         if (_sessionCsvManager) _sessionCsvManager.Initialize(_currentSession);
+        if (simonGame) simonGame.SetSession(_currentSession);
     }
 
     private void EndSession()
@@ -70,5 +88,10 @@ public class StudyManager : MonoBehaviour
     {
         if (_userCsvManager) _userCsvManager.UpdateData(_currentUser);
         if (_sessionCsvManager) _sessionCsvManager.UpdateData(_currentSession);
+    }
+
+    private void AppendSessionData()
+    {
+        if (_sessionCsvManager) _sessionCsvManager.AppendReport();
     }
 }

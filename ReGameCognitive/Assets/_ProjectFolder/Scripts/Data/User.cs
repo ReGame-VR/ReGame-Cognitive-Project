@@ -12,18 +12,26 @@ public class User
     public string utcEndTime = "";
     public string timeInStudy = "";
     public bool studyCompleted = false;
-    public int sequencesCompleted;
-    public int correctSequences;
-    public List<string> sequences = new List<string>();
-    
-    public float SuccessPercentage
+    public int totalSequencesAttempted;
+    public int totalSequencesCorrect;
+    public float sequenceSuccessPercentage;
+    public int totalSessionsCorrect;
+    public int totalSessionsAttempted;
+    public float sessionSuccessPercentage;
+
+
+    public void SetSequenceSuccessPercentage()
     {
-        get
-        {
-            if (sequencesCompleted == 0) return 0;
+        if (totalSequencesAttempted == 0) sequenceSuccessPercentage = 0;
             
-            return (float) Decimal.Divide(correctSequences, sequencesCompleted);
-        }
+        sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
+    }
+    
+    public void SetSessionSuccessPercentage()
+    {
+        if (totalSessionsAttempted == 0) sessionSuccessPercentage = 0;
+            
+        sessionSuccessPercentage = (float) Decimal.Divide(totalSessionsCorrect, totalSessionsAttempted);
     }
     
     public User()
@@ -36,6 +44,9 @@ public class User
     {
         localEndTime = DateTime.Now.ToString();
         utcEndTime = DateTime.UtcNow.ToString();
+
+        var start = DateTime.Parse(localStartTime);
+        timeInStudy = DateTime.Now.Subtract(start).ToString();
     }
 
     private void SetStartTime()

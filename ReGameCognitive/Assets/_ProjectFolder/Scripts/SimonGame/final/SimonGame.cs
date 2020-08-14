@@ -25,7 +25,9 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
-    
+
+    private User _currentUser;
+    private Session _currentSession;
     private int[] _sequence;
     private float _timeInSequence;
     private int _numberOfButtons;
@@ -43,9 +45,15 @@ public class SimonGame : MonoBehaviour
     private const int NULL_BUTTON_INDEX = -1;
 
     public delegate void StateHandler();
+
+    public delegate void DataHandler(SimonGame simonGame);
     
     public event StateHandler SessionHasStarted;
     public event StateHandler SessionHasEnded;
+    public event StateHandler RoundHasStarted;
+    public event StateHandler RoundHasEnded;
+    public event StateHandler ButtonWasPushed;
+    
     
 
     void FixedUpdate()
@@ -56,6 +64,16 @@ public class SimonGame : MonoBehaviour
         CheckForButtonPushed();
     }
 
+    public void SetUser(User user)
+    {
+        _currentUser = user;
+    }
+
+    public void SetSession(Session session)
+    {
+        _currentSession = session;
+    }
+    
     [Button]
     public void Activate()
     {
@@ -72,8 +90,9 @@ public class SimonGame : MonoBehaviour
         _isActive = true;
         Initialize();
         StartCoroutine(PlaySequence());
-        
+
         SessionHasStarted?.Invoke();
+        RoundHasStarted?.Invoke();
     }
 
     [Button]
@@ -86,6 +105,8 @@ public class SimonGame : MonoBehaviour
         
         ToggleCanvasObjects(false);
         ActivateHands();
+        UpdateSessionTime();
+        EndSession();
         
         SessionHasEnded?.Invoke();
     }
@@ -170,6 +191,81 @@ public class SimonGame : MonoBehaviour
         if (startController) startController.PlayStartSequence();
     }
 
+    private void UpdateUserTime()
+    {
+        _currentUser?.SetEndTime();
+    }
+    
+    private void EndSession()
+    {
+        if (_currentSession == null || _currentUser == null) return;
+        
+        _currentSession.SetEndTime();
+        var minutes = ((int)_timeInSequence / 60).ToString();
+        var seconds = (_timeInSequence % 60).ToString("00");
+        var timeString = minutes + ":" + seconds;
+        _currentSession.timeInSequence = timeString;
+        _currentSession.sessionCompleted = true;
+        
+        _currentUser.totalSessionsAttempted++;
+        if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
+        _currentUser?.SetSessionSuccessPercentage();
+    }
+
+    private void UpdateSessionTime()
+    {
+        if (_currentSession == null) return;
+        
+        _currentSession.SetEndTime();
+        
+        var minutes = ((int)_timeInSequence / 60).ToString();
+        var seconds = (_timeInSequence % 60).ToString("00");
+        var timeString = minutes + ":" + seconds;
+        _currentSession.timeInSequence = timeString;
+    }
+
+    private void StoreButtonPushData()
+    {
+        if (_currentSession == null || _currentUser == null) return;
+
+        var sequenceAttempted = "";
+        for (var i = 0; i <= _numSequences; i++)
+        {
+            sequenceAttempted += "[" + _sequence[i] + "] ";
+        }
+        _currentSession.sequencesAttempted = sequenceAttempted;
+        _currentSession.totalSequencesAttempted = _round;
+
+        _currentUser.totalSequencesAttempted = _round;
+    }
+
+    private void StoreCorrectSequence()
+    {
+        if (_currentSession == null || _currentUser == null) return;
+        
+        _currentSession.sequencesMissed = "";
+        _currentSession.totalSequencesCorrect++;
+        _currentSession.SetSequenceSuccessPercentage();
+
+        _currentUser.totalSequencesCorrect++;
+        _currentUser.SetSequenceSuccessPercentage();
+    }
+
+    private void StoreIncorrectSequence()
+    {
+        if (_currentSession == null || _currentUser == null) return;
+
+        var sequenceEntered = "";
+        for (var i = 0; i < _currentSequenceIndex; i++)
+        {
+            sequenceEntered += "[" + _sequence[i] + "] ";
+        }
+        _currentSession.sequencesMissed = sequenceEntered + "[" + _buttonPushedIndex + "]";
+        _currentSession.SetSequenceSuccessPercentage();
+        
+        _currentUser.SetSequenceSuccessPercentage();
+    }
+
     private void Initialize()
     {
         _round = 1;
@@ -208,11 +304,14 @@ public class SimonGame : MonoBehaviour
         if (!WasButtonPushed() || _responseIsBeingProcessed) return;
         
         _responseIsBeingProcessed = true;
+        StoreButtonPushData();
         
         if (WasCorrectButtonPushed())
         {
             if (_currentSequenceIndex == _numSequences)    // Is last sequence
             {
+                StoreCorrectSequence();
+                
                 //Add to sequence, play from beginning
                 _numSequences++;
                 StartCoroutine(StartNextRound(true));
@@ -228,6 +327,7 @@ public class SimonGame : MonoBehaviour
         {
             _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
             
+            StoreIncorrectSequence();
             StartCoroutine(StartNextRound(false));
         }
 
@@ -236,10 +336,6 @@ public class SimonGame : MonoBehaviour
 
     private IEnumerator StartNextRound(bool wasCorrect)
     {
-        _currentSequenceIndex = 0;
-        _round++;
-        if (roundText) roundText.text = (_round).ToString();
-        
         yield return new WaitForSeconds(timeCubeLit);
         
         StopAllFeedback();
@@ -249,7 +345,14 @@ public class SimonGame : MonoBehaviour
 
         yield return new WaitForSeconds(timeCubeLit);
         
+        RoundHasEnded?.Invoke();
+        
+        _currentSequenceIndex = 0;
         _responseIsBeingProcessed = false;
+        _round++;
+        if (roundText) roundText.text = (_round).ToString();
+        
+        RoundHasStarted?.Invoke();
         
         StartCoroutine(PlaySequence());
     }
@@ -342,6 +445,9 @@ public class SimonGame : MonoBehaviour
         var minutes = ((int)_timeRemaining / 60).ToString();
         var seconds = (_timeRemaining % 60).ToString("00");
         countdownNumberText.text = minutes + ":" + seconds;
+        
+        UpdateSessionTime();
+        UpdateUserTime();
 
         if (_timeRemaining <= 0)    //Restart from "Choose difficulty"
         {
@@ -415,5 +521,11 @@ public class SimonGame : MonoBehaviour
         {
             StopFeedback(i);
         }
+    }
+
+    //TODO implement
+    private bool WasSessionPassed()
+    {
+        return true;
     }
 }
