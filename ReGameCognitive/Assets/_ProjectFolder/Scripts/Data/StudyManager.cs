@@ -7,7 +7,8 @@ using UnityEngine;
 public class StudyManager : MonoBehaviour
 {
     [SerializeField] private SimonGame simonGame;
-
+    [SerializeField] private VideoPanel videoPanel;
+    
     private CSVManager _userCsvManager;
     private CSVManager _sessionCsvManager;
     private User _currentUser;
@@ -16,16 +17,18 @@ public class StudyManager : MonoBehaviour
 
     private void Awake()
     {
+        _userCsvManager = gameObject.AddComponent<CSVManager>();
+        _sessionCsvManager = gameObject.AddComponent<CSVManager>();
+        
         if (simonGame)
         {
             simonGame.SessionHasStarted += StartSession;
             simonGame.SessionHasEnded += EndSession;
             simonGame.RoundHasEnded += StoreData;
             simonGame.RoundHasEnded += AppendSessionData;
+            
+            simonGame.SetUser(_currentUser);
         }
-        
-        _userCsvManager = gameObject.AddComponent<CSVManager>();
-        _sessionCsvManager = gameObject.AddComponent<CSVManager>();
         
         StartStudy();
     }
@@ -47,12 +50,8 @@ public class StudyManager : MonoBehaviour
         _currentUser = new User();
         
         if (_userCsvManager) _userCsvManager.Initialize(_currentUser);
-        
-        if (simonGame)
-        {
-            simonGame.SetUser(_currentUser);
-            simonGame.Activate();
-        }
+
+        StartCoroutine(StartStudyCoroutine());
     }
     
     [Button]
@@ -95,5 +94,14 @@ public class StudyManager : MonoBehaviour
     private void AppendSessionData()
     {
         if (_sessionCsvManager) _sessionCsvManager.AppendReport();
+    }
+
+    private IEnumerator StartStudyCoroutine()
+    {
+        if (!videoPanel || !simonGame) yield break;
+        
+        yield return StartCoroutine(videoPanel.Enable());
+        
+        simonGame.Activate();
     }
 }

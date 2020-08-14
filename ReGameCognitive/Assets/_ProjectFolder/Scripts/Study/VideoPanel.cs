@@ -29,6 +29,11 @@ public class VideoPanel : MonoBehaviour
         //StartCoroutine(VideoActivator(intervalCheckingTime));
     }
 
+    public IEnumerator Enable()
+    {
+        yield return StartCoroutine(VideoActivator(intervalCheckingTime));
+    }
+
     private IEnumerator VideoActivator(float timeToWait)
     {
         if (!displayPrefab.activeSelf)
