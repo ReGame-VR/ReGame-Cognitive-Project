@@ -11,8 +11,8 @@ public class VideoPanel : MonoBehaviour
     [SerializeField] private GameObject displayPrefab;
     [SerializeField] private float intervalCheckingTime = 0.5f;
     [SerializeField] private CustomButton customButton;
-    private double _videoClipLength;
-    private float _elapsedTime = 0f;
+    [SerializeField] private double _videoClipLength;
+    [SerializeField] private double _elapsedTime = 0f;
     
     private void Start()
     {
@@ -25,13 +25,14 @@ public class VideoPanel : MonoBehaviour
                 _videoClipLength = videoPlayer.length;
             }
         }
-
-        StartCoroutine(VideoActivator(intervalCheckingTime));
+        
+        
+        //StartCoroutine(VideoActivator(intervalCheckingTime));
     }
 
     private IEnumerator VideoActivator(float timeToWait)
     {
-        while (enabled)
+        while (!videoCompletion)
         {
             _elapsedTime += Time.deltaTime;
             
@@ -39,7 +40,7 @@ public class VideoPanel : MonoBehaviour
             {
                 videoCompletion = true;
             }
-        
+            
             yield return new WaitForSeconds(timeToWait);
         }
     }

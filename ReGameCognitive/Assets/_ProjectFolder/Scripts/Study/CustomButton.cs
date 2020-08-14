@@ -5,40 +5,36 @@ using UnityEngine;
 
 public class CustomButton : MonoBehaviour
 {
-    [SerializeField] private float triggerTime;
+    [SerializeField] private float currentTime;
     [SerializeField] private float timeUntilActivation;
     [SerializeField] private float hapticsAmplitude;
     [SerializeField] private float hapticsFrequency;
+    [SerializeField] private Collider leftHand;
+    [SerializeField] private Collider rightHand;
+    [SerializeField] private MeshRenderer renderer;
+    [SerializeField] private Color activationColor;
     public bool trigger = false;
 
-    private void Start()
-    {
-        triggerTime = 0f;
-    }
-
-    //Currently hard coding hand collider values. Needs update
     private void OnTriggerStay(Collider other)
     {
-        while (triggerTime < timeUntilActivation)
+        if (other.transform.name == leftHand.name && (currentTime < timeUntilActivation))
         {
-            if (other.transform.parent.name == "CustomHandLeft")
-            {
-                triggerTime += Time.deltaTime;
-                ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, true);
-            }
-        
-            if (other.transform.parent.name == "CustomHandRight")
-            {
-                triggerTime += Time.deltaTime;
-                ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, false);
-            }
+            ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, true);
+            currentTime += Time.deltaTime;
         }
+        
+        if (other.transform.name == rightHand.name && (currentTime < timeUntilActivation))
+        {
+            ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, false);
+            currentTime += Time.deltaTime;
+        }
+        renderer.material.color = Color.Lerp(Color.white, activationColor, currentTime);
         trigger = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        triggerTime = 0f;
-        ControllerHaptics.ForceQuitOVRHaptics();
+        currentTime = 0;
+        renderer.material.color = Color.white;
     }
 }

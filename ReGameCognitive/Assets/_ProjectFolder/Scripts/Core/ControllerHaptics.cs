@@ -5,9 +5,7 @@ public static class ControllerHaptics
 {
     public static void ActivateHaptics(float amplitude, float duration, bool isLeftController) 
     {
-        OVRHaptics(amplitude, duration, isLeftController);
-        
-        //XR and OVR check needs to be included in this method. 
+        XRHaptics(amplitude, duration, isLeftController);
     }
 
     public static void XRHaptics(float amplitude, float duration, bool isLeftController)

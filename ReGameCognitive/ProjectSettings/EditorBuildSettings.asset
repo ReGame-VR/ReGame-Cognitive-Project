@@ -17,13 +17,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_ProjectFolder/Scenes/simonFive.unity
     guid: d0f2b2074b4fd674ca1edfce3f3ef823
-  - enabled: 1
+  - enabled: 0
     path: Assets/_ProjectFolder/Scenes/Kevin_Prototype.unity
     guid: 4775f8e571ca7d64d8a48baea671085e
   - enabled: 0
     path: Assets/_ProjectFolder/Scenes/FinalSimon.unity
     guid: 11ccbd6ac82e7ce4683d7f82c3b00ef1
-  - enabled: 0
+  - enabled: 1
     path: Assets/_ProjectFolder/Scenes/Arcade Room.unity
     guid: 0c586ac72d7751b4a9e26cc57fa62250
   m_configObjects: {}
