@@ -46,9 +46,6 @@ public class SimonGame : MonoBehaviour
     private const float CHECK_INTERVAL = 1;
 
     public delegate void StateHandler();
-
-    public delegate void DataHandler(SimonGame simonGame);
-    
     public event StateHandler SessionHasStarted;
     public event StateHandler SessionHasEnded;
     public event StateHandler RoundHasStarted;
