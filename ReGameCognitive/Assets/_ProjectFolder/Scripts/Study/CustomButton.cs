@@ -9,14 +9,25 @@ public class CustomButton : MonoBehaviour
     [SerializeField] private float timeUntilActivation;
     [SerializeField] private float hapticsAmplitude;
     [SerializeField] private float hapticsFrequency;
+    [SerializeField] private Collider collider;
     [SerializeField] private Collider leftHand;
     [SerializeField] private Collider rightHand;
     [SerializeField] private MeshRenderer renderer;
     [SerializeField] private Color activationColor;
     public bool trigger = false;
 
+    private void Start()
+    {
+        ToggleOffTrigger();
+    }
+
     private void OnTriggerStay(Collider other)
     {
+        if (currentTime >= timeUntilActivation)
+        {
+            trigger = true;
+        }
+        
         if (other.transform.name == leftHand.name && (currentTime < timeUntilActivation))
         {
             ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, true);
@@ -29,12 +40,25 @@ public class CustomButton : MonoBehaviour
             currentTime += Time.deltaTime;
         }
         renderer.material.color = Color.Lerp(Color.white, activationColor, currentTime);
-        trigger = true;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void ResetButton()
     {
+        trigger = false;
         currentTime = 0;
         renderer.material.color = Color.white;
+    }
+
+    public void ToggleOffTrigger()
+    {
+        ResetButton();
+        renderer.enabled = false;
+        collider.enabled = false;
+    }
+    
+    public void ToggleOnTrigger()
+    {
+        renderer.enabled = true;
+        collider.enabled = true;
     }
 }

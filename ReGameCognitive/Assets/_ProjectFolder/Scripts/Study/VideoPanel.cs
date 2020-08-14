@@ -26,15 +26,24 @@ public class VideoPanel : MonoBehaviour
             }
         }
         
-        
         //StartCoroutine(VideoActivator(intervalCheckingTime));
     }
 
     private IEnumerator VideoActivator(float timeToWait)
     {
+        if (!displayPrefab.activeSelf)
+        {
+            displayPrefab.SetActive(true);
+        }
+        
         while (!videoCompletion)
         {
             _elapsedTime += Time.deltaTime;
+
+            if (_elapsedTime >= _videoClipLength)
+            {
+                customButton.ToggleOnTrigger();
+            }
             
             if (customButton.trigger && (_elapsedTime >= _videoClipLength))
             {
@@ -43,6 +52,9 @@ public class VideoPanel : MonoBehaviour
             
             yield return new WaitForSeconds(timeToWait);
         }
+        
+        customButton.ToggleOffTrigger();
+        displayPrefab.SetActive(false);
     }
 
     public void ResetElapsedTime()
