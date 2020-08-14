@@ -43,8 +43,6 @@ public class VideoPanel : MonoBehaviour
         
         while (!videoCompletion)
         {
-            _elapsedTime += Time.deltaTime;
-
             if (_elapsedTime >= _videoClipLength)
             {
                 customButton.ToggleOnTrigger();
@@ -56,6 +54,7 @@ public class VideoPanel : MonoBehaviour
             }
             
             yield return new WaitForSeconds(timeToWait);
+            _elapsedTime += Time.deltaTime + timeToWait;
         }
         
         customButton.ToggleOffTrigger();

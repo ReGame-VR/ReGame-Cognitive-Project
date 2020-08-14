@@ -43,6 +43,7 @@ public class SimonGame : MonoBehaviour
     private bool _responseIsBeingProcessed;
     
     private const int NULL_BUTTON_INDEX = -1;
+    private const float CHECK_INTERVAL = 1;
 
     public delegate void StateHandler();
 
@@ -73,13 +74,63 @@ public class SimonGame : MonoBehaviour
     {
         _currentSession = session;
     }
+
+    public IEnumerator PlayRound(Difficulty difficulty)
+    {
+        if (difficulty == null)
+        {
+            yield return StartCoroutine(PlayRound());
+            yield break;
+        }
+        
+        StartFromStopSequence();
+        SetDifficulty(difficulty);
+
+        //Wait for Game to start
+        while (!_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+        
+        //Wait for game to end
+        while (_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+    }
+    
+    public IEnumerator PlayRound()
+    {
+        StartFromChooseDifficulty();
+
+        //Wait for Game to start
+        while (!_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+        
+        //Wait for game to end
+        while (_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+    }
     
     [Button]
-    public void Activate()
+    public void StartFromStopSequence()
     {
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.PlayStopSequence();
+
+        ActivateHands();
+    }
+
+    public void StartFromChooseDifficulty()
+    {
+        if (buttonModelParent) buttonModelParent.SetActive(true);
+        if (buttonColliderParent) buttonColliderParent.SetActive(false);
+        if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
 
         ActivateHands();
     }

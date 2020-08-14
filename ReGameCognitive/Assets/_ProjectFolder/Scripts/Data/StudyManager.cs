@@ -8,7 +8,13 @@ public class StudyManager : MonoBehaviour
 {
     [SerializeField] private SimonGame simonGame;
     [SerializeField] private VideoPanel videoPanel;
-    
+    [SerializeField] private Difficulty tutorialDifficulty;
+    [SerializeField] private Difficulty level1;
+    [SerializeField] private Difficulty level2;
+    [SerializeField] private Difficulty level3;
+    [SerializeField] private Difficulty level4;
+    [SerializeField] private Difficulty level5;
+
     private CSVManager _userCsvManager;
     private CSVManager _sessionCsvManager;
     private User _currentUser;
@@ -26,8 +32,6 @@ public class StudyManager : MonoBehaviour
             simonGame.SessionHasEnded += EndSession;
             simonGame.RoundHasEnded += StoreData;
             simonGame.RoundHasEnded += AppendSessionData;
-            
-            simonGame.SetUser(_currentUser);
         }
         
         StartStudy();
@@ -50,6 +54,7 @@ public class StudyManager : MonoBehaviour
         _currentUser = new User();
         
         if (_userCsvManager) _userCsvManager.Initialize(_currentUser);
+        if (simonGame) simonGame.SetUser(_currentUser);
 
         StartCoroutine(StartStudyCoroutine());
     }
@@ -100,8 +105,18 @@ public class StudyManager : MonoBehaviour
     {
         if (!videoPanel || !simonGame) yield break;
         
-        yield return StartCoroutine(videoPanel.Enable());
-        
-        simonGame.Activate();
+        yield return StartCoroutine(videoPanel.Enable());    //Watch instruction video
+        yield return StartCoroutine(simonGame.PlayRound(tutorialDifficulty));    //Play practice round
+        //TODO remove headset
+        yield return StartCoroutine(simonGame.PlayRound(level1));    //Play level 1
+        //TODO remove headset
+        yield return StartCoroutine(simonGame.PlayRound(level2));    //Play level 2
+        //TODO remove headset
+        yield return StartCoroutine(simonGame.PlayRound(level3));    //Play level 3
+        //TODO remove headset
+        yield return StartCoroutine(simonGame.PlayRound(level4));    //Play level 4
+        //TODO remove headset
+        yield return StartCoroutine(simonGame.PlayRound(level5));    //Play level 5
+        //TODO remove headset
     }
 }

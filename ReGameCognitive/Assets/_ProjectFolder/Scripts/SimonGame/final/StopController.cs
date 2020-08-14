@@ -14,10 +14,15 @@ public class StopController : MonoBehaviour
 
     public void PlayStopSequence()
     {
-        StartCoroutine(PlaySequence());
+        StartCoroutine(PlayStopSequenceCoroutine());
     }
 
-    private IEnumerator PlaySequence()
+    public void PlayStopSequenceAndChooseDifficulty()
+    {
+        StartCoroutine(PlayStopSequenceAndChooseDifficultyCoroutine());
+    }
+
+    private IEnumerator PlayStopSequenceCoroutine()
     {
         yield return new WaitForSeconds(startUpBuffer);
 
@@ -25,10 +30,21 @@ public class StopController : MonoBehaviour
 
         yield return new WaitForSeconds(lightUpInterval);
 
-        SetupDifficultyButtons();
+        //SetupDifficultyButtons();
+    }
+    
+    private IEnumerator PlayStopSequenceAndChooseDifficultyCoroutine()
+    {
+        yield return new WaitForSeconds(startUpBuffer);
+
+        LightUpStopCubes();
+
+        yield return new WaitForSeconds(lightUpInterval);
+
+        //SetupDifficultyButtons();
     }
 
-    private void LightUpStopCubes()
+    public void LightUpStopCubes()
     {
         for (var i = 0; i < 12; i++)
         {

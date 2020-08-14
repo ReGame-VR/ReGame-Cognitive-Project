@@ -1,2 +1,0 @@
-userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInStudy,studyCompleted,totalSequencesAttempted,totalSequencesCorrect,sequenceSuccessPercentage,totalSessionsCorrect,totalSessionsAttempted,sessionSuccessPercentage
-5b8d1aa493b54ce1a1e419769e275526,8/13/2020 5:50:20 PM,8/13/2020 5:53:21 PM,8/14/2020 12:50:20 AM,8/14/2020 12:53:21 AM,00:03:01.8365521,True,10,7,0.7,1,1,1
