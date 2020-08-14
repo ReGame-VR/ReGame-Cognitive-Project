@@ -12,15 +12,15 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private Feedback wrongFeedback;
     [SerializeField] private StartController startController;
     [SerializeField] private StopController stopController;
+    [SerializeField] private CustomTextCanvas timerCustomTextCanvas;
+    [SerializeField] private CustomTextCanvas roundCustomTextCanvas;
+    [SerializeField] private CustomTextCanvas scoreCustomTextCanvas;
     [SerializeField] private Transform wallParentTransform;
     [SerializeField] private GameObject difficultyColliderParent;
     [SerializeField] private GameObject buttonModelParent;
     [SerializeField] private GameObject buttonColliderParent;
-    [SerializeField] private GameObject[] canvasGameObjects;
     [SerializeField] private GameObject[] hands;
     [SerializeField] private GameObject[] buttonModelGameObjects;
-    [SerializeField] private TextMesh countdownNumberText;
-    [SerializeField] private TextMesh roundText;
     [SerializeField] private Material activatedHandMaterial;
     [SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
@@ -103,7 +103,10 @@ public class SimonGame : MonoBehaviour
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.PlayStopSequence();
         
-        ToggleCanvasObjects(false);
+        if (timerCustomTextCanvas) timerCustomTextCanvas.Disable();
+        if (roundCustomTextCanvas) roundCustomTextCanvas.Disable();
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.Enable();
+        
         ActivateHands();
         UpdateSessionTime();
         EndSession();
@@ -180,7 +183,7 @@ public class SimonGame : MonoBehaviour
     {
         if (!difficulty) return;
 
-        difficulty.levelColors.SetLevelColor(wallParentTransform);
+        if (difficulty.levelColors) difficulty.levelColors.SetLevelColor(wallParentTransform);
 
         _numberOfButtons = difficulty.numberOfButtons;
         _numSequences = difficulty.baseSequence;
@@ -201,10 +204,7 @@ public class SimonGame : MonoBehaviour
         if (_currentSession == null || _currentUser == null) return;
         
         _currentSession.SetEndTime();
-        var minutes = ((int)_timeInSequence / 60).ToString();
-        var seconds = (_timeInSequence % 60).ToString("00");
-        var timeString = minutes + ":" + seconds;
-        _currentSession.timeInSequence = timeString;
+        _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentSession.sessionCompleted = true;
         
         _currentUser.totalSessionsAttempted++;
@@ -217,11 +217,7 @@ public class SimonGame : MonoBehaviour
         if (_currentSession == null) return;
         
         _currentSession.SetEndTime();
-        
-        var minutes = ((int)_timeInSequence / 60).ToString();
-        var seconds = (_timeInSequence % 60).ToString("00");
-        var timeString = minutes + ":" + seconds;
-        _currentSession.timeInSequence = timeString;
+        _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
     }
 
     private void StoreButtonPushData()
@@ -249,6 +245,8 @@ public class SimonGame : MonoBehaviour
 
         _currentUser.totalSequencesCorrect++;
         _currentUser.SetSequenceSuccessPercentage();
+
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage));
     }
 
     private void StoreIncorrectSequence()
@@ -264,12 +262,14 @@ public class SimonGame : MonoBehaviour
         _currentSession.SetSequenceSuccessPercentage();
         
         _currentUser.SetSequenceSuccessPercentage();
+
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage));
     }
 
     private void Initialize()
     {
         _round = 1;
-        if (roundText) roundText.text = (_round).ToString();
+        if (roundCustomTextCanvas) roundCustomTextCanvas.SetBody(_round.ToString());
         
         _currentSequenceIndex = 0;
         _timeRemaining = _timeLimit;
@@ -279,16 +279,9 @@ public class SimonGame : MonoBehaviour
         SetupColors();
         HowManyCubes();
         SetupSequence();
-        
-        ToggleCanvasObjects(true);
-    }
-
-    private void ToggleCanvasObjects(bool state)
-    {
-        foreach (var canvasGameObject in canvasGameObjects)
-        {
-            canvasGameObject.SetActive(state);
-        }
+        if (timerCustomTextCanvas) timerCustomTextCanvas.Enable();
+        if (roundCustomTextCanvas) roundCustomTextCanvas.Enable();
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.Disable();
     }
 
     private void SetupColors()
@@ -350,7 +343,7 @@ public class SimonGame : MonoBehaviour
         _currentSequenceIndex = 0;
         _responseIsBeingProcessed = false;
         _round++;
-        if (roundText) roundText.text = (_round).ToString();
+        if (roundCustomTextCanvas) roundCustomTextCanvas.SetBody(_round.ToString());
         
         RoundHasStarted?.Invoke();
         
@@ -442,9 +435,7 @@ public class SimonGame : MonoBehaviour
     {
         _timeRemaining -= Time.fixedDeltaTime;
         _timeInSequence += Time.fixedDeltaTime;
-        var minutes = ((int)_timeRemaining / 60).ToString();
-        var seconds = (_timeRemaining % 60).ToString("00");
-        countdownNumberText.text = minutes + ":" + seconds;
+        timerCustomTextCanvas.SetBody(CustomTextCanvas.FormatTimeToString(_timeRemaining));
         
         UpdateSessionTime();
         UpdateUserTime();

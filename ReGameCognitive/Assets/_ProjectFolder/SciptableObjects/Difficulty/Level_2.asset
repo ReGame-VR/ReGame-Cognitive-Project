@@ -17,4 +17,4 @@ MonoBehaviour:
   baseSequence: 0
   maxSequence: 20
   sessionTimeLimit: 120
-  levelColors: {fileID: 11400000, guid: 9668711e9633d1b499532c6499854ff0, type: 2}
+  levelColors: {fileID: 11400000, guid: 0fcc82e582de89d45a16f5edeaa1ac1f, type: 2}

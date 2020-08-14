@@ -26,6 +26,8 @@ public class StudyManager : MonoBehaviour
         
         _userCsvManager = gameObject.AddComponent<CSVManager>();
         _sessionCsvManager = gameObject.AddComponent<CSVManager>();
+        
+        StartStudy();
     }
 
     private void OnDestroy()
