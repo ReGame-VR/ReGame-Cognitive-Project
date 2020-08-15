@@ -7,6 +7,10 @@ public class OVRHeadsetDetection : MonoBehaviour
 {
     private bool _headsetHasBeenMounted = false;
     [SerializeField] private float intervalTime = 0.5f;
+    [SerializeField] private CustomTextCanvas customTextCanvas;
+    [SerializeField] private CustomButton customButton;
+    [SerializeField] private GameObject instructionsPanelParent;
+    
 
     private void Awake()
     {
@@ -29,14 +33,24 @@ public class OVRHeadsetDetection : MonoBehaviour
     {
         _headsetHasBeenMounted = false;
     }
-
-    //This  might need to be changed to headsetHasBeenMounted depending on how you 
-    //use it in your logic. Ex. return if headset has been place on or off. 
+    
+    public IEnumerator Enable()
+    {
+        yield return StartCoroutine(HeadsetDetection(intervalTime));
+    }
+    
     private IEnumerator HeadsetDetection(float timeToWait)
     {
-        while (!_headsetHasBeenMounted)
+        instructionsPanelParent.SetActive(true);
+        customTextCanvas.SetBody("Please take your headset off\n" +
+                                 " to talk to the researcher.");
+        
+        while (_headsetHasBeenMounted)
         {
             yield return new WaitForSeconds(timeToWait);
         }
+        
+        customTextCanvas.SetBody("Touch the white circle to continue.");
+        customButton.ToggleOnTrigger();
     }
 }

@@ -8,6 +8,8 @@ public class StudyManager : MonoBehaviour
 {
     [SerializeField] private SimonGame simonGame;
     [SerializeField] private VideoPanel videoPanel;
+    [SerializeField] private OVRHeadsetDetection headsetDetection;
+    [SerializeField] private UserTriggerActivation triggerActivation;
     [SerializeField] private Difficulty tutorialDifficulty;
     [SerializeField] private Difficulty level1;
     [SerializeField] private Difficulty level2;
@@ -105,18 +107,24 @@ public class StudyManager : MonoBehaviour
     {
         if (!videoPanel || !simonGame) yield break;
         
-        yield return StartCoroutine(videoPanel.Enable());    //Watch instruction video
+        yield return StartCoroutine(videoPanel.Enable());                        //Watch instruction video
         yield return StartCoroutine(simonGame.PlayRound(tutorialDifficulty));    //Play practice round
-        //TODO remove headset
-        yield return StartCoroutine(simonGame.PlayRound(level1));    //Play level 1
-        //TODO remove headset
-        yield return StartCoroutine(simonGame.PlayRound(level2));    //Play level 2
-        //TODO remove headset
-        yield return StartCoroutine(simonGame.PlayRound(level3));    //Play level 3
-        //TODO remove headset
-        yield return StartCoroutine(simonGame.PlayRound(level4));    //Play level 4
-        //TODO remove headset
-        yield return StartCoroutine(simonGame.PlayRound(level5));    //Play level 5
-        //TODO remove headset
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound(level1));                //Play level 1
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound(level2));                //Play level 2
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound(level3));                //Play level 3
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound(level4));                //Play level 4
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound(level5));                //Play level 5
+        yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
+        yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
     }
 }

@@ -13,6 +13,8 @@ public class VideoPanel : MonoBehaviour
     [SerializeField] private CustomButton customButton;
     [SerializeField] private double _videoClipLength;
     [SerializeField] private double _elapsedTime = 0f;
+    [SerializeField] private CustomTextCanvas customTextCanvas;
+    
     
     private void Start()
     {
@@ -25,8 +27,6 @@ public class VideoPanel : MonoBehaviour
                 _videoClipLength = videoPlayer.length;
             }
         }
-        
-        //StartCoroutine(VideoActivator(intervalCheckingTime));
     }
 
     public IEnumerator Enable()
@@ -36,6 +36,14 @@ public class VideoPanel : MonoBehaviour
 
     private IEnumerator VideoActivator(float timeToWait)
     {
+        customTextCanvas.Enable();
+        customTextCanvas.SetTitle("");
+        customTextCanvas.SetBody("Watch the video on how to play the game.\n" +
+                                 "When you have finished watching the video,\n" +
+                                 "place and hold your hand in the white circle\n" +
+                                 "to begin the practice round.");
+           
+        
         if (!displayPrefab.activeSelf)
         {
             displayPrefab.SetActive(true);
@@ -56,6 +64,9 @@ public class VideoPanel : MonoBehaviour
             yield return new WaitForSeconds(timeToWait);
             _elapsedTime += Time.deltaTime + timeToWait;
         }
+
+        customTextCanvas.SetBody("This is just a practice round and will not\n" +
+                                 "have an impact on your score.");
         
         customButton.ToggleOffTrigger();
         displayPrefab.SetActive(false);
