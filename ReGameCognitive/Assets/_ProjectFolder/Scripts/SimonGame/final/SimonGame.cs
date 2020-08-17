@@ -46,6 +46,8 @@ public class SimonGame : MonoBehaviour
     private const float CHECK_INTERVAL = 1;
 
     public delegate void StateHandler();
+    public delegate void DifficultyHandler(Difficulty difficulty);
+    public event DifficultyHandler DifficultyWasSet;
     public event StateHandler SessionHasStarted;
     public event StateHandler SessionHasEnded;
     public event StateHandler RoundHasStarted;
@@ -250,6 +252,8 @@ public class SimonGame : MonoBehaviour
         
         if (difficultyColliderParent) difficultyColliderParent.SetActive(false);
         if (startController) startController.PlayStartSequence();
+        
+        DifficultyWasSet?.Invoke(difficulty);
     }
 
     private void UpdateUserTime()
