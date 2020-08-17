@@ -11,4 +11,5 @@ public class Difficulty : ScriptableObject
     public int maxSequence;
     public float sessionTimeLimit;
     public LevelColors levelColors;
+    public Feedback handFeedback;
 }
