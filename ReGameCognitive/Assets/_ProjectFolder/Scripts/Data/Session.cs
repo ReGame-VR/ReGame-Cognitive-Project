@@ -17,7 +17,7 @@ public class Session
     public int totalSequencesCorrect;
     public string sequencesAttempted;
     public string sequencesMissed;
-    public string handUsed;
+    //public string handUsed;
     public float sequenceSuccessPercentage;
 
 
