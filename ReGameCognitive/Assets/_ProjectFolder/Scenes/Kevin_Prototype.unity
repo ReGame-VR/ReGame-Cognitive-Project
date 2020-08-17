@@ -11977,6 +11977,7 @@ MonoBehaviour:
   - {fileID: 481468323}
   - {fileID: 1752242609}
   lightUpInterval: 1
+  countdownNumbers: []
 --- !u!114 &1445968377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13119,12 +13120,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   videoPanel: {fileID: 963694068}
-  tutorialDifficulty: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
-  level1: {fileID: 0}
-  level2: {fileID: 0}
-  level3: {fileID: 0}
-  level4: {fileID: 0}
-  level5: {fileID: 0}
+  headsetDetection: {fileID: 0}
+  triggerActivation: {fileID: 0}
+  tutorialDifficulty: {fileID: 11400000, guid: 6078d808f9a85994383d1cab6943dce3, type: 2}
+  level1: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
+  level2: {fileID: 11400000, guid: 2d96bcc26c2ee444d95c60f2e70c4c8a, type: 2}
+  level3: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
+  level4: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
+  level5: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
 --- !u!4 &1662879199
 Transform:
   m_ObjectHideFlags: 0
