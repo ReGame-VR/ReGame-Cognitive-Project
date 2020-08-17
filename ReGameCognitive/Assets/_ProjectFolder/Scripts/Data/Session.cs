@@ -12,7 +12,7 @@ public class Session
     public string utcEndTime = "";
     public string timeInSequence = "";
     public bool sessionCompleted = false;
-    public int currentSequence;
+    public int currentSession;
     public int totalSequencesAttempted;
     public int totalSequencesCorrect;
     public string sequencesAttempted;
@@ -33,7 +33,7 @@ public class Session
         if (user == null) return;
         
         //Data from user
-        currentSequence = user.totalSequencesAttempted + 1;
+        currentSession = user.totalSequencesAttempted + 1;
         userId = user.userId;
         
         SetStartTime();

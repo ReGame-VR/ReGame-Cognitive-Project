@@ -141,7 +141,7 @@ public class SimonGame : MonoBehaviour
     {
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
-        if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
+        //if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
 
         ActivateHands();
     }
