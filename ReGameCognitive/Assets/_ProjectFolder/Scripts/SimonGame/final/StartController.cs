@@ -10,10 +10,11 @@ public class StartController : MonoBehaviour
     [SerializeField] private Feedback redFeedback;
     [SerializeField] private GameObject[] buttonModelGameObjects;
     [SerializeField] private float lightUpInterval = 1;
-
+    [SerializeField] private List<GameObject> countdownNumbers;
+    
     private List<Feedback> _feedbacks = new List<Feedback>();
 
-    
+
     void Awake()
     {
         _feedbacks = new List<Feedback>()
@@ -39,12 +40,14 @@ public class StartController : MonoBehaviour
         {
             if (simonGame)
             {
+                DisplayCountdownNumbers(i);
                 PlayColumnFeedback(i);
             }
             yield return new WaitForSeconds(lightUpInterval);
         }
         yield return new WaitForSeconds(lightUpInterval);
         
+        DisableCountdownNumbers();
         simonGame.StartGame();
     }
 
@@ -77,4 +80,29 @@ public class StartController : MonoBehaviour
             }
         }
     }
+
+    private void DisplayCountdownNumbers(int countdown)
+    {
+        for (int i = 0; i < countdownNumbers.Count; i++)
+        {
+            if (i == countdown)
+            {
+                countdownNumbers[i].SetActive(true);
+            }
+            else
+            {
+                countdownNumbers[i].SetActive(false);
+            }
+        }
+    }
+
+    private void DisableCountdownNumbers()
+    {
+        foreach (var numberObjects in countdownNumbers)
+        {
+            numberObjects.SetActive(false);
+        }
+    }
+    
+    
 }

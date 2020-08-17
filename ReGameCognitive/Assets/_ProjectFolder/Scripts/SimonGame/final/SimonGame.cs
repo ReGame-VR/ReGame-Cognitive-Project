@@ -80,7 +80,9 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
         
-        StartFromStopSequence();
+        //StartFromStopSequence();
+        
+        StartFromStartSequence();
         SetDifficulty(difficulty);
 
         //Wait for Game to start
@@ -120,6 +122,14 @@ public class SimonGame : MonoBehaviour
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.PlayStopSequence();
 
+        ActivateHands();
+    }
+
+    public void StartFromStartSequence()
+    {
+        if (buttonModelParent) buttonModelParent.SetActive(true);
+        if (buttonColliderParent) buttonColliderParent.SetActive(false);
+        
         ActivateHands();
     }
 

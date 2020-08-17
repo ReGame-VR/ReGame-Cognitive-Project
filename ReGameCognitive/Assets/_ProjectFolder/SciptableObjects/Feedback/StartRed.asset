@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3ccb8ea97243842b61d7b832f93cfa, type: 3}
   m_Name: StartRed
   m_EditorClassIdentifier: 
-  litColor: {r: 1, g: 0, b: 0, a: 1}
-  unlitColor: {r: 0.4528302, g: 0, b: 0, a: 0.78431374}
+  litColor: {r: 1, g: 0.9780377, b: 0, a: 0}
+  unlitColor: {r: 0.38679248, g: 0.37873432, b: 0, a: 0}
   audioClip: {fileID: 8300000, guid: bfe19fa98b16aef489d6c8f756dbfaf4, type: 3}
   volume: 0.5
   pitch: 1
