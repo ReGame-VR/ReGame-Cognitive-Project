@@ -18,3 +18,4 @@ MonoBehaviour:
   maxSequence: 20
   sessionTimeLimit: 120
   levelColors: {fileID: 11400000, guid: 3503443b5e8c1fc47bfcc2bd2f282e8f, type: 2}
+  handFeedback: {fileID: 11400000, guid: 54ddda298f986cc459388396fa6f6bad, type: 2}

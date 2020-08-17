@@ -13051,7 +13051,8 @@ MonoBehaviour:
   timerCustomTextCanvas: {fileID: 1312342688}
   roundCustomTextCanvas: {fileID: 1249242769}
   scoreCustomTextCanvas: {fileID: 111464392}
-  wallParentTransform: {fileID: 1964241608}
+  defaultHandFeedback: {fileID: 11400000, guid: 74a6e14f755345e49a7727a634f3db1f,
+    type: 2}
   difficultyColliderParent: {fileID: 1480304716}
   buttonModelParent: {fileID: 272027781}
   buttonColliderParent: {fileID: 138739326}
@@ -13071,10 +13072,6 @@ MonoBehaviour:
   - {fileID: 1850914978}
   - {fileID: 481468323}
   - {fileID: 1752242609}
-  activatedHandMaterial: {fileID: 2100000, guid: eae1d5178061eed4fbda84e15dcee839,
-    type: 2}
-  deactivatedHandMaterial: {fileID: 2100000, guid: c114fb0d5e729da4d9b06b952896db90,
-    type: 2}
   timeBetweenCubeLit: 0.5
   timeCubeLit: 0.5
 --- !u!1001 &1446847848
