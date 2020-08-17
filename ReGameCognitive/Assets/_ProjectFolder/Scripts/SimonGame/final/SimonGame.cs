@@ -273,9 +273,9 @@ public class SimonGame : MonoBehaviour
         _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentSession.sessionCompleted = true;
         
-        _currentUser.totalSessionsAttempted++;
-        if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
-        _currentUser?.SetSessionSuccessPercentage();
+        //_currentUser.totalSessionsAttempted++;
+        //if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
+        //_currentUser?.SetSessionSuccessPercentage();
     }
 
     private void UpdateSessionTime()

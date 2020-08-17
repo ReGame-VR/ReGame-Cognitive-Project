@@ -15,8 +15,8 @@ public class User
     public int totalSequencesAttempted;
     public int totalSequencesCorrect;
     public float sequenceSuccessPercentage;
-    public int totalSessionsCorrect;
-    public int totalSessionsAttempted;
+    //public int totalSessionsCorrect;
+    //public int totalSessionsAttempted;
     public float sessionSuccessPercentage;
 
 
@@ -27,12 +27,12 @@ public class User
         sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
     }
     
-    public void SetSessionSuccessPercentage()
+    /*public void SetSessionSuccessPercentage()
     {
         if (totalSessionsAttempted == 0) sessionSuccessPercentage = 0;
             
         sessionSuccessPercentage = (float) Decimal.Divide(totalSessionsCorrect, totalSessionsAttempted);
-    }
+    }*/
     
     public User()
     {
