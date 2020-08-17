@@ -15,19 +15,21 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private CustomTextCanvas timerCustomTextCanvas;
     [SerializeField] private CustomTextCanvas roundCustomTextCanvas;
     [SerializeField] private CustomTextCanvas scoreCustomTextCanvas;
-    [SerializeField] private Transform wallParentTransform;
+    [SerializeField] private Feedback defaultHandFeedback;
+    //[SerializeField] private Transform wallParentTransform;
     [SerializeField] private GameObject difficultyColliderParent;
     [SerializeField] private GameObject buttonModelParent;
     [SerializeField] private GameObject buttonColliderParent;
     [SerializeField] private GameObject[] hands;
     [SerializeField] private GameObject[] buttonModelGameObjects;
-    [SerializeField] private Material activatedHandMaterial;
-    [SerializeField] private Material deactivatedHandMaterial;
+    //[SerializeField] private Material activatedHandMaterial;
+    //[SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
 
     private User _currentUser;
     private Session _currentSession;
+    private Feedback _handFeedback;
     private int[] _sequence;
     private float _timeInSequence;
     private int _numberOfButtons;
@@ -166,7 +168,8 @@ public class SimonGame : MonoBehaviour
         if (timerCustomTextCanvas) timerCustomTextCanvas.Disable();
         if (roundCustomTextCanvas) roundCustomTextCanvas.Disable();
         if (scoreCustomTextCanvas) scoreCustomTextCanvas.Enable();
-        
+
+        ResetHands();
         ActivateHands();
         UpdateSessionTime();
         EndSession();
@@ -243,7 +246,8 @@ public class SimonGame : MonoBehaviour
     {
         if (!difficulty) return;
 
-        if (difficulty.levelColors) difficulty.levelColors.SetLevelColor(wallParentTransform);
+        if (difficulty.handFeedback) _handFeedback = difficulty.handFeedback;
+        //if (difficulty.levelColors) difficulty.levelColors.SetLevelColor(wallParentTransform);
 
         _numberOfButtons = difficulty.numberOfButtons;
         _numSequences = difficulty.baseSequence;
@@ -467,7 +471,8 @@ public class SimonGame : MonoBehaviour
 
     private void ActivateHands()
     {
-        if (!activatedHandMaterial) return;
+        if (!_handFeedback) return;
+        //if (!activatedHandMaterial) return;
         
         foreach (var hand in hands)
         {
@@ -475,13 +480,15 @@ public class SimonGame : MonoBehaviour
             if (collider) collider.enabled = true;
 
             var renderer = hand.GetComponent<Renderer>();
-            if (renderer) renderer.material = activatedHandMaterial;
+            //if (renderer) renderer.material = activatedHandMaterial;
+            if (renderer && renderer.material) renderer.material.color = _handFeedback.litColor;
         }
     }
     
     private void DeactivateHands()
     {
-        if (!deactivatedHandMaterial) return;
+        if (!_handFeedback) return;
+        //if (!deactivatedHandMaterial) return;
         
         foreach (var hand in hands)
         {
@@ -489,7 +496,8 @@ public class SimonGame : MonoBehaviour
             if (collider) collider.enabled = false;
 
             var renderer = hand.GetComponent<Renderer>();
-            if (renderer) renderer.material = deactivatedHandMaterial;
+            //if (renderer) renderer.material = deactivatedHandMaterial;
+            if (renderer && renderer.material) renderer.material.color = _handFeedback.unlitColor;
         }
     }
 
@@ -580,5 +588,12 @@ public class SimonGame : MonoBehaviour
     private bool WasSessionPassed()
     {
         return true;
+    }
+
+    private void ResetHands()
+    {
+        if (!defaultHandFeedback) return;
+        
+        _handFeedback = defaultHandFeedback;
     }
 }
