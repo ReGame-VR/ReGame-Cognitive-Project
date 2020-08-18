@@ -5483,6 +5483,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5419607876129548614, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: db9d232f683c9c140bfc369a9ef08920,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c3982cc229dbf4bbe1b0bed6442c91, type: 3}
 --- !u!4 &575564898 stripped
@@ -13051,7 +13057,8 @@ MonoBehaviour:
   timerCustomTextCanvas: {fileID: 1312342688}
   roundCustomTextCanvas: {fileID: 1249242769}
   scoreCustomTextCanvas: {fileID: 111464392}
-  wallParentTransform: {fileID: 1964241608}
+  defaultHandFeedback: {fileID: 11400000, guid: 74a6e14f755345e49a7727a634f3db1f,
+    type: 2}
   difficultyColliderParent: {fileID: 1480304716}
   buttonModelParent: {fileID: 272027781}
   buttonColliderParent: {fileID: 138739326}
@@ -13071,10 +13078,6 @@ MonoBehaviour:
   - {fileID: 1850914978}
   - {fileID: 481468323}
   - {fileID: 1752242609}
-  activatedHandMaterial: {fileID: 2100000, guid: eae1d5178061eed4fbda84e15dcee839,
-    type: 2}
-  deactivatedHandMaterial: {fileID: 2100000, guid: c114fb0d5e729da4d9b06b952896db90,
-    type: 2}
   timeBetweenCubeLit: 0.5
   timeCubeLit: 0.5
 --- !u!1001 &1446847848
@@ -14341,7 +14344,7 @@ MonoBehaviour:
   videoPanel: {fileID: 963694068}
   headsetDetection: {fileID: 1709475414}
   triggerActivation: {fileID: 1709475415}
-  tutorialDifficulty: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
+  tutorialDifficulty: {fileID: 11400000, guid: 6078d808f9a85994383d1cab6943dce3, type: 2}
   level1: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
   level2: {fileID: 11400000, guid: 2d96bcc26c2ee444d95c60f2e70c4c8a, type: 2}
   level3: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
