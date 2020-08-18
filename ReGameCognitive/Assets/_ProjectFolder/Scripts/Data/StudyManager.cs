@@ -106,7 +106,7 @@ public class StudyManager : MonoBehaviour
     private IEnumerator StartStudyCoroutine()
     {
         if (!videoPanel || !simonGame) yield break;
-        
+
         yield return StartCoroutine(videoPanel.Enable());                        //Watch instruction video
         yield return StartCoroutine(simonGame.PlayRound(tutorialDifficulty));    //Play practice round
         yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
@@ -126,5 +126,8 @@ public class StudyManager : MonoBehaviour
         yield return StartCoroutine(simonGame.PlayRound(level5));                //Play level 5
         yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
+        yield return StartCoroutine(simonGame.PlayRound());                    //Choose Difficulty, play round
+        
+        EndStudy();
     }
 }

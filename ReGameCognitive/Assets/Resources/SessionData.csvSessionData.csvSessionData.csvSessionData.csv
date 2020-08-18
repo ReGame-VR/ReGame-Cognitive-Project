@@ -1,5 +1,0 @@
-userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInSequence,sessionCompleted,currentSequence,totalSequencesAttempted,totalSequencesCorrect,sequencesAttempted,sequencesMissed,handUsed,sequenceSuccessPercentage
-c9a7deee487b4af49b19b2b2c39ec89f,8/14/2020 7:39:11 PM,8/14/2020 7:39:16 PM,8/15/2020 2:39:11 AM,8/15/2020 2:39:16 AM,0:01,True,1,0,0,,,,0
-3b962f5f17f34c1696b21b1ba3f2326a,8/14/2020 7:43:51 PM,8/14/2020 7:43:56 PM,8/15/2020 2:43:51 AM,8/15/2020 2:43:56 AM,0:01,True,1,0,0,,,,0
-cdaa43cb9a9b468790579da801e00413,8/17/2020 1:43:23 PM,8/17/2020 1:43:28 PM,8/17/2020 8:43:23 PM,8/17/2020 8:43:28 PM,0:01,True,1,0,0,,,,0
-cfc2df8254f04474916a2963dde45ad5,8/17/2020 1:49:22 PM,8/17/2020 1:49:27 PM,8/17/2020 8:49:22 PM,8/17/2020 8:49:27 PM,0:01,True,1,0,0,,,,0

@@ -141,7 +141,7 @@ public class SimonGame : MonoBehaviour
     {
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
-        if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
+        //if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
 
         ActivateHands();
     }
@@ -273,9 +273,9 @@ public class SimonGame : MonoBehaviour
         _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentSession.sessionCompleted = true;
         
-        _currentUser.totalSessionsAttempted++;
-        if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
-        _currentUser?.SetSessionSuccessPercentage();
+        //_currentUser.totalSessionsAttempted++;
+        //if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
+        //_currentUser?.SetSessionSuccessPercentage();
     }
 
     private void UpdateSessionTime()
