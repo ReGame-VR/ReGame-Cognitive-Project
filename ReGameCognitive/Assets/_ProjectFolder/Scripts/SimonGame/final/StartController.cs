@@ -11,7 +11,8 @@ public class StartController : MonoBehaviour
     [SerializeField] private GameObject[] buttonModelGameObjects;
     [SerializeField] private float lightUpInterval = 1;
     [SerializeField] private List<GameObject> countdownNumbers;
-    
+
+
     private List<Feedback> _feedbacks = new List<Feedback>();
 
 

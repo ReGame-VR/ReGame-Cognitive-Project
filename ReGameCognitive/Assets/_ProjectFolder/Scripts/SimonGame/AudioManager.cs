@@ -7,7 +7,8 @@ public class AudioManager : MonoBehaviour
 {
 
     [SerializeField] private SimonGame simonGame;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource distractionAudio;
+    [SerializeField] public AudioSource auditoryStart;
 
     private void Start()
     {
@@ -32,12 +33,12 @@ public class AudioManager : MonoBehaviour
 
         if (difficulty.level >= 4)
         {
-            audioSource.Play();
+            distractionAudio.Play();
         }
     }
 
     private void DisableDistractions()
     {
-        audioSource.Stop();
+        distractionAudio.Stop();
     }
 }

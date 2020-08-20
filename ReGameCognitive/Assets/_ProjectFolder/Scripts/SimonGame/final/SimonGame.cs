@@ -26,6 +26,7 @@ public class SimonGame : MonoBehaviour
     //[SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
+    [SerializeField] private AudioManager audioManager;
 
     private User _currentUser;
     private Session _currentSession;
@@ -604,6 +605,9 @@ public class SimonGame : MonoBehaviour
         _currentSequenceIndex = 0;
         _timeInSequence = 0;
         ActivateHands();
+        
+        if(_isActive)
+            audioManager.auditoryStart.Play();
     }
 
     private void StopAllFeedback()
