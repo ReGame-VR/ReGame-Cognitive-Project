@@ -41,7 +41,7 @@ public class StopController : MonoBehaviour
 
         yield return new WaitForSeconds(lightUpInterval);
 
-        //SetupDifficultyButtons();
+        SetupDifficultyButtons();
     }
 
     public void LightUpStopCubes()
@@ -53,11 +53,19 @@ public class StopController : MonoBehaviour
         }
     }
 
-    private void SetupDifficultyButtons()
+    public void SetupDifficultyButtons()
     {
         if (difficultyColliderParent) difficultyColliderParent.SetActive(true);
 
         EnableDifficultyCubes();
+        DisableNonDifficultyCubes();
+    }
+    
+    public void SetupDifficultyButtons(int level)
+    {
+        if (difficultyColliderParent) difficultyColliderParent.SetActive(true);
+
+        EnableDifficultyCubes(level);
         DisableNonDifficultyCubes();
     }
 
@@ -74,6 +82,19 @@ public class StopController : MonoBehaviour
         for (var i = 0; i < 5; i++)
         {
             simonGame.PlaySilentFeedback(i);
+            buttonModelGameObjects[i].SetActive(true);
+        }
+    }
+    
+    private void EnableDifficultyCubes(int level)
+    {
+        Debug.Log("EnableDifficultyCubes");
+        var levelIndex = level - 1;
+        for (var i = 0; i < 5; i++)
+        {
+            simonGame.PlaySilentFeedback(i);
+            var collider = buttonModelGameObjects[i].GetComponent<Collider>();
+            if (collider) collider.enabled = i == levelIndex;
             buttonModelGameObjects[i].SetActive(true);
         }
     }

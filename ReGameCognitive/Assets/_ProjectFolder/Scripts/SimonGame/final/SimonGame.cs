@@ -86,8 +86,8 @@ public class SimonGame : MonoBehaviour
         
         //StartFromStopSequence();
         
-        StartFromStartSequence();
-        SetDifficulty(difficulty);
+        StartFromChooseDifficulty(difficulty.level);
+        //SetDifficulty(difficulty);
 
         //Wait for Game to start
         while (!_isActive)
@@ -141,7 +141,16 @@ public class SimonGame : MonoBehaviour
     {
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
-        //if (stopController) stopController.PlayStopSequenceAndChooseDifficulty();
+        if (stopController) stopController.SetupDifficultyButtons();
+
+        ActivateHands();
+    }
+    
+    public void StartFromChooseDifficulty(int level)
+    {
+        if (buttonModelParent) buttonModelParent.SetActive(true);
+        if (buttonColliderParent) buttonColliderParent.SetActive(false);
+        if (stopController) stopController.SetupDifficultyButtons(level);
 
         ActivateHands();
     }

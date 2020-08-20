@@ -21,6 +21,7 @@ public class StudyManager : MonoBehaviour
     private CSVManager _sessionCsvManager;
     private User _currentUser;
     private Session _currentSession;
+    private Difficulty _lastDifficultyChosen;
 
 
     private void Awake()
@@ -34,6 +35,7 @@ public class StudyManager : MonoBehaviour
             simonGame.SessionHasEnded += EndSession;
             simonGame.RoundHasEnded += StoreData;
             simonGame.RoundHasEnded += AppendSessionData;
+            simonGame.DifficultyWasSet += SetDifficulty;
         }
         
         StartStudy();
@@ -47,6 +49,7 @@ public class StudyManager : MonoBehaviour
             simonGame.SessionHasEnded -= EndSession;
             simonGame.RoundHasEnded -= StoreData;
             simonGame.RoundHasEnded -= AppendSessionData;
+            simonGame.DifficultyWasSet -= SetDifficulty;
         }
     }
 
@@ -126,8 +129,18 @@ public class StudyManager : MonoBehaviour
         yield return StartCoroutine(simonGame.PlayRound(level5));                //Play level 5
         yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
-        yield return StartCoroutine(simonGame.PlayRound());                    //Choose Difficulty, play round
-        
+        yield return StartCoroutine(simonGame.PlayRound());                      //Choose Difficulty, play round
+        yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
+        yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
+        yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
+
         EndStudy();
+    }
+
+    private void SetDifficulty(Difficulty difficulty)
+    {
+        if (!difficulty) return;
+
+        _lastDifficultyChosen = difficulty;
     }
 }
