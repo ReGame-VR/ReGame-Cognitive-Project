@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class StopController : MonoBehaviour
@@ -84,18 +85,28 @@ public class StopController : MonoBehaviour
             simonGame.PlaySilentFeedback(i);
             buttonModelGameObjects[i].SetActive(true);
         }
+        
+        for (var i = 0; i < difficultyColliderParent.transform.childCount; i++)
+        {
+            var colliderTransform = difficultyColliderParent.transform.GetChild(i);
+            if (colliderTransform) colliderTransform.gameObject.SetActive(true);
+        }
     }
     
+    [Button]
     private void EnableDifficultyCubes(int level)
     {
-        Debug.Log("EnableDifficultyCubes");
-        var levelIndex = level - 1;
+        var levelIndex = level == 0 ? 0 : level - 1;
         for (var i = 0; i < 5; i++)
         {
             simonGame.PlaySilentFeedback(i);
-            var collider = buttonModelGameObjects[i].GetComponent<Collider>();
-            if (collider) collider.enabled = i == levelIndex;
             buttonModelGameObjects[i].SetActive(true);
+        }
+
+        for (var i = 0; i < difficultyColliderParent.transform.childCount; i++)
+        {
+            var colliderTransform = difficultyColliderParent.transform.GetChild(i);
+            if (colliderTransform) colliderTransform.gameObject.SetActive(i == levelIndex);
         }
     }
 }

@@ -111,7 +111,7 @@ public class StudyManager : MonoBehaviour
         if (!videoPanel || !simonGame) yield break;
 
         yield return StartCoroutine(videoPanel.Enable());                        //Watch instruction video
-        yield return StartCoroutine(simonGame.PlayRound(tutorialDifficulty));    //Play practice round
+        yield return StartCoroutine(simonGame.PlayTutorial(tutorialDifficulty)); //Play practice round
         yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level1));                //Play level 1

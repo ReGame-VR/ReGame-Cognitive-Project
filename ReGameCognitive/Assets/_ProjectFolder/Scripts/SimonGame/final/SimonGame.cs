@@ -75,6 +75,30 @@ public class SimonGame : MonoBehaviour
     {
         _currentSession = session;
     }
+    
+    public IEnumerator PlayTutorial(Difficulty difficulty)
+    {
+        if (difficulty == null)
+        {
+            yield return StartCoroutine(PlayRound());
+            yield break;
+        }
+        
+        StartFromChooseDifficulty(difficulty.level);
+        SetDifficulty(difficulty);
+
+        //Wait for Game to start
+        while (!_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+        
+        //Wait for game to end
+        while (_isActive)
+        {
+            yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+    }
 
     public IEnumerator PlayRound(Difficulty difficulty)
     {
@@ -84,10 +108,7 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
         
-        //StartFromStopSequence();
-        
         StartFromChooseDifficulty(difficulty.level);
-        //SetDifficulty(difficulty);
 
         //Wait for Game to start
         while (!_isActive)
