@@ -16,7 +16,7 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private CustomTextCanvas roundCustomTextCanvas;
     [SerializeField] private CustomTextCanvas scoreCustomTextCanvas;
     [SerializeField] private Feedback defaultHandFeedback;
-    //[SerializeField] private Transform wallParentTransform;
+    [SerializeField] private Transform panelParentTransform;
     [SerializeField] private GameObject difficultyColliderParent;
     [SerializeField] private GameObject buttonModelParent;
     [SerializeField] private GameObject buttonColliderParent;
@@ -278,7 +278,7 @@ public class SimonGame : MonoBehaviour
         if (!difficulty) return;
 
         if (difficulty.handFeedback) _handFeedback = difficulty.handFeedback;
-        //if (difficulty.levelColors) difficulty.levelColors.SetLevelColor(wallParentTransform);
+        if (difficulty.levelColors) difficulty.levelColors.SetLevelColor(panelParentTransform);
 
         _numberOfButtons = difficulty.numberOfButtons;
         _numSequences = difficulty.baseSequence;
