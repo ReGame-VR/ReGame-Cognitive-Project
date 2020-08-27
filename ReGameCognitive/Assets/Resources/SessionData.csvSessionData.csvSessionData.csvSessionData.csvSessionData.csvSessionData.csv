@@ -1,0 +1,2 @@
+userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInSequence,sessionCompleted,currentSession,totalSequencesAttempted,totalSequencesCorrect,sequencesAttempted,sequencesMissed,sequenceSuccessPercentage
+38a900f3ba1041e0b9fc2e2835833241,8/27/2020 1:46:05 PM,8/27/2020 1:46:51 PM,8/27/2020 8:46:05 PM,8/27/2020 8:46:51 PM,0:28,True,4,0,0,,,0
