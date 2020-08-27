@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class InstructionPanel : MonoBehaviour
 {
-    [SerializeField] private CustomButton customButton;
-    [SerializeField] private float _elapsedTime = 0f;
-    [SerializeField] private float minTimeToRead = 5f;
-    private bool hasReadInstructions = false;
-    
+    [SerializeField] private CustomTextCanvas customTextCanvas;
+    [SerializeField] private string instructionBeforeColor;
+    [SerializeField] private string instructionAfterColor;
 
-    private IEnumerator InstructionsActivator(float timeToWait)
+    
+    public void SetDifficulty(Difficulty difficulty)
     {
-        while (!hasReadInstructions)
-        {
-            _elapsedTime += Time.deltaTime;
-            
-            if (customButton.trigger && (_elapsedTime >= minTimeToRead))
-            {
-                hasReadInstructions = true;
-            }
-            
-            yield return new WaitForSeconds(timeToWait);
-        }
+        if (!difficulty || !customTextCanvas) return;
+        
+        customTextCanvas.SetBody(instructionBeforeColor + $" {difficulty.colorString} " + instructionAfterColor);
+        customTextCanvas.Enable();
     }
-    
-    
+
+    public void Disable()
+    {
+        if (!customTextCanvas) return;
+        
+        customTextCanvas.Disable();
+    }
 }

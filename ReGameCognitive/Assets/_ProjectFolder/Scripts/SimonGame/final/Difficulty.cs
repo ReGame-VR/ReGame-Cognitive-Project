@@ -10,6 +10,7 @@ public class Difficulty : ScriptableObject
     public int baseSequence;
     public int maxSequence;
     public float sessionTimeLimit;
+    public string colorString;
     public LevelColors levelColors;
     public Feedback handFeedback;
 }
