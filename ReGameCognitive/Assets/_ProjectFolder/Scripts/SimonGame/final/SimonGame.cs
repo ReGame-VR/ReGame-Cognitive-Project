@@ -12,6 +12,7 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private Feedback wrongFeedback;
     [SerializeField] private StartController startController;
     [SerializeField] private StopController stopController;
+    [SerializeField] private InstructionPanel instructionPanel;
     [SerializeField] private CustomTextCanvas timerCustomTextCanvas;
     [SerializeField] private CustomTextCanvas roundCustomTextCanvas;
     [SerializeField] private CustomTextCanvas scoreCustomTextCanvas;
@@ -85,7 +86,7 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
         
-        StartFromChooseDifficulty(difficulty.level);
+        StartFromChooseDifficulty(difficulty);
         SetDifficulty(difficulty);
 
         //Wait for Game to start
@@ -109,7 +110,7 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
         
-        StartFromChooseDifficulty(difficulty.level);
+        StartFromChooseDifficulty(difficulty);
 
         //Wait for Game to start
         while (!_isActive)
@@ -168,8 +169,13 @@ public class SimonGame : MonoBehaviour
         ActivateHands();
     }
     
-    public void StartFromChooseDifficulty(int level)
+    public void StartFromChooseDifficulty(Difficulty difficulty)
     {
+        if (!difficulty) return;
+
+        var level = difficulty.level;
+        
+        if (instructionPanel) instructionPanel.SetDifficulty(difficulty);
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons(level);
@@ -287,6 +293,7 @@ public class SimonGame : MonoBehaviour
         
         if (difficultyColliderParent) difficultyColliderParent.SetActive(false);
         if (startController) startController.PlayStartSequence();
+        if (instructionPanel) instructionPanel.Disable();
         
         DifficultyWasSet?.Invoke(difficulty);
     }
