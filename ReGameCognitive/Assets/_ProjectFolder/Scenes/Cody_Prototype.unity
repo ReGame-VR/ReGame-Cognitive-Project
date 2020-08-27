@@ -2694,7 +2694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &272027782
 Transform:
   m_ObjectHideFlags: 0
@@ -3198,9 +3198,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 454a4edad7e7f154b9ad469877e68a3e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5f780804974f08f48b24e4b6b1b90df0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.814
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13041,7 +13041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1445968374
 Transform:
   m_ObjectHideFlags: 0
@@ -13157,6 +13157,7 @@ MonoBehaviour:
   scoreCustomTextCanvas: {fileID: 111464392}
   defaultHandFeedback: {fileID: 11400000, guid: 74a6e14f755345e49a7727a634f3db1f,
     type: 2}
+  panelParentTransform: {fileID: 0}
   difficultyColliderParent: {fileID: 1480304716}
   buttonModelParent: {fileID: 272027781}
   buttonColliderParent: {fileID: 138739326}
