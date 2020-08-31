@@ -133,8 +133,8 @@ public class StudyManager : MonoBehaviour
         yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
         yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
         yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty
-
         EndStudy();
+        yield return StartCoroutine(simonGame.StudyComplete());
     }
 
     private void SetDifficulty(Difficulty difficulty)
