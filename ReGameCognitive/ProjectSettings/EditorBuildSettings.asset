@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_ProjectFolder/Scenes/Arcade Room.unity
     guid: 0c586ac72d7751b4a9e26cc57fa62250
-  - enabled: 1
+  - enabled: 0
     path: Assets/_ProjectFolder/Scenes/Cody_Prototype.unity
     guid: 17c102a75a5c10547af39a951255dc7e
   m_configObjects: {}

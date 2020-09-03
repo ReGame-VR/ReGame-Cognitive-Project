@@ -14,6 +14,7 @@ public class CustomButton : MonoBehaviour
     [SerializeField] private Collider rightHand;
     [SerializeField] private MeshRenderer renderer;
     [SerializeField] private Color activationColor;
+    [SerializeField] private InputController inputController;
     public bool trigger = false;
 
     private void Start()
@@ -22,6 +23,25 @@ public class CustomButton : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other)
+    {
+        //VrTrigger(other);
+    }
+
+    private void Update()
+    {
+        //needs to be disabled in VR version
+        PcTrigger();
+    }
+
+    private void PcTrigger()
+    {
+        if (inputController.spacebarTrigger)
+        {
+            trigger = true;
+        }
+    }
+
+    private void VrTrigger(Collider other)
     {
         if (currentTime >= timeUntilActivation)
         {
