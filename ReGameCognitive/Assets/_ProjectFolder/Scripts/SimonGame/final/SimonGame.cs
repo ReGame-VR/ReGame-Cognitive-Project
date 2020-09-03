@@ -23,15 +23,16 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private GameObject buttonColliderParent;
     [SerializeField] private GameObject[] hands;
     [SerializeField] private GameObject[] buttonModelGameObjects;
-    //[SerializeField] private Material activatedHandMaterial;
-    //[SerializeField] private Material deactivatedHandMaterial;
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private bool usePredeterminedSequences;
+    
 
     private User _currentUser;
     private Session _currentSession;
     private Feedback _handFeedback;
+    private Difficulty _currentDifficulty;
     private int[] _sequence;
     private float _timeInSequence;
     private int _numberOfButtons;
@@ -294,6 +295,8 @@ public class SimonGame : MonoBehaviour
         if (difficultyColliderParent) difficultyColliderParent.SetActive(false);
         if (startController) startController.PlayStartSequence();
         if (instructionPanel) instructionPanel.Disable();
+
+        _currentDifficulty = difficulty;
         
         DifficultyWasSet?.Invoke(difficulty);
     }
@@ -310,10 +313,6 @@ public class SimonGame : MonoBehaviour
         _currentSession.SetEndTime();
         _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentSession.sessionCompleted = true;
-        
-        //_currentUser.totalSessionsAttempted++;
-        //if (WasSessionPassed()) _currentUser.totalSessionsCorrect++;
-        //_currentUser?.SetSessionSuccessPercentage();
     }
 
     private void UpdateSessionTime()
@@ -498,19 +497,25 @@ public class SimonGame : MonoBehaviour
 
     private void SetupSequence()
     {
-        _sequence = new int[_maxSequence];
-        while (_currentSequenceIndex < _maxSequence)
+        if (usePredeterminedSequences && _currentDifficulty)
         {
-            _sequence[_currentSequenceIndex] = Random.Range(0, _numberOfButtons);
-            _currentSequenceIndex++;
+            _sequence = _currentDifficulty.GetNextSequenceSet();
         }
-        _currentSequenceIndex = 0;
+        else
+        {
+            _sequence = new int[_maxSequence];
+            while (_currentSequenceIndex < _maxSequence)
+            {
+                _sequence[_currentSequenceIndex] = Random.Range(0, _numberOfButtons);
+                _currentSequenceIndex++;
+            }
+            _currentSequenceIndex = 0;
+        }
     }
 
     private void ActivateHands()
     {
         if (!_handFeedback) return;
-        //if (!activatedHandMaterial) return;
         
         foreach (var hand in hands)
         {
@@ -518,7 +523,6 @@ public class SimonGame : MonoBehaviour
             if (collider) collider.enabled = true;
 
             var renderer = hand.GetComponent<Renderer>();
-            //if (renderer) renderer.material = activatedHandMaterial;
             if (renderer && renderer.material) renderer.material.color = _handFeedback.litColor;
         }
     }
@@ -526,7 +530,6 @@ public class SimonGame : MonoBehaviour
     private void DeactivateHands()
     {
         if (!_handFeedback) return;
-        //if (!deactivatedHandMaterial) return;
         
         foreach (var hand in hands)
         {
@@ -534,7 +537,6 @@ public class SimonGame : MonoBehaviour
             if (collider) collider.enabled = false;
 
             var renderer = hand.GetComponent<Renderer>();
-            //if (renderer) renderer.material = deactivatedHandMaterial;
             if (renderer && renderer.material) renderer.material.color = _handFeedback.unlitColor;
         }
     }
