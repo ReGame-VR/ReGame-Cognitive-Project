@@ -166,6 +166,7 @@ public class SimonGame : MonoBehaviour
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons();
+        if (instructionPanel) instructionPanel.FinalInstructions();
 
         ActivateHands();
     }
@@ -638,5 +639,10 @@ public class SimonGame : MonoBehaviour
         if (!defaultHandFeedback) return;
         
         _handFeedback = defaultHandFeedback;
+    }
+    
+    public IEnumerator StudyComplete()
+    {
+        yield return StartCoroutine(instructionPanel.EndOfStudy(5f));
     }
 }

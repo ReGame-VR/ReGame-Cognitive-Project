@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         if (!difficulty)
             return;
 
-        if (difficulty.level >= 4)
+        if (difficulty.level == 5)
         {
             distractionAudio.Play();
         }

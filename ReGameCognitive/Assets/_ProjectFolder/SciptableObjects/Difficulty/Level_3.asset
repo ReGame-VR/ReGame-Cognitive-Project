@@ -16,7 +16,7 @@ MonoBehaviour:
   numberOfButtons: 6
   baseSequence: 2
   maxSequence: 20
-  sessionTimeLimit: 30
+  sessionTimeLimit: 3
   colorString: RED
   levelColors: {fileID: 11400000, guid: 2357fa4dbe90aca44823e50f39702a05, type: 2}
   handFeedback: {fileID: 11400000, guid: a0f6039fa6e621b448d592478bc860ff, type: 2}
