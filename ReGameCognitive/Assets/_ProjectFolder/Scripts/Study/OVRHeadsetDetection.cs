@@ -34,7 +34,7 @@ public class OVRHeadsetDetection : MonoBehaviour
         _headsetHasBeenMounted = false;
     }
     
-    public IEnumerator Enable()
+    public IEnumerator EnableHeadsetDetection()
     {
         yield return StartCoroutine(HeadsetDetection(intervalTime));
     }
@@ -52,5 +52,17 @@ public class OVRHeadsetDetection : MonoBehaviour
         
         customTextCanvas.SetBody("Touch the white circle to continue.");
         customButton.ToggleOnTrigger();
+    }
+
+    private IEnumerator InputDetection()
+    {
+        instructionsPanelParent.SetActive(true);
+        customTextCanvas.SetBody("Press the Space bar to continue.");
+        yield return null;
+    }
+
+    public IEnumerator EnableInputDetection()
+    {
+        yield return StartCoroutine(InputDetection());
     }
 }
