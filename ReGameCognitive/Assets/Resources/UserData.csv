@@ -1,3 +1,4 @@
 userId,localStartTime,localEndTime,utcStartTime,utcEndTime,timeInStudy,studyCompleted,totalSequencesAttempted,totalSequencesCorrect,sequenceSuccessPercentage,sessionSuccessPercentage
 027ff59e4f4643dfbfec81844632d364,8/27/2020 3:35:07 PM,8/27/2020 3:38:24 PM,8/27/2020 10:35:07 PM,8/27/2020 10:38:24 PM,00:03:17.8683458,True,0,0,0,0
 a807d7e6223b4b3fb436afd244f0944c,8/27/2020 3:50:01 PM,8/27/2020 3:52:26 PM,8/27/2020 10:50:01 PM,8/27/2020 10:52:26 PM,00:02:25.1097016,True,0,0,0,0
+0a8e7b6243134de6a0ad960b078393f1,9/3/2020 6:27:38 PM,9/3/2020 6:29:59 PM,9/4/2020 1:27:38 AM,9/4/2020 1:29:59 AM,00:02:21.3546397,True,0,0,0,0

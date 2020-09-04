@@ -5580,6 +5580,11 @@ PrefabInstance:
       propertyPath: rightHand
       value: 
       objectReference: {fileID: 1218619022}
+    - target: {fileID: 2235975203996977927, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 917839554}
     - target: {fileID: 5135598674183010268, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
         type: 3}
       propertyPath: m_IsActive
@@ -6405,6 +6410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
+  difficultyKey: 0
 --- !u!65 &639909507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7371,6 +7377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
+  difficultyKey: 0
 --- !u!65 &677140603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9514,6 +9521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
+  difficultyKey: 0
 --- !u!65 &1043107397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12907,6 +12915,7 @@ MonoBehaviour:
   rightHand: {fileID: 1218619022}
   renderer: {fileID: 1404448103}
   activationColor: {r: 0.048704147, g: 0, b: 1, a: 0}
+  inputController: {fileID: 917839554}
   trigger: 0
 --- !u!135 &1404448102
 SphereCollider:
@@ -16125,6 +16134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
+  difficultyKey: 0
 --- !u!65 &1770200311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17452,7 +17462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893323259}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.835, z: -0.15}
+  m_LocalPosition: {x: -0.091, y: 0.835, z: -0.523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -18495,6 +18505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 2d96bcc26c2ee444d95c60f2e70c4c8a, type: 2}
+  difficultyKey: 0
 --- !u!65 &2006710729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18834,6 +18845,72 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2033500297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033500300}
+  - component: {fileID: 2033500299}
+  - component: {fileID: 2033500298}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2033500298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033500297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &2033500299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033500297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &2033500300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033500297}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2051859084
 PrefabInstance:
   m_ObjectHideFlags: 0
