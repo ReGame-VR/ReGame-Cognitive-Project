@@ -6,6 +6,7 @@ using UnityEngine;
 public class OVRHeadsetDetection : MonoBehaviour
 {
     private bool _headsetHasBeenMounted = false;
+    [SerializeField] private SimonGame simonGame;
     [SerializeField] private float intervalTime = 0.5f;
     [SerializeField] private CustomTextCanvas customTextCanvas;
     [SerializeField] private CustomButton customButton;
@@ -34,9 +35,18 @@ public class OVRHeadsetDetection : MonoBehaviour
         _headsetHasBeenMounted = false;
     }
     
-    public IEnumerator Enable()
+    public IEnumerator EnableDetection()
     {
-        yield return StartCoroutine(HeadsetDetection(intervalTime));
+        if (simonGame.usePredeterminedSequences)
+        {
+            //check for keyboard input
+            yield return StartCoroutine(InputDetection());
+        }
+        else
+        {
+            //headset detection input
+            yield return StartCoroutine(HeadsetDetection(intervalTime));
+        }
     }
     
     private IEnumerator HeadsetDetection(float timeToWait)
@@ -52,5 +62,12 @@ public class OVRHeadsetDetection : MonoBehaviour
         
         customTextCanvas.SetBody("Touch the white circle to continue.");
         customButton.ToggleOnTrigger();
+    }
+
+    private IEnumerator InputDetection()
+    {
+        instructionsPanelParent.SetActive(true);
+        customTextCanvas.SetBody("Press the Space bar to continue.");
+        yield return null;
     }
 }

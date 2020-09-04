@@ -26,7 +26,7 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private bool usePredeterminedSequences;
+    [SerializeField] public bool usePredeterminedSequences;
     
 
     private User _currentUser;
