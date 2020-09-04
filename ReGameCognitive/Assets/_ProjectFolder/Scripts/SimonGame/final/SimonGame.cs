@@ -302,6 +302,21 @@ public class SimonGame : MonoBehaviour
         DifficultyWasSet?.Invoke(difficulty);
     }
 
+    [Button]
+    public void ForceStartNextRound(bool wasCorrect)
+    {
+        if (wasCorrect)
+        {
+            _numSequences++;
+        }
+        else
+        {
+            _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
+        }
+        
+        StartCoroutine(StartNextRound(wasCorrect));
+    }
+
     private void UpdateUserTime()
     {
         _currentUser?.SetEndTime();
