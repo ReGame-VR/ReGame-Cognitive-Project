@@ -14,17 +14,19 @@ public class Difficulty : ScriptableObject
     public int maxSequence;
     public float sessionTimeLimit;
     public string colorString;
+    public string keyLetter;
     public LevelColors levelColors;
     public Feedback handFeedback;
     public int[] sequenceSet0;
     public int[] sequenceSet1;
     public int[] sequenceSet2;
     public int[] sequenceSet3;
+    public int[] sequenceSet4;
     public List<int[]> predeterminedSequences = new List<int[]>();
 
     private int _currentIndex = 0;
     
-    private const int MAX_ROUNDS = 4;
+    private const int MAX_ROUNDS = 5;
 
 
     private void OnEnable()
@@ -35,6 +37,7 @@ public class Difficulty : ScriptableObject
         predeterminedSequences.Add(sequenceSet1);
         predeterminedSequences.Add(sequenceSet2);
         predeterminedSequences.Add(sequenceSet3);
+        predeterminedSequences.Add(sequenceSet4);
     }
 
     public int[] GetNextSequenceSet()
@@ -53,6 +56,7 @@ public class Difficulty : ScriptableObject
         sequenceSet1 = new int[maxSequence];
         sequenceSet2 = new int[maxSequence];
         sequenceSet3 = new int[maxSequence];
+        sequenceSet4 = new int[maxSequence];
 
         for (var i = 0; i < maxSequence; i++)
         {
@@ -60,12 +64,14 @@ public class Difficulty : ScriptableObject
             sequenceSet1[i] = Random.Range(0, numberOfButtons);
             sequenceSet2[i] = Random.Range(0, numberOfButtons);
             sequenceSet3[i] = Random.Range(0, numberOfButtons);
+            sequenceSet4[i] = Random.Range(0, numberOfButtons);
         }
         
         predeterminedSequences.Add(sequenceSet0);
         predeterminedSequences.Add(sequenceSet1);
         predeterminedSequences.Add(sequenceSet2);
         predeterminedSequences.Add(sequenceSet3);
+        predeterminedSequences.Add(sequenceSet4);
     }
 
     [Button]

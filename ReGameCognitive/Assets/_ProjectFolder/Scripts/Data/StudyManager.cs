@@ -112,28 +112,22 @@ public class StudyManager : MonoBehaviour
 
         yield return StartCoroutine(videoPanel.Enable());                        //Watch instruction video
         yield return StartCoroutine(simonGame.PlayTutorial(tutorialDifficulty)); //Play practice round
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level1));                //Play level 1
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level2));                //Play level 2
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level3));                //Play level 3
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level4));                //Play level 4
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level5));                //Play level 5
-        //yield return StartCoroutine(headsetDetection.Enable());                  //start checking for headset
-        yield return StartCoroutine(headsetDetection.EnableInputDetection());
+        yield return StartCoroutine(headsetDetection.EnableDetection());         //start checking for headset
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound());                      //Choose Difficulty, play round
         yield return StartCoroutine(simonGame.PlayRound(_lastDifficultyChosen)); //Play round at last difficulty

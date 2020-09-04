@@ -5550,6 +5550,16 @@ PrefabInstance:
       propertyPath: customTextCanvas
       value: 
       objectReference: {fileID: 1044412743}
+    - target: {fileID: 2235975203033259433, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: simonGame
+      value: 
+      objectReference: {fileID: 1445968377}
+    - target: {fileID: 2235975203033259433, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 917839554}
     - target: {fileID: 2235975203033259438, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
         type: 3}
       propertyPath: m_Name
@@ -6036,9 +6046,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0258f84a8253134db866083d5273e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
   customTextCanvas: {fileID: 612547539}
   instructionBeforeColor: Touch the
   instructionAfterColor: cube to begin the session.
+  instructionBeforeKey: Press the
+  instructionAfterKey: level to begin the session.
 --- !u!1001 &624586143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13523,6 +13536,7 @@ MonoBehaviour:
   timeBetweenCubeLit: 0.5
   timeCubeLit: 0.5
   audioManager: {fileID: 308009053}
+  usePredeterminedSequences: 1
 --- !u!1001 &1446847848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15198,6 +15212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6450fe4c2e9f0da40b0249136c5676e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
   intervalTime: 0.5
   customTextCanvas: {fileID: 1044412743}
   customButton: {fileID: 1404448101}

@@ -7,6 +7,8 @@ using UnityEngine.Video;
 
 public class VideoPanel : MonoBehaviour
 {
+    [SerializeField] private SimonGame simonGame;
+    [SerializeField] private InputController inputController;
     [SerializeField] public bool videoCompletion = false;
     [SerializeField] private GameObject displayPrefab;
     [SerializeField] private float intervalCheckingTime = 0.5f;
@@ -31,10 +33,17 @@ public class VideoPanel : MonoBehaviour
 
     public IEnumerator Enable()
     {
-        yield return StartCoroutine(VideoActivator(intervalCheckingTime));
+        if (simonGame.usePredeterminedSequences)
+        {
+            yield return StartCoroutine(PcVideoActivator());
+        }
+        else
+        {
+            yield return StartCoroutine(VrVideoActivator(intervalCheckingTime));
+        }
     }
 
-    private IEnumerator VideoActivator(float timeToWait)
+    private IEnumerator VrVideoActivator(float timeToWait)
     {
         customTextCanvas.Enable();
         customTextCanvas.SetTitle("");
@@ -70,6 +79,38 @@ public class VideoPanel : MonoBehaviour
         
         customButton.ToggleOffTrigger();
         displayPrefab.SetActive(false);
+    }
+
+    private IEnumerator PcVideoActivator()
+    {
+        customTextCanvas.Enable();
+        customTextCanvas.SetTitle("");
+        customTextCanvas.SetBody("Watch the video on how to play the game.\n" +
+                                 "When you have finished watching the video,\n" +
+                                 "press the Space bar to begin the practice round.");
+           
+        
+        if (!displayPrefab.activeSelf)
+        {
+            displayPrefab.SetActive(true);
+        }
+        
+        while (!videoCompletion)
+        {
+            if (inputController.spacebarTrigger)
+            {
+                videoCompletion = true;
+            }
+
+            yield return null;
+        }
+
+        customTextCanvas.SetBody("This is just a practice round and will not\n" +
+                                 "have an impact on your score.");
+        
+        customButton.ToggleOffTrigger();
+        displayPrefab.SetActive(false);
+        yield return null;
     }
 
     public void ResetElapsedTime()

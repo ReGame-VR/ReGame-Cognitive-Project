@@ -29,23 +29,18 @@ public class ChooseDifficulty : MonoBehaviour
         {
             case 1:
                 difficultyKey = KeyCode.B;
-                Debug.Log("key has been set to B");
                 break;
             case 2:
                 difficultyKey = KeyCode.G;
-                Debug.Log("key has been set to G");
                 break;
             case 3:
                 difficultyKey = KeyCode.R;
-                Debug.Log("key has been set to R");
                 break;
             case 4:
                 difficultyKey = KeyCode.Y;
-                Debug.Log("key has been set to Y");
                 break;
             case 5:
                 difficultyKey = KeyCode.O;
-                Debug.Log("key has been set to O");
                 break;
             default:
                 Debug.Log("Difficulty Key not found.");
