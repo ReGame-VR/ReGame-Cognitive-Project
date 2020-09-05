@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+    [SerializeField] private SimonGame simonGame;
+    
     public bool spacebarTrigger = false;
 
     private void Update()
@@ -17,6 +19,15 @@ public class InputController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             spacebarTrigger = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            simonGame.ForceStartNextRound(false);
+        }
+        if (Input.GetKeyDown(KeyCode.RightShift))
+        {
+            simonGame.ForceStartNextRound(true);
         }
     }
 }

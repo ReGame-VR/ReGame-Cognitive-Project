@@ -8911,6 +8911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffbf324138eed345833f49d2b4698d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
   spacebarTrigger: 0
 --- !u!4 &917839555
 Transform:

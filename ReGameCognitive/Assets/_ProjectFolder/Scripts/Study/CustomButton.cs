@@ -24,7 +24,7 @@ public class CustomButton : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //VrTrigger(other);
+        VrTrigger(other);
     }
 
     private void Update()
