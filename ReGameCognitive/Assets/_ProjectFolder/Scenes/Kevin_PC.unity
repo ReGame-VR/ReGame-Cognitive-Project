@@ -5550,6 +5550,11 @@ PrefabInstance:
       propertyPath: customTextCanvas
       value: 
       objectReference: {fileID: 1044412743}
+    - target: {fileID: 2235975203033259433, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 917839554}
     - target: {fileID: 2235975203033259438, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
         type: 3}
       propertyPath: m_Name
