@@ -31,16 +31,10 @@ public class VideoPanel : MonoBehaviour
         }
     }
 
-    public IEnumerator Enable()
+    public IEnumerator Enable(bool isVrVersion)
     {
-        if (simonGame.usePredeterminedSequences)
-        {
-            yield return StartCoroutine(PcVideoActivator());
-        }
-        else
-        {
-            yield return StartCoroutine(VrVideoActivator(intervalCheckingTime));
-        }
+        var activatorCoroutine = isVrVersion ? PcVideoActivator() : VrVideoActivator(intervalCheckingTime);
+        yield return StartCoroutine(activatorCoroutine);
     }
 
     private IEnumerator VrVideoActivator(float timeToWait)

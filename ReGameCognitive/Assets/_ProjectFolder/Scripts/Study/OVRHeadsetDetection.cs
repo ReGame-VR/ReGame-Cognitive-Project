@@ -6,7 +6,6 @@ using UnityEngine;
 public class OVRHeadsetDetection : MonoBehaviour
 {
     private bool _headsetHasBeenMounted = false;
-    [SerializeField] private SimonGame simonGame;
     [SerializeField] private float intervalTime = 0.5f;
     [SerializeField] private CustomTextCanvas customTextCanvas;
     [SerializeField] private CustomButton customButton;
@@ -35,18 +34,10 @@ public class OVRHeadsetDetection : MonoBehaviour
         _headsetHasBeenMounted = false;
     }
     
-    public IEnumerator EnableDetection()
+    public IEnumerator EnableDetection(bool isVrVersion)
     {
-        if (simonGame.usePredeterminedSequences)
-        {
-            //check for keyboard input
-            yield return StartCoroutine(InputDetection());
-        }
-        else
-        {
-            //headset detection input
-            yield return StartCoroutine(HeadsetDetection(intervalTime));
-        }
+        var detectionCoroutine = isVrVersion ? HeadsetDetection(intervalTime) : InputDetection();
+        yield return StartCoroutine(detectionCoroutine);
     }
     
     private IEnumerator HeadsetDetection(float timeToWait)

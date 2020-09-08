@@ -6039,6 +6039,8 @@ MonoBehaviour:
   customTextCanvas: {fileID: 612547539}
   instructionBeforeColor: Touch the
   instructionAfterColor: cube to begin the session.
+  instructionBeforeKey: 
+  instructionAfterKey: 
 --- !u!1001 &624586143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6410,6 +6412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
+  difficultyKey: 0
 --- !u!65 &639909507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7376,6 +7379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: e8cfe55e8de98f8459023115bfce16ad, type: 2}
+  difficultyKey: 0
 --- !u!65 &677140603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8896,6 +8900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffbf324138eed345833f49d2b4698d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  simonGame: {fileID: 1445968377}
   spacebarTrigger: 0
 --- !u!4 &917839555
 Transform:
@@ -9519,6 +9524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
+  difficultyKey: 0
 --- !u!65 &1043107397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13520,7 +13526,6 @@ MonoBehaviour:
   timeBetweenCubeLit: 0.5
   timeCubeLit: 0.5
   audioManager: {fileID: 308009053}
-  usePredeterminedSequences: 1
 --- !u!1001 &1446847848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14782,6 +14787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   videoPanel: {fileID: 963694068}
+  instructionPanel: {fileID: 612547540}
   headsetDetection: {fileID: 1709475414}
   triggerActivation: {fileID: 1709475415}
   tutorialDifficulty: {fileID: 11400000, guid: 6078d808f9a85994383d1cab6943dce3, type: 2}
@@ -14790,6 +14796,7 @@ MonoBehaviour:
   level3: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
   level4: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
   level5: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
+  isVrVersion: 0
 --- !u!4 &1662879199
 Transform:
   m_ObjectHideFlags: 0
@@ -16132,6 +16139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
+  difficultyKey: 0
 --- !u!65 &1770200311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18502,6 +18510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simonGame: {fileID: 1445968377}
   difficulty: {fileID: 11400000, guid: 2d96bcc26c2ee444d95c60f2e70c4c8a, type: 2}
+  difficultyKey: 0
 --- !u!65 &2006710729
 BoxCollider:
   m_ObjectHideFlags: 0

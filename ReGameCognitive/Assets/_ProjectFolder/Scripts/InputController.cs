@@ -11,6 +11,8 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
+        if (!simonGame) return;
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             spacebarTrigger = true;

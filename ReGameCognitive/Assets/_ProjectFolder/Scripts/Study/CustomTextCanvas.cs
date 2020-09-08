@@ -10,6 +10,7 @@ public class CustomTextCanvas : MonoBehaviour
     [SerializeField] private TextMesh titleTextMesh;
     [SerializeField] private TextMesh bodyTextMesh;
 
+    
     public void Enable()
     {
         canvasParentGameObject.SetActive(true);

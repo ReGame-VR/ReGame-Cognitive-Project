@@ -26,9 +26,7 @@ public class SimonGame : MonoBehaviour
     [SerializeField] private float timeBetweenCubeLit;
     [SerializeField] private float timeCubeLit;
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] public bool usePredeterminedSequences;
     
-
     private User _currentUser;
     private Session _currentSession;
     private Feedback _handFeedback;
@@ -46,6 +44,8 @@ public class SimonGame : MonoBehaviour
     private int _round;
     private bool _isActive;
     private bool _responseIsBeingProcessed;
+    private bool _isVrVersion;
+    private bool _usePredeterminedSequences;
     
     private const int NULL_BUTTON_INDEX = -1;
     private const float CHECK_INTERVAL = 1;
@@ -67,6 +67,12 @@ public class SimonGame : MonoBehaviour
         
         Timer();
         CheckForButtonPushed();
+    }
+
+    public void SetVersion(bool isVrVersion)
+    {
+        _usePredeterminedSequences = !isVrVersion;
+        _isVrVersion = isVrVersion;
     }
 
     public void SetUser(User user)
@@ -166,7 +172,7 @@ public class SimonGame : MonoBehaviour
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons();
-        if (instructionPanel) instructionPanel.FinalInstructions();
+        if (instructionPanel) instructionPanel.FinalInstructions(_isVrVersion);
 
         ActivateHands();
     }
@@ -177,7 +183,7 @@ public class SimonGame : MonoBehaviour
 
         var level = difficulty.level;
         
-        if (instructionPanel) instructionPanel.SetDifficulty(difficulty);
+        if (instructionPanel) instructionPanel.SetDifficulty(difficulty, _isVrVersion);
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons(level);
@@ -513,7 +519,7 @@ public class SimonGame : MonoBehaviour
 
     private void SetupSequence()
     {
-        if (usePredeterminedSequences && _currentDifficulty)
+        if (_usePredeterminedSequences && _currentDifficulty)
         {
             _sequence = _currentDifficulty.GetNextSequenceSet();
         }
@@ -654,10 +660,5 @@ public class SimonGame : MonoBehaviour
         if (!defaultHandFeedback) return;
         
         _handFeedback = defaultHandFeedback;
-    }
-    
-    public IEnumerator StudyComplete()
-    {
-        yield return StartCoroutine(instructionPanel.EndOfStudy(5f));
     }
 }
