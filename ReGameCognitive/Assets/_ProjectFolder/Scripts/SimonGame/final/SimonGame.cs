@@ -46,6 +46,7 @@ public class SimonGame : MonoBehaviour
     private bool _responseIsBeingProcessed;
     private bool _isVrVersion;
     private bool _usePredeterminedSequences;
+    private bool _isReadyForKeyBoardInput;
     
     private const int NULL_BUTTON_INDEX = -1;
     private const float CHECK_INTERVAL = 1;
@@ -210,6 +211,7 @@ public class SimonGame : MonoBehaviour
     public void StopGame()
     {
         _isActive = false;
+        _isReadyForKeyBoardInput = false;
         
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.PlayStopSequence();
@@ -315,6 +317,9 @@ public class SimonGame : MonoBehaviour
     [Button]
     public void ForceStartNextRound(bool wasCorrect)
     {
+        if (!_isReadyForKeyBoardInput) return;
+        
+        _isReadyForKeyBoardInput = false;
         StoreButtonPushData();
         
         if (wasCorrect)
@@ -327,7 +332,7 @@ public class SimonGame : MonoBehaviour
             _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
             StoreIncorrectSequence();
         }
-        
+
         StartCoroutine(StartNextRound(wasCorrect));
     }
 
@@ -413,6 +418,7 @@ public class SimonGame : MonoBehaviour
         _currentSequenceIndex = 0;
         _timeRemaining = _timeLimit;
         _buttonPushedIndex = NULL_BUTTON_INDEX;
+        _isReadyForKeyBoardInput = false;
         
         DeactivateHands();
         SetupColors();
@@ -627,6 +633,7 @@ public class SimonGame : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenCubeLit);
         DeactivateHands();
+        _isReadyForKeyBoardInput = false;
         while (_currentSequenceIndex <= _numSequences &&
                _isActive)
         {
@@ -648,6 +655,7 @@ public class SimonGame : MonoBehaviour
 
         _currentSequenceIndex = 0;
         _timeInSequence = 0;
+        _isReadyForKeyBoardInput = true;
         ActivateHands();
         
         if(_isActive)

@@ -33,7 +33,7 @@ public class VideoPanel : MonoBehaviour
 
     public IEnumerator Enable(bool isVrVersion)
     {
-        var activatorCoroutine = isVrVersion ? PcVideoActivator() : VrVideoActivator(intervalCheckingTime);
+        var activatorCoroutine = isVrVersion ? VrVideoActivator(intervalCheckingTime) : PcVideoActivator();
         yield return StartCoroutine(activatorCoroutine);
     }
 
