@@ -36,7 +36,7 @@ public class OVRHeadsetDetection : MonoBehaviour
     
     public IEnumerator EnableDetection(bool isVrVersion)
     {
-        var detectionCoroutine = isVrVersion ? InputDetection() : HeadsetDetection(intervalTime);
+        var detectionCoroutine = isVrVersion ? HeadsetDetection(intervalTime) : InputDetection();
         yield return StartCoroutine(detectionCoroutine);
     }
     

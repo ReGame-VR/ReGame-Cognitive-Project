@@ -16,7 +16,7 @@ MonoBehaviour:
   numberOfButtons: 9
   baseSequence: 0
   maxSequence: 20
-  sessionTimeLimit: 60
+  sessionTimeLimit: 5
   colorString: ORANGE
   keyLetter: '''O'''
   levelColors: {fileID: 11400000, guid: 75c37f2bc96867747b11fbaa6e347f49, type: 2}
