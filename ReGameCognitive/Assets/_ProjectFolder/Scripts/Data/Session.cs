@@ -23,7 +23,11 @@ public class Session
 
     public void SetSequenceSuccessPercentage()
     {
-        if (totalSequencesAttempted == 0) sequenceSuccessPercentage = 0;
+        if (totalSequencesAttempted == 0)
+        {
+            sequenceSuccessPercentage = 0;
+            return;
+        }
             
         sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
     }
