@@ -4,46 +4,39 @@ using UnityEngine;
 
 public class InstructionPanel : MonoBehaviour
 {
-    [SerializeField] private SimonGame simonGame;
     [SerializeField] private CustomTextCanvas customTextCanvas;
     [SerializeField] private string instructionBeforeColor;
     [SerializeField] private string instructionAfterColor;
     [SerializeField] private string instructionBeforeKey;
     [SerializeField] private string instructionAfterKey;
 
-    public void SetDifficulty(Difficulty difficulty)
+    private const string FINAL_INSTRUCTIONS_PC = "Select the level that the researcher suggested.\n" +
+                                                 "Press the 'B' for Blue, 'G' for Green, 'R' for Red,\n" +
+                                                 "'Y' for Yellow, and 'O' for Orange";
+    private const string FINAL_INSTRUCTIONS_VR = "Select the level that the researcher suggested.";
+    private const string END_OF_STUDY_PC = "Nice work! This is the end.\nPlease talk to the researcher.";
+    private const string END_OF_STUDY_VR = "Nice work! This is the end.\nPlease take off the headset and talk to the researcher."; 
+
+    public void SetDifficulty(Difficulty difficulty, bool isVrVersion)
     {
         if (!difficulty || !customTextCanvas) return;
 
-        if (simonGame.usePredeterminedSequences)
-        {
-            customTextCanvas.SetBody(instructionBeforeKey + $" {difficulty.keyLetter} key " + "for the" + $" {difficulty.colorString} \n" + instructionAfterKey);
-            customTextCanvas.Enable();
-        }
-        else
-        {
-            customTextCanvas.SetBody(instructionBeforeColor + $" {difficulty.colorString} " + instructionAfterColor);
-            customTextCanvas.Enable();
-        }
+        var setDifficultyString = isVrVersion
+            ? instructionBeforeColor + $" {difficulty.colorString} " + instructionAfterColor
+            : instructionBeforeKey + $" {difficulty.keyLetter} key " + "for the" + $" {difficulty.colorString} \n" +
+              instructionAfterKey;
         
+        customTextCanvas.SetBody(setDifficultyString);
+        customTextCanvas.Enable();
     }
 
-    public void FinalInstructions()
+    public void FinalInstructions(bool isVrVersion)
     {
         if (!customTextCanvas) return;
 
-        if (simonGame.usePredeterminedSequences)
-        {
-            customTextCanvas.SetBody("Select the level that the researcher suggested.\n" +
-                                     "Press the 'B' for Blue, 'G' for Green, 'R' for Red,\n" +
-                                     "'Y' for Yellow, and 'O' for Orange");
-            customTextCanvas.Enable();
-        }
-        else
-        {
-            customTextCanvas.SetBody("Select the level that the researcher suggested.");
-            customTextCanvas.Enable();
-        }
+        var finalInstructionsString = isVrVersion ? FINAL_INSTRUCTIONS_VR : FINAL_INSTRUCTIONS_PC;
+        customTextCanvas.SetBody(finalInstructionsString);
+        customTextCanvas.Enable();
     }
 
     public void Disable()
@@ -53,22 +46,12 @@ public class InstructionPanel : MonoBehaviour
         customTextCanvas.Disable();
     }
     
-    public IEnumerator EndOfStudy(float timeToWait)
+    public void EndOfStudy(bool isVrVersion)
     {
-        customTextCanvas.Enable();
-
-        if (simonGame.usePredeterminedSequences)
-        {
-            customTextCanvas.SetBody("Nice work! This is the end.\nPlease talk to the researcher.");
-        }
-        else
-        {
-            customTextCanvas.SetBody("Nice work! This is the end.\nPlease take off the headset and talk to the researcher.");
-        }
+        if (!customTextCanvas) return;
         
-        while (true)
-        {
-            yield return new WaitForSeconds(timeToWait);
-        }
+        var endOfStudyString = isVrVersion ? END_OF_STUDY_VR : END_OF_STUDY_PC;
+        customTextCanvas.SetBody(endOfStudyString);
+        customTextCanvas.Enable();
     }
 }
