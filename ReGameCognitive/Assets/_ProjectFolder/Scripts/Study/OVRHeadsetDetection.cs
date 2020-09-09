@@ -10,7 +10,9 @@ public class OVRHeadsetDetection : MonoBehaviour
     [SerializeField] private CustomTextCanvas customTextCanvas;
     [SerializeField] private CustomButton customButton;
     [SerializeField] private GameObject instructionsPanelParent;
-    
+    public delegate void HeadSetDetection();
+    public event HeadSetDetection headsetOff;
+    public event HeadSetDetection headsetOn;
 
     private void Awake()
     {
@@ -46,10 +48,14 @@ public class OVRHeadsetDetection : MonoBehaviour
         customTextCanvas.SetBody("Please take your headset off\n" +
                                  " to talk to the researcher.");
         
+        headsetOff?.Invoke();
+        
         while (_headsetHasBeenMounted)
         {
             yield return new WaitForSeconds(timeToWait);
         }
+        
+        headsetOn?.Invoke();
         
         customTextCanvas.SetBody("Touch the white circle to continue.");
         customButton.ToggleOnTrigger();

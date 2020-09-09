@@ -59,6 +59,9 @@ public class SimonGame : MonoBehaviour
     public event StateHandler RoundHasEnded;
     public event StateHandler ButtonWasPushed;
     
+    public delegate void PracticeRoundAudio();
+    public event PracticeRoundAudio practiceAudio;
+    
     
 
     void FixedUpdate()
@@ -92,10 +95,18 @@ public class SimonGame : MonoBehaviour
             yield return StartCoroutine(PlayRound());
             yield break;
         }
-        
-        StartFromChooseDifficulty(difficulty);
-        SetDifficulty(difficulty);
 
+        if (_isVrVersion)
+        {
+            practiceAudio?.Invoke();
+            StartCoroutine(WaitForAudio(difficulty));
+        }
+        else
+        {
+            StartFromChooseDifficulty(difficulty);
+            SetDifficulty(difficulty);
+        }
+        
         //Wait for Game to start
         while (!_isActive)
         {
@@ -107,6 +118,13 @@ public class SimonGame : MonoBehaviour
         {
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
+    }
+
+    private IEnumerator WaitForAudio(Difficulty difficulty)
+    {
+        yield return new WaitForSeconds(10f);
+        StartFromChooseDifficulty(difficulty);
+        SetDifficulty(difficulty);
     }
 
     public IEnumerator PlayRound(Difficulty difficulty)
