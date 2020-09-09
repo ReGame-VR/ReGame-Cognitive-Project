@@ -9,6 +9,9 @@ public class InstructionPanel : MonoBehaviour
     [SerializeField] private string instructionAfterColor;
     [SerializeField] private string instructionBeforeKey;
     [SerializeField] private string instructionAfterKey;
+    
+    public delegate void FinalInstruction();
+    public event FinalInstruction finalInstructions;
 
     private const string FINAL_INSTRUCTIONS_PC = "Select the level that the researcher suggested.\n" +
                                                  "Press the 'B' for <color=blue>Blue</color>, 'G' for <color=green>Green</color>, 'R' for <color=red>Red</color>,\n" +
@@ -35,6 +38,12 @@ public class InstructionPanel : MonoBehaviour
         if (!customTextCanvas) return;
 
         var finalInstructionsString = isVrVersion ? FINAL_INSTRUCTIONS_VR : FINAL_INSTRUCTIONS_PC;
+
+        if (isVrVersion)
+        {
+            finalInstructions?.Invoke();
+        }
+        
         customTextCanvas.SetBody(finalInstructionsString);
         customTextCanvas.Enable();
     }

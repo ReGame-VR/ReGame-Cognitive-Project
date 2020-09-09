@@ -23,13 +23,18 @@ public class InputController : MonoBehaviour
             spacebarTrigger = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             simonGame.ForceStartNextRound(false);
         }
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             simonGame.ForceStartNextRound(true);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 }

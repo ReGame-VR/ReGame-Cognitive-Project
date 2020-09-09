@@ -11,6 +11,8 @@ public class StudyManager : MonoBehaviour
     [SerializeField] private InstructionPanel instructionPanel;
     [SerializeField] private OVRHeadsetDetection headsetDetection;
     [SerializeField] private UserTriggerActivation triggerActivation;
+    [SerializeField] private GameObject vrRig;
+    [SerializeField] private GameObject CameraRig;
     [SerializeField] private Difficulty tutorialDifficulty;
     [SerializeField] private Difficulty level1;
     [SerializeField] private Difficulty level2;
@@ -41,6 +43,17 @@ public class StudyManager : MonoBehaviour
             simonGame.DifficultyWasSet += SetDifficulty;
             
             simonGame.SetVersion(isVrVersion);
+        }
+
+        if (isVrVersion)
+        {
+            vrRig.SetActive(true);
+            CameraRig.SetActive(false);
+        }
+        else
+        {
+            vrRig.SetActive(false);
+            CameraRig.SetActive(true);
         }
         
         StartStudy();

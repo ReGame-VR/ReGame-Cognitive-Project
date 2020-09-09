@@ -54,11 +54,16 @@ public class OVRHeadsetDetection : MonoBehaviour
         {
             yield return new WaitForSeconds(timeToWait);
         }
-        
-        headsetOn?.Invoke();
-        
+
         customTextCanvas.SetBody("Touch the white circle to continue.");
         customButton.ToggleOnTrigger();
+
+        while (!_headsetHasBeenMounted)
+        {
+            yield return new WaitForSeconds(timeToWait);
+        }
+        
+        headsetOn?.Invoke();
     }
 
     private IEnumerator InputDetection()

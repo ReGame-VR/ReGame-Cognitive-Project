@@ -65,7 +65,8 @@ public class SimonGame : MonoBehaviour
     public delegate void PracticeRoundAudio();
     public event PracticeRoundAudio practiceAudio;
     
-    
+    public delegate void ButtonInstruction(Difficulty difficulty);
+    public event ButtonInstruction buttonInstruction;
 
     void FixedUpdate()
     {
@@ -137,7 +138,12 @@ public class SimonGame : MonoBehaviour
             yield return StartCoroutine(PlayRound());
             yield break;
         }
-        
+
+        if (_isVrVersion)
+        {
+            buttonInstruction?.Invoke(difficulty);
+        }
+
         StartFromChooseDifficulty(difficulty);
 
         //Wait for Game to start

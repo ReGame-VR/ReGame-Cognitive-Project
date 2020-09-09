@@ -17,6 +17,8 @@ public class VideoPanel : MonoBehaviour
     [SerializeField] private double _elapsedTime = 0f;
     [SerializeField] private CustomTextCanvas customTextCanvas;
     
+    public delegate void VideoAudio();
+    public event VideoAudio videoAudio;
     
     private void Start()
     {
@@ -39,6 +41,8 @@ public class VideoPanel : MonoBehaviour
 
     private IEnumerator VrVideoActivator(float timeToWait)
     {
+        videoAudio?.Invoke();
+        
         customTextCanvas.Enable();
         customTextCanvas.SetTitle("");
         customTextCanvas.SetBody("Watch the video on how to play the game.\n" +
