@@ -16,8 +16,7 @@ public class VideoPanel : MonoBehaviour
     [SerializeField] private double _videoClipLength;
     [SerializeField] private double _elapsedTime = 0f;
     [SerializeField] private CustomTextCanvas customTextCanvas;
-    public delegate void VideoAudio();
-    public event VideoAudio videoAudio;
+    
     
     private void Start()
     {
@@ -34,14 +33,12 @@ public class VideoPanel : MonoBehaviour
 
     public IEnumerator Enable(bool isVrVersion)
     {
-        var activatorCoroutine = isVrVersion ? VrVideoActivator(intervalCheckingTime)  : PcVideoActivator();
+        var activatorCoroutine = isVrVersion ? VrVideoActivator(intervalCheckingTime) : PcVideoActivator();
         yield return StartCoroutine(activatorCoroutine);
     }
 
     private IEnumerator VrVideoActivator(float timeToWait)
     {
-        videoAudio?.Invoke();
-        
         customTextCanvas.Enable();
         customTextCanvas.SetTitle("");
         customTextCanvas.SetBody("Watch the video on how to play the game.\n" +

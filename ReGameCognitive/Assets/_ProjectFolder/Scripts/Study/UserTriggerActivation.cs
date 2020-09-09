@@ -22,6 +22,8 @@ public class UserTriggerActivation : MonoBehaviour
     
     public IEnumerator Enable()
     {
+        customButton.trigger = false;
+        
         yield return StartCoroutine(TriggerActivation(intervalTime));
     }
 }

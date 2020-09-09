@@ -16,6 +16,7 @@ public class CustomButton : MonoBehaviour
     [SerializeField] private Color activationColor;
     [SerializeField] private InputController inputController;
     public bool trigger = false;
+    
 
     private void Start()
     {

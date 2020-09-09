@@ -46,9 +46,12 @@ public class SimonGame : MonoBehaviour
     private bool _responseIsBeingProcessed;
     private bool _isVrVersion;
     private bool _usePredeterminedSequences;
+    private bool _isReadyForKeyBoardInput;
     
     private const int NULL_BUTTON_INDEX = -1;
     private const float CHECK_INTERVAL = 1;
+    private const string PRE_SCORE_TEXT = "Nice work! You got ";
+    private const string POST_SCORE_TEXT = " right!";
 
     public delegate void StateHandler();
     public delegate void DifficultyHandler(Difficulty difficulty);
@@ -191,6 +194,7 @@ public class SimonGame : MonoBehaviour
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons();
         if (instructionPanel) instructionPanel.FinalInstructions(_isVrVersion);
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.Disable();
 
         ActivateHands();
     }
@@ -205,6 +209,7 @@ public class SimonGame : MonoBehaviour
         if (buttonModelParent) buttonModelParent.SetActive(true);
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.SetupDifficultyButtons(level);
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.Disable();
 
         ActivateHands();
     }
@@ -224,6 +229,7 @@ public class SimonGame : MonoBehaviour
     public void StopGame()
     {
         _isActive = false;
+        _isReadyForKeyBoardInput = false;
         
         if (buttonColliderParent) buttonColliderParent.SetActive(false);
         if (stopController) stopController.PlayStopSequence();
@@ -329,15 +335,22 @@ public class SimonGame : MonoBehaviour
     [Button]
     public void ForceStartNextRound(bool wasCorrect)
     {
+        if (!_isReadyForKeyBoardInput) return;
+        
+        _isReadyForKeyBoardInput = false;
+        StoreButtonPushData();
+        
         if (wasCorrect)
         {
             _numSequences++;
+            StoreCorrectSequence();
         }
         else
         {
             _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
+            StoreIncorrectSequence();
         }
-        
+
         StartCoroutine(StartNextRound(wasCorrect));
     }
 
@@ -389,7 +402,10 @@ public class SimonGame : MonoBehaviour
         _currentUser.totalSequencesCorrect++;
         _currentUser.SetSequenceSuccessPercentage();
 
-        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage));
+        var scoreText = PRE_SCORE_TEXT +
+                        CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage) +
+                        POST_SCORE_TEXT;
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
     }
 
     private void StoreIncorrectSequence()
@@ -406,7 +422,10 @@ public class SimonGame : MonoBehaviour
         
         _currentUser.SetSequenceSuccessPercentage();
 
-        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage));
+        var scoreText = PRE_SCORE_TEXT +
+                        CustomTextCanvas.FormatDecimalToPercent(_currentSession.sequenceSuccessPercentage) +
+                        POST_SCORE_TEXT;
+        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
     }
 
     private void Initialize()
@@ -417,6 +436,7 @@ public class SimonGame : MonoBehaviour
         _currentSequenceIndex = 0;
         _timeRemaining = _timeLimit;
         _buttonPushedIndex = NULL_BUTTON_INDEX;
+        _isReadyForKeyBoardInput = false;
         
         DeactivateHands();
         SetupColors();
@@ -424,7 +444,6 @@ public class SimonGame : MonoBehaviour
         SetupSequence();
         if (timerCustomTextCanvas) timerCustomTextCanvas.Enable();
         if (roundCustomTextCanvas) roundCustomTextCanvas.Enable();
-        if (scoreCustomTextCanvas) scoreCustomTextCanvas.Disable();
     }
 
     private void SetupColors()
@@ -632,6 +651,7 @@ public class SimonGame : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenCubeLit);
         DeactivateHands();
+        _isReadyForKeyBoardInput = false;
         while (_currentSequenceIndex <= _numSequences &&
                _isActive)
         {
@@ -653,6 +673,7 @@ public class SimonGame : MonoBehaviour
 
         _currentSequenceIndex = 0;
         _timeInSequence = 0;
+        _isReadyForKeyBoardInput = true;
         ActivateHands();
         
         if(_isActive)
