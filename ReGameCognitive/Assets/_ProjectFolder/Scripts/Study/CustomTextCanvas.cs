@@ -56,7 +56,7 @@ public class CustomTextCanvas : MonoBehaviour
 
     public static string FormatDecimalToPercent(float someFloat)
     {
-        var percentString = someFloat.ToString("P1");
+        var percentString = someFloat.ToString("P0");
         return percentString;
     }
 }

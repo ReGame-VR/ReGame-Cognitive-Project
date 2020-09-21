@@ -72,8 +72,7 @@ public class VideoPanel : MonoBehaviour
             _elapsedTime += Time.deltaTime + timeToWait;
         }
 
-        customTextCanvas.SetBody("This is just a practice round and will not\n" +
-                                 "have an impact on your score.");
+        customTextCanvas.SetBody("This is a practice round!");
         
         customButton.ToggleOffTrigger();
         displayPrefab.SetActive(false);
@@ -103,8 +102,7 @@ public class VideoPanel : MonoBehaviour
             yield return null;
         }
 
-        customTextCanvas.SetBody("This is just a practice round and will not\n" +
-                                 "have an impact on your score.");
+        customTextCanvas.SetBody("This is a practice round!");
         
         customButton.ToggleOffTrigger();
         displayPrefab.SetActive(false);
