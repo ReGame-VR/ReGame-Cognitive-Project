@@ -49,7 +49,9 @@ public class SimonGame : MonoBehaviour
     private bool _isReadyForKeyBoardInput;
     
     private const int NULL_BUTTON_INDEX = -1;
+    private const int WRONG_BUTTON_INDEX = 100;
     private const float CHECK_INTERVAL = 1;
+    private const float VR_AUDIO_WAIT_TIME = 10f;
     private const string PRE_SCORE_TEXT = "Nice work! You got ";
     private const string POST_SCORE_TEXT = " right!";
 
@@ -67,7 +69,8 @@ public class SimonGame : MonoBehaviour
     
     public delegate void ButtonInstruction(Difficulty difficulty);
     public event ButtonInstruction buttonInstruction;
-
+    
+    
     void FixedUpdate()
     {
         if (!_isActive) return;
@@ -100,7 +103,7 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
 
-        if (_isVrVersion)
+        /*if (_isVrVersion)
         {
             practiceAudio?.Invoke();
             StartCoroutine(WaitForAudio(difficulty));
@@ -109,7 +112,16 @@ public class SimonGame : MonoBehaviour
         {
             StartFromChooseDifficulty(difficulty);
             SetDifficulty(difficulty);
+        }*/
+        
+        if (_isVrVersion)
+        {
+            practiceAudio?.Invoke();
+            yield return new WaitForSeconds(VR_AUDIO_WAIT_TIME);
         }
+        
+        StartFromChooseDifficulty(difficulty);
+        SetDifficulty(difficulty);
         
         //Wait for Game to start
         while (!_isActive)
@@ -341,23 +353,36 @@ public class SimonGame : MonoBehaviour
     [Button]
     public void ForceStartNextRound(bool wasCorrect)
     {
-        if (!_isReadyForKeyBoardInput) return;
+        StartCoroutine(ForceStartNextRoundCoroutine(wasCorrect));
+    }
+
+    private IEnumerator ForceStartNextRoundCoroutine(bool wasCorrect)
+    {
+        if (!_isReadyForKeyBoardInput) yield break;
         
         _isReadyForKeyBoardInput = false;
-        StoreButtonPushData();
         
+        yield return new WaitForFixedUpdate();
+        
+        var currentNumSequences = _numSequences;
         if (wasCorrect)
         {
-            _numSequences++;
-            StoreCorrectSequence();
+            while (_currentSequenceIndex <= _numSequences &&
+                   currentNumSequences == _numSequences)
+            {
+                _buttonPushedIndex = _sequence[_currentSequenceIndex];
+                CheckForButtonPushed();
+                yield return new WaitForFixedUpdate();
+            }
         }
         else
         {
-            _numSequences = _numSequences > 0 ? _numSequences - 1 : 0;
-            StoreIncorrectSequence();
+            _buttonPushedIndex = WRONG_BUTTON_INDEX;
+            CheckForButtonPushed();
+            yield return new WaitForFixedUpdate();
         }
-
-        StartCoroutine(StartNextRound(wasCorrect));
+        
+        yield return new WaitForFixedUpdate();
     }
 
     private void UpdateUserTime()
@@ -372,6 +397,8 @@ public class SimonGame : MonoBehaviour
         _currentSession.SetEndTime();
         _currentSession.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentSession.sessionCompleted = true;
+
+        _currentUser.totalSessionsAttempted++;
     }
 
     private void UpdateSessionTime()
@@ -394,7 +421,7 @@ public class SimonGame : MonoBehaviour
         _currentSession.sequencesAttempted = sequenceAttempted;
         _currentSession.totalSequencesAttempted = _round;
 
-        _currentUser.totalSequencesAttempted = _round;
+        _currentUser.totalSequencesAttempted++;
     }
 
     private void StoreCorrectSequence()
