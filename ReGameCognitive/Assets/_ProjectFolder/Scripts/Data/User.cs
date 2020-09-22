@@ -16,7 +16,7 @@ public class User
     public int totalSequencesCorrect;
     public float sequenceSuccessPercentage;
     //public int totalSessionsCorrect;
-    //public int totalSessionsAttempted;
+    public int totalSessionsAttempted;
     public float sessionSuccessPercentage;
 
 

@@ -37,7 +37,7 @@ public class Session
         if (user == null) return;
         
         //Data from user
-        currentSession = user.totalSequencesAttempted + 1;
+        currentSession = user.totalSessionsAttempted + 1;
         userId = user.userId;
         
         SetStartTime();
