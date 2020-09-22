@@ -5734,8 +5734,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: db9d232f683c9c140bfc369a9ef08920,
+      objectReference: {fileID: 32900000, guid: c3568be349d11a64da20ad1cf422cfdd,
         type: 3}
+    - target: {fileID: 5419607876129548614, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: m_DirectAudioMutes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c3982cc229dbf4bbe1b0bed6442c91, type: 3}
 --- !u!4 &575564898 stripped
@@ -6172,7 +6177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customTextCanvas: {fileID: 612547539}
   instructionBeforeColor: Touch the
-  instructionAfterColor: cube to begin the session.
+  instructionAfterColor: cube to begin the game.
   instructionBeforeKey: 
   instructionAfterKey: 
 --- !u!1001 &624586143
