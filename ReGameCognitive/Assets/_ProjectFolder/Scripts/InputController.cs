@@ -25,11 +25,11 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            simonGame.ForceStartNextRound(false);
+            simonGame.ForceStartNextAttempt(false);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            simonGame.ForceStartNextRound(true);
+            simonGame.ForceStartNextAttempt(true);
         }
         
         if (Input.GetKeyDown(KeyCode.Escape))

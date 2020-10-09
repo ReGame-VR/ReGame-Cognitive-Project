@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Session
+public class Round
 {
     public string userId;
     public string localStartTime = "";
@@ -11,13 +11,12 @@ public class Session
     public string utcStartTime = "";
     public string utcEndTime = "";
     public string timeInSequence = "";
-    public bool sessionCompleted = false;
-    public int currentSession;
+    public bool roundCompleted = false;
+    public int currentRound;
     public int totalSequencesAttempted;
     public int totalSequencesCorrect;
     public string sequencesAttempted;
-    public string sequencesMissed;
-    //public string handUsed;
+    public string buttonMissed;
     public float sequenceSuccessPercentage;
 
 
@@ -32,12 +31,12 @@ public class Session
         sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
     }
     
-    public Session(User user)
+    public Round(User user)
     {
         if (user == null) return;
         
         //Data from user
-        currentSession = user.totalSessionsAttempted + 1;
+        currentRound = user.totalRoundsAttempted + 1;
         userId = user.userId;
         
         SetStartTime();
