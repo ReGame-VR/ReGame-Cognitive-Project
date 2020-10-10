@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,7 +29,7 @@ public class Difficulty : ScriptableObject
     private int _currentIndex = 0;
     
     private const int MAX_ROUNDS = 5;
-
+    
 
     private void OnEnable()
     {
@@ -38,6 +40,8 @@ public class Difficulty : ScriptableObject
         predeterminedSequences.Add(sequenceSet2);
         predeterminedSequences.Add(sequenceSet3);
         predeterminedSequences.Add(sequenceSet4);
+        
+        PrintSequences();
     }
 
     public int[] GetNextSequenceSet()
@@ -89,19 +93,53 @@ public class Difficulty : ScriptableObject
     [Button]
     private void PrintSequences()
     {
-        string currentSequence = "";
-        for (int i = 0; i < baseSequence; i++)
-        {
-            currentSequence += $"[{predeterminedSequences[0][i]}] ";
-        }
+        CheckIfFileExists();
         
-        for (var j = 0; j < maxSequence; j++)
+        WriteString("-------------- Level " + level + " --------------\n");
+
+        for (int x = 0; x < predeterminedSequences.Count; x++)
         {
-            currentSequence += $"[{predeterminedSequences[0][j]}] " + "\n";
-            //Debug.Log($"[{predeterminedSequences[0][j]}]");
-            //Debug.Log(currentSequence);
-        }
+            WriteString("-------------- Sequence " + x + " --------------\n");
+            
+            string currentSequence = "";
+            for (int i = 0; i < baseSequence; i++)
+            {
+                currentSequence += $"[{predeterminedSequences[x][i]}] ";
+            }
         
-        Debug.Log(currentSequence);
+            for (var j = 0; j < maxSequence; j++)
+            {
+                currentSequence += $"[{predeterminedSequences[x][j]}] ";
+                
+                WriteString(currentSequence);
+            }
+            
+            WriteString("\n");
+        }
+    }
+    
+    private void WriteString(string text)
+    {
+        string path = "Assets/Resources/" + "Level_" + level.ToString() + "_Sequences.txt";
+
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(text);
+        writer.Close();
+    }
+
+    private void CheckIfFileExists()
+    {
+        string path = "Assets/Resources/" + "Level_" + level.ToString() + "_Sequences.txt";
+        
+        if (File.Exists(path))
+        {
+            Debug.Log("File Exists....Deleting to create new file....");
+            File.Delete(path);
+            Debug.Log("Successfully deleted!");
+        }
+        else
+        {
+            Debug.Log("File does not exist...Continuing...");
+        }
     }
 }
