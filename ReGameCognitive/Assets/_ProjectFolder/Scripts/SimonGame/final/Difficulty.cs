@@ -75,7 +75,7 @@ public class Difficulty : ScriptableObject
     }
 
     [Button]
-    private void PrintSequences(int index)
+    private void PrintSequenceButtons(int index)
     {
         if (index >= MAX_ROUNDS) return;
         if (index >= predeterminedSequences.Count) return;
@@ -84,5 +84,24 @@ public class Difficulty : ScriptableObject
         {
             Debug.Log($"[{predeterminedSequences[index][j]}]");
         }
+    }
+    
+    [Button]
+    private void PrintSequences()
+    {
+        string currentSequence = "";
+        for (int i = 0; i < baseSequence; i++)
+        {
+            currentSequence += $"[{predeterminedSequences[0][i]}] ";
+        }
+        
+        for (var j = 0; j < maxSequence; j++)
+        {
+            currentSequence += $"[{predeterminedSequences[0][j]}] " + "\n";
+            //Debug.Log($"[{predeterminedSequences[0][j]}]");
+            //Debug.Log(currentSequence);
+        }
+        
+        Debug.Log(currentSequence);
     }
 }
