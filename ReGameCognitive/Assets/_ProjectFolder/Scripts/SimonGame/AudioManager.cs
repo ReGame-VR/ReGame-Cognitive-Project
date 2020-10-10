@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
         if (simonGame)
         {
             simonGame.DifficultyWasSet += SetDistractions;
-            simonGame.SessionHasEnded += DisableDistractions;
+            simonGame.RoundHasEnded += DisableDistractions;
             simonGame.practiceAudio += PlayPracticeAudio;
             videoPanel.videoAudio += PlayTutorialAudio;
             headsetDetection.headsetOn += PlayHeadsetOn;
@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         simonGame.DifficultyWasSet -= SetDistractions;
-        simonGame.SessionHasEnded -= DisableDistractions;
+        simonGame.RoundHasEnded -= DisableDistractions;
         simonGame.practiceAudio -= PlayPracticeAudio;
         videoPanel.videoAudio -= PlayTutorialAudio;
         simonGame.buttonInstruction -= PlayLevelAudio;

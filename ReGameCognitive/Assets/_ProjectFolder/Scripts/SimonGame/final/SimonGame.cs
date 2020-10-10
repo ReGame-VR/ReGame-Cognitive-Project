@@ -54,12 +54,13 @@ public class SimonGame : MonoBehaviour
     private const float VR_AUDIO_WAIT_TIME = 10f;
     private const string PRE_SCORE_TEXT = "Nice work! You got ";
     private const string POST_SCORE_TEXT = " right!";
+    private const string UNKNOWN_BUTTON_MESSAGE = "[???]";
 
     public delegate void StateHandler();
     public delegate void DifficultyHandler(Difficulty difficulty);
     public event DifficultyHandler DifficultyWasSet;
-    public event StateHandler SessionHasStarted;
-    public event StateHandler SessionHasEnded;
+    public event StateHandler RoundHasStarted;
+    public event StateHandler RoundHasEnded;
     public event StateHandler AttemptHasStarted;
     public event StateHandler AttemptHasEnded;
     public event StateHandler ButtonWasPushed;
@@ -90,7 +91,7 @@ public class SimonGame : MonoBehaviour
         _currentUser = user;
     }
 
-    public void SetSession(Round round)
+    public void SetRound(Round round)
     {
         _currentRound = round;
     }
@@ -118,14 +119,7 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
 
-        if (_currentRound != null)
-        {
-            _currentRound.difficultyLevel = difficulty.colorString;
-        }
-        else
-        {
-            Debug.Log($"_currentRound == null, difficulty={difficulty.colorString}");
-        }
+        //StoreDifficultyLevel();
         
         //Wait for game to end
         while (_isActive)
@@ -162,14 +156,7 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
         
-        if (_currentRound != null)
-        {
-            _currentRound.difficultyLevel = difficulty.colorString;
-        }
-        else
-        {
-            Debug.Log($"_currentRound == null, difficulty={difficulty.colorString}");
-        }
+        //StoreDifficultyLevel();
         
         //Wait for game to end
         while (_isActive)
@@ -177,7 +164,7 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
     }
-    
+
     public IEnumerator PlayRound()
     {
         StartFromChooseDifficulty();
@@ -188,14 +175,7 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
         
-        if (_currentRound != null && _currentDifficulty != null)
-        {
-            _currentRound.difficultyLevel = _currentDifficulty.colorString;
-        }
-        else
-        {
-            Debug.Log($"_currentRound == null, difficulty={_currentDifficulty.colorString}");
-        }
+        //StoreDifficultyLevel();
         
         //Wait for game to end
         while (_isActive)
@@ -203,7 +183,7 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
     }
-    
+
     [Button]
     public void StartFromStopSequence()
     {
@@ -255,8 +235,10 @@ public class SimonGame : MonoBehaviour
         Initialize();
         StartCoroutine(PlaySequence());
 
-        SessionHasStarted?.Invoke();
+        RoundHasStarted?.Invoke();
         AttemptHasStarted?.Invoke();
+        
+        StoreDifficultyLevel();
     }
 
     [Button]
@@ -277,7 +259,7 @@ public class SimonGame : MonoBehaviour
         UpdateSessionTime();
         EndSession();
         
-        SessionHasEnded?.Invoke();
+        RoundHasEnded?.Invoke();
     }
     
     public void ButtonPress(ButtonData buttonData)
@@ -362,6 +344,8 @@ public class SimonGame : MonoBehaviour
         if (instructionPanel) instructionPanel.Disable();
 
         _currentDifficulty = difficulty;
+        
+        //StoreDifficultyLevel();
 
         DifficultyWasSet?.Invoke(difficulty);
     }
@@ -411,7 +395,7 @@ public class SimonGame : MonoBehaviour
         if (_currentRound == null || _currentUser == null) return;
         
         _currentRound.SetEndTime();
-        _currentRound.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
+        _currentRound.timeSpentInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
         _currentRound.roundCompleted = true;
 
         _currentUser.totalRoundsAttempted++;
@@ -422,7 +406,7 @@ public class SimonGame : MonoBehaviour
         if (_currentRound == null) return;
         
         _currentRound.SetEndTime();
-        _currentRound.timeInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
+        _currentRound.timeSpentInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
     }
 
     private void StoreButtonPushData()
@@ -466,7 +450,15 @@ public class SimonGame : MonoBehaviour
         {
             sequenceEntered += "[" + _sequence[i] + "] ";
         }
-        _currentRound.buttonMissed = sequenceEntered + "[" + _buttonPushedIndex + "]";
+
+        if (_buttonPushedIndex == WRONG_BUTTON_INDEX)
+        {
+            _currentRound.buttonMissed = UNKNOWN_BUTTON_MESSAGE;
+        }
+        else
+        {
+            _currentRound.buttonMissed = sequenceEntered + "[" + _buttonPushedIndex + "]";
+        }
         _currentRound.SetSequenceSuccessPercentage();
         
         _currentUser.SetSequenceSuccessPercentage();
@@ -475,6 +467,18 @@ public class SimonGame : MonoBehaviour
                         CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentageInRound) +
                         POST_SCORE_TEXT;
         if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
+    }
+    
+    private void StoreDifficultyLevel()
+    {
+        if (_currentRound != null && _currentDifficulty != null)
+        {
+            _currentRound.difficultyLevel = $"{_currentDifficulty.level} ({_currentDifficulty.colorString})";
+        }
+        else
+        {
+            Debug.Log($"_currentRound == null, difficulty={_currentDifficulty.colorString}");
+        }
     }
 
     private void Initialize()
@@ -491,6 +495,7 @@ public class SimonGame : MonoBehaviour
         SetupColors();
         HowManyCubes();
         SetupSequence();
+        
         if (timerCustomTextCanvas) timerCustomTextCanvas.Enable();
         if (attemptCustomTextCanvas) attemptCustomTextCanvas.Enable();
     }

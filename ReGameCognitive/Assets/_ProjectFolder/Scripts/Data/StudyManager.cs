@@ -23,7 +23,7 @@ public class StudyManager : MonoBehaviour
     
 
     private CSVManager _userCsvManager;
-    private CSVManager _sessionCsvManager;
+    private CSVManager _roundCsvManager;
     private User _currentUser;
     private Round _currentRound;
     private Difficulty _lastDifficultyChosen;
@@ -32,14 +32,14 @@ public class StudyManager : MonoBehaviour
     private void Awake()
     {
         _userCsvManager = gameObject.AddComponent<CSVManager>();
-        _sessionCsvManager = gameObject.AddComponent<CSVManager>();
+        _roundCsvManager = gameObject.AddComponent<CSVManager>();
         
         if (simonGame)
         {
-            simonGame.SessionHasStarted += StartSession;
-            simonGame.SessionHasEnded += EndSession;
+            simonGame.RoundHasStarted += StartRound;
+            simonGame.RoundHasEnded += EndRound;
             simonGame.AttemptHasEnded += StoreData;
-            simonGame.AttemptHasEnded += AppendSessionData;
+            simonGame.AttemptHasEnded += AppendRoundData;
             simonGame.DifficultyWasSet += SetDifficulty;
             
             simonGame.SetVersion(isVrVersion);
@@ -63,10 +63,10 @@ public class StudyManager : MonoBehaviour
     {
         if (simonGame)
         {
-            simonGame.SessionHasStarted -= StartSession;
-            simonGame.SessionHasEnded -= EndSession;
+            simonGame.RoundHasStarted -= StartRound;
+            simonGame.RoundHasEnded -= EndRound;
             simonGame.AttemptHasEnded -= StoreData;
-            simonGame.AttemptHasEnded -= AppendSessionData;
+            simonGame.AttemptHasEnded -= AppendRoundData;
             simonGame.DifficultyWasSet -= SetDifficulty;
         }
     }
@@ -99,18 +99,18 @@ public class StudyManager : MonoBehaviour
         if (instructionPanel) instructionPanel.EndOfStudy(isVrVersion);
     }
 
-    private void StartSession()
+    private void StartRound()
     {
         _currentRound = new Round(_currentUser);
         
-        if (_sessionCsvManager) _sessionCsvManager.Initialize(_currentRound);
-        if (simonGame) simonGame.SetSession(_currentRound);
+        if (_roundCsvManager) _roundCsvManager.Initialize(_currentRound);
+        if (simonGame) simonGame.SetRound(_currentRound);
     }
 
-    private void EndSession()
+    private void EndRound()
     {
         StoreData();
-        if (_sessionCsvManager) _sessionCsvManager.AppendReport();
+        if (_roundCsvManager) _roundCsvManager.AppendReport();
         
         _currentRound = null;
     }
@@ -118,12 +118,12 @@ public class StudyManager : MonoBehaviour
     private void StoreData()
     {
         if (_userCsvManager) _userCsvManager.UpdateData(_currentUser);
-        if (_sessionCsvManager) _sessionCsvManager.UpdateData(_currentRound);
+        if (_roundCsvManager) _roundCsvManager.UpdateData(_currentRound);
     }
 
-    private void AppendSessionData()
+    private void AppendRoundData()
     {
-        if (_sessionCsvManager) _sessionCsvManager.AppendReport();
+        if (_roundCsvManager) _roundCsvManager.AppendReport();
     }
 
     private IEnumerator StartStudyCoroutine()
