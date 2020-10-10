@@ -10,25 +10,26 @@ public class Round
     public string localEndTime = "";
     public string utcStartTime = "";
     public string utcEndTime = "";
-    public string timeInSequence = "";
-    public bool roundCompleted = false;
     public int currentRound;
-    public int totalSequencesAttempted;
-    public int totalSequencesCorrect;
-    public string sequencesAttempted;
+    public string difficultyLevel = "";
+    public string sequenceAttempted;
     public string buttonMissed;
-    public float sequenceSuccessPercentage;
+    public string timeInSequence = "";
+    public int totalSequencesAttemptedInRound;
+    public int totalSequencesCorrectInRound;
+    public float sequenceSuccessPercentageInRound;
+    public bool roundCompleted = false;
 
 
     public void SetSequenceSuccessPercentage()
     {
-        if (totalSequencesAttempted == 0)
+        if (totalSequencesAttemptedInRound == 0)
         {
-            sequenceSuccessPercentage = 0;
+            sequenceSuccessPercentageInRound = 0;
             return;
         }
             
-        sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
+        sequenceSuccessPercentageInRound = (float) Decimal.Divide(totalSequencesCorrectInRound, totalSequencesAttemptedInRound);
     }
     
     public Round(User user)

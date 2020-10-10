@@ -103,17 +103,6 @@ public class SimonGame : MonoBehaviour
             yield break;
         }
 
-        /*if (_isVrVersion)
-        {
-            practiceAudio?.Invoke();
-            StartCoroutine(WaitForAudio(difficulty));
-        }
-        else
-        {
-            StartFromChooseDifficulty(difficulty);
-            SetDifficulty(difficulty);
-        }*/
-        
         if (_isVrVersion)
         {
             practiceAudio?.Invoke();
@@ -127,6 +116,15 @@ public class SimonGame : MonoBehaviour
         while (!_isActive)
         {
             yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+
+        if (_currentRound != null)
+        {
+            _currentRound.difficultyLevel = difficulty.colorString;
+        }
+        else
+        {
+            Debug.Log($"_currentRound == null, difficulty={difficulty.colorString}");
         }
         
         //Wait for game to end
@@ -164,6 +162,15 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
         
+        if (_currentRound != null)
+        {
+            _currentRound.difficultyLevel = difficulty.colorString;
+        }
+        else
+        {
+            Debug.Log($"_currentRound == null, difficulty={difficulty.colorString}");
+        }
+        
         //Wait for game to end
         while (_isActive)
         {
@@ -179,6 +186,15 @@ public class SimonGame : MonoBehaviour
         while (!_isActive)
         {
             yield return new WaitForSeconds(CHECK_INTERVAL);
+        }
+        
+        if (_currentRound != null && _currentDifficulty != null)
+        {
+            _currentRound.difficultyLevel = _currentDifficulty.colorString;
+        }
+        else
+        {
+            Debug.Log($"_currentRound == null, difficulty={_currentDifficulty.colorString}");
         }
         
         //Wait for game to end
@@ -346,7 +362,7 @@ public class SimonGame : MonoBehaviour
         if (instructionPanel) instructionPanel.Disable();
 
         _currentDifficulty = difficulty;
-        
+
         DifficultyWasSet?.Invoke(difficulty);
     }
 
@@ -418,8 +434,8 @@ public class SimonGame : MonoBehaviour
         {
             sequenceAttempted += "[" + _sequence[i] + "] ";
         }
-        _currentRound.sequencesAttempted = sequenceAttempted;
-        _currentRound.totalSequencesAttempted = _attempts;
+        _currentRound.sequenceAttempted = sequenceAttempted;
+        _currentRound.totalSequencesAttemptedInRound = _attempts;
 
         _currentUser.totalSequencesAttempted++;
     }
@@ -429,14 +445,14 @@ public class SimonGame : MonoBehaviour
         if (_currentRound == null || _currentUser == null) return;
         
         _currentRound.buttonMissed = "";
-        _currentRound.totalSequencesCorrect++;
+        _currentRound.totalSequencesCorrectInRound++;
         _currentRound.SetSequenceSuccessPercentage();
 
         _currentUser.totalSequencesCorrect++;
         _currentUser.SetSequenceSuccessPercentage();
 
         var scoreText = PRE_SCORE_TEXT +
-                        CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentage) +
+                        CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentageInRound) +
                         POST_SCORE_TEXT;
         if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
     }
@@ -456,7 +472,7 @@ public class SimonGame : MonoBehaviour
         _currentUser.SetSequenceSuccessPercentage();
 
         var scoreText = PRE_SCORE_TEXT +
-                        CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentage) +
+                        CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentageInRound) +
                         POST_SCORE_TEXT;
         if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
     }

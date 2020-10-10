@@ -5784,7 +5784,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575774337}
-  m_Text: 'Round:'
+  m_Text: 'Attempt:'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -10876,7 +10876,7 @@ GameObject:
   - component: {fileID: 1249242768}
   - component: {fileID: 1249242769}
   m_Layer: 0
-  m_Name: Round
+  m_Name: Attempt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13642,7 +13642,7 @@ MonoBehaviour:
   stopController: {fileID: 1445968375}
   instructionPanel: {fileID: 612547540}
   timerCustomTextCanvas: {fileID: 1312342688}
-  roundCustomTextCanvas: {fileID: 1249242769}
+  attemptCustomTextCanvas: {fileID: 0}
   scoreCustomTextCanvas: {fileID: 111464392}
   defaultHandFeedback: {fileID: 11400000, guid: 74a6e14f755345e49a7727a634f3db1f,
     type: 2}
