@@ -14,7 +14,7 @@ public class Round
     public string difficultyLevel = "";
     public string sequenceAttempted;
     public string buttonMissed;
-    public string timeInSequence = "";
+    public string timeSpentInSequence = "";
     public int totalSequencesAttemptedInRound;
     public int totalSequencesCorrectInRound;
     public float sequenceSuccessPercentageInRound;
