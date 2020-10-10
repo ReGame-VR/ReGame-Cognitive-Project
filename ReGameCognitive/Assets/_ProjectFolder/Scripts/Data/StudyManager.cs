@@ -25,7 +25,7 @@ public class StudyManager : MonoBehaviour
     private CSVManager _userCsvManager;
     private CSVManager _sessionCsvManager;
     private User _currentUser;
-    private Session _currentSession;
+    private Round _currentRound;
     private Difficulty _lastDifficultyChosen;
 
 
@@ -38,8 +38,8 @@ public class StudyManager : MonoBehaviour
         {
             simonGame.SessionHasStarted += StartSession;
             simonGame.SessionHasEnded += EndSession;
-            simonGame.RoundHasEnded += StoreData;
-            simonGame.RoundHasEnded += AppendSessionData;
+            simonGame.AttemptHasEnded += StoreData;
+            simonGame.AttemptHasEnded += AppendSessionData;
             simonGame.DifficultyWasSet += SetDifficulty;
             
             simonGame.SetVersion(isVrVersion);
@@ -65,8 +65,8 @@ public class StudyManager : MonoBehaviour
         {
             simonGame.SessionHasStarted -= StartSession;
             simonGame.SessionHasEnded -= EndSession;
-            simonGame.RoundHasEnded -= StoreData;
-            simonGame.RoundHasEnded -= AppendSessionData;
+            simonGame.AttemptHasEnded -= StoreData;
+            simonGame.AttemptHasEnded -= AppendSessionData;
             simonGame.DifficultyWasSet -= SetDifficulty;
         }
     }
@@ -101,10 +101,10 @@ public class StudyManager : MonoBehaviour
 
     private void StartSession()
     {
-        _currentSession = new Session(_currentUser);
+        _currentRound = new Round(_currentUser);
         
-        if (_sessionCsvManager) _sessionCsvManager.Initialize(_currentSession);
-        if (simonGame) simonGame.SetSession(_currentSession);
+        if (_sessionCsvManager) _sessionCsvManager.Initialize(_currentRound);
+        if (simonGame) simonGame.SetSession(_currentRound);
     }
 
     private void EndSession()
@@ -112,13 +112,13 @@ public class StudyManager : MonoBehaviour
         StoreData();
         if (_sessionCsvManager) _sessionCsvManager.AppendReport();
         
-        _currentSession = null;
+        _currentRound = null;
     }
 
     private void StoreData()
     {
         if (_userCsvManager) _userCsvManager.UpdateData(_currentUser);
-        if (_sessionCsvManager) _sessionCsvManager.UpdateData(_currentSession);
+        if (_sessionCsvManager) _sessionCsvManager.UpdateData(_currentRound);
     }
 
     private void AppendSessionData()

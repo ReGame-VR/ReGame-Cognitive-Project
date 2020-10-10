@@ -15,9 +15,7 @@ public class User
     public int totalSequencesAttempted;
     public int totalSequencesCorrect;
     public float sequenceSuccessPercentage;
-    //public int totalSessionsCorrect;
-    public int totalSessionsAttempted;
-    public float sessionSuccessPercentage;
+    public int totalRoundsAttempted;
 
 
     public void SetSequenceSuccessPercentage()

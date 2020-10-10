@@ -35,8 +35,10 @@ public class CSVManager : MonoBehaviour
     public void Initialize(object dataObject)
     {
         if (dataObject == null) return;
+        
+        var date = DateTime.Now.ToString("MM-dd-yyyy");
 
-        _path = _rootPath + dataObject.GetType().Name + REPORT_FILE_NAME;
+        _path = _rootPath + date + "_" + dataObject.GetType().Name + REPORT_FILE_NAME;
         
         InitializeHeaders(dataObject);
         InitializeDictionary();

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   numberOfButtons: 9
-  baseSequence: 0
+  baseSequence: 2
   maxSequence: 20
   sessionTimeLimit: 30
   colorString: ORANGE
