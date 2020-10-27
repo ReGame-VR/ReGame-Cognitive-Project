@@ -25,11 +25,16 @@ public class Difficulty : ScriptableObject
     public int[] sequenceSet3;
     public int[] sequenceSet4;
     public List<int[]> predeterminedSequences = new List<int[]>();
+    public Dictionary<int, string> sequenceColorReference = new Dictionary<int, string>
+    {
+        {0, "BLUE"}, {1, "GREEN"}, {2, "RED"},
+        {3, "YELLOW"}, {4, "ORANGE"}, {5, "BLACK"},
+        {6, "WHITE"}, {7, "PINK"}, {8, "SKY_BLUE"}
+    };
 
     private int _currentIndex = 0;
-    
     private const int MAX_ROUNDS = 5;
-    
+
 
     private void OnEnable()
     {
@@ -104,13 +109,14 @@ public class Difficulty : ScriptableObject
             string currentSequence = "";
             for (int i = 0; i < baseSequence; i++)
             {
-                currentSequence += $"[{predeterminedSequences[x][i]}] ";
+                currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][i]]}] ";
+                //currentSequence += $"[{predeterminedSequences[x][i]}] ";
             }
         
             for (var j = 0; j < maxSequence; j++)
             {
-                currentSequence += $"[{predeterminedSequences[x][j]}] ";
-                
+                currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][j]]}] ";
+                //currentSequence += $"[{predeterminedSequences[x][j]}] ";
                 WriteString(currentSequence);
             }
             
