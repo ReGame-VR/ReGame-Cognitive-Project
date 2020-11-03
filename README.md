@@ -1,6 +1,6 @@
 # ReGame Cognitive Project
 
-This project is both a VR and PC application. 
+This project is both a VR and PC application. Production scene is "Cognitive". 
 
 For the VR version:</br>
 1. On the [StudyManager] gameobject make sure you **check** the "Is VR Version" checkbox.
