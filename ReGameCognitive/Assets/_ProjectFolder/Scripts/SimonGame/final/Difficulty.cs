@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Sirenix.OdinInspector;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,9 +25,14 @@ public class Difficulty : ScriptableObject
     public int[] sequenceSet3;
     public int[] sequenceSet4;
     public List<int[]> predeterminedSequences = new List<int[]>();
+    public Dictionary<int, string> sequenceColorReference = new Dictionary<int, string>
+    {
+        {0, "BLUE"}, {1, "GREEN"}, {2, "RED"},
+        {3, "YELLOW"}, {4, "ORANGE"}, {5, "BLACK"},
+        {6, "WHITE"}, {7, "PINK"}, {8, "SKY_BLUE"}
+    };
 
     private int _currentIndex = 0;
-    
     private const int MAX_ROUNDS = 5;
 
 
@@ -38,6 +45,8 @@ public class Difficulty : ScriptableObject
         predeterminedSequences.Add(sequenceSet2);
         predeterminedSequences.Add(sequenceSet3);
         predeterminedSequences.Add(sequenceSet4);
+        
+        PrintSequences();
     }
 
     public int[] GetNextSequenceSet()
@@ -75,7 +84,7 @@ public class Difficulty : ScriptableObject
     }
 
     [Button]
-    private void PrintSequences(int index)
+    private void PrintSequenceButtons(int index)
     {
         if (index >= MAX_ROUNDS) return;
         if (index >= predeterminedSequences.Count) return;
@@ -83,6 +92,60 @@ public class Difficulty : ScriptableObject
         for (var j = 0; j < maxSequence; j++)
         {
             Debug.Log($"[{predeterminedSequences[index][j]}]");
+        }
+    }
+    
+    [Button]
+    private void PrintSequences()
+    {
+        CheckIfFileExists();
+        
+        WriteString("-------------- Level " + level + " --------------\n");
+
+        for (int x = 0; x < predeterminedSequences.Count; x++)
+        {
+            WriteString("-------------- Sequence " + x + " --------------\n");
+            
+            string currentSequence = "";
+            for (int i = 0; i < baseSequence; i++)
+            {
+                currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][i]]}] ";
+                //currentSequence += $"[{predeterminedSequences[x][i]}] ";
+            }
+        
+            for (var j = 0; j < maxSequence; j++)
+            {
+                currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][j]]}] ";
+                //currentSequence += $"[{predeterminedSequences[x][j]}] ";
+                WriteString(currentSequence);
+            }
+            
+            WriteString("\n");
+        }
+    }
+    
+    private void WriteString(string text)
+    {
+        string path = "Assets/Resources/" + "Level_" + level.ToString() + "_Sequences.txt";
+
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(text);
+        writer.Close();
+    }
+
+    private void CheckIfFileExists()
+    {
+        string path = "Assets/Resources/" + "Level_" + level.ToString() + "_Sequences.txt";
+        
+        if (File.Exists(path))
+        {
+            Debug.Log("File Exists....Deleting to create new file....");
+            File.Delete(path);
+            Debug.Log("Successfully deleted!");
+        }
+        else
+        {
+            Debug.Log("File does not exist...Continuing...");
         }
     }
 }

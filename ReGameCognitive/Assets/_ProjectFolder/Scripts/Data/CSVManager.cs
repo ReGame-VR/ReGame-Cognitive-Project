@@ -8,6 +8,7 @@ public class CSVManager : MonoBehaviour
 {
     private List<string> _reportHeaders;
     private Dictionary<string, string> _dictionary;
+    private string _rootPath;
     private string _path;
 
     private const string REPORT_SEPARATOR = ",";
@@ -23,11 +24,11 @@ public class CSVManager : MonoBehaviour
 
         if (Application.isEditor)
         {
-            _path = "Assets/Resources/";
+            _rootPath = "Assets/Resources/";
         }
         else
         {
-            _path = Application.persistentDataPath + "/";
+            _rootPath = Application.persistentDataPath + "/";
         }
     }
 
@@ -35,7 +36,10 @@ public class CSVManager : MonoBehaviour
     {
         if (dataObject == null) return;
         
-        _path += dataObject.GetType().Name + REPORT_FILE_NAME;
+        var date = DateTime.Now.ToString("MM-dd-yyyy");
+
+        _path = _rootPath + date + "_" + dataObject.GetType().Name + REPORT_FILE_NAME;
+        
         InitializeHeaders(dataObject);
         InitializeDictionary();
     }

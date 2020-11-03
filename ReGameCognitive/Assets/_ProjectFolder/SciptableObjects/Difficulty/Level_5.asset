@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 5
   numberOfButtons: 9
-  baseSequence: 0
+  baseSequence: 2
   maxSequence: 20
-  sessionTimeLimit: 3
+  sessionTimeLimit: 30
   colorString: ORANGE
   keyLetter: '''O'''
   levelColors: {fileID: 11400000, guid: 75c37f2bc96867747b11fbaa6e347f49, type: 2}

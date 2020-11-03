@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a3ccb8ea97243842b61d7b832f93cfa, type: 3}
   m_Name: R3C2
   m_EditorClassIdentifier: 
-  litColor: {r: 0, g: 0.75454235, b: 1, a: 1}
-  unlitColor: {r: 0, g: 0.35893553, b: 0.43529412, a: 0.78431374}
+  litColor: {r: 1, g: 0.7529412, b: 0.79607844, a: 1}
+  unlitColor: {r: 0.8113208, g: 0.61614454, b: 0.650223, a: 0.78431374}
   audioClip: {fileID: 8300000, guid: afcdbb118c38ec340911098667b79a87, type: 3}
   volume: 1
   pitch: 1

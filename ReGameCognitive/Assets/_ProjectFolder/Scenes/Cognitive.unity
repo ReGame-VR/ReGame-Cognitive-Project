@@ -2694,7 +2694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &272027782
 Transform:
   m_ObjectHideFlags: 0
@@ -2831,7 +2831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_IsActive
@@ -4816,7 +4816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &481468324
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5734,8 +5734,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VideoClip
       value: 
-      objectReference: {fileID: 32900000, guid: db9d232f683c9c140bfc369a9ef08920,
+      objectReference: {fileID: 32900000, guid: c3568be349d11a64da20ad1cf422cfdd,
         type: 3}
+    - target: {fileID: 5419607876129548614, guid: 26c3982cc229dbf4bbe1b0bed6442c91,
+        type: 3}
+      propertyPath: m_DirectAudioMutes.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c3982cc229dbf4bbe1b0bed6442c91, type: 3}
 --- !u!4 &575564898 stripped
@@ -13642,7 +13647,7 @@ MonoBehaviour:
   stopController: {fileID: 1445968375}
   instructionPanel: {fileID: 612547540}
   timerCustomTextCanvas: {fileID: 1312342688}
-  roundCustomTextCanvas: {fileID: 1249242769}
+  attemptCustomTextCanvas: {fileID: 0}
   scoreCustomTextCanvas: {fileID: 111464392}
   defaultHandFeedback: {fileID: 11400000, guid: 74a6e14f755345e49a7727a634f3db1f,
     type: 2}
@@ -14842,7 +14847,7 @@ MonoBehaviour:
   level3: {fileID: 11400000, guid: 9daed6bb15117b645a502edbc6041f97, type: 2}
   level4: {fileID: 11400000, guid: a72c4c1c29fff27458553585814e4c56, type: 2}
   level5: {fileID: 11400000, guid: 929ccccc8465cad46b4cc05be9c5b675, type: 2}
-  isVrVersion: 1
+  isVrVersion: 0
 --- !u!4 &1662879199
 Transform:
   m_ObjectHideFlags: 0
@@ -15796,7 +15801,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1752242610
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16818,7 +16823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1850914979
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17422,7 +17427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1893323260
 MonoBehaviour:
   m_ObjectHideFlags: 0

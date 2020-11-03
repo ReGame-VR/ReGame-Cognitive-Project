@@ -3,41 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Session
+public class Round
 {
     public string userId;
     public string localStartTime = "";
     public string localEndTime = "";
     public string utcStartTime = "";
     public string utcEndTime = "";
-    public string timeInSequence = "";
-    public bool sessionCompleted = false;
-    public int currentSession;
-    public int totalSequencesAttempted;
-    public int totalSequencesCorrect;
-    public string sequencesAttempted;
-    public string sequencesMissed;
-    //public string handUsed;
-    public float sequenceSuccessPercentage;
+    public int currentRound;
+    public string difficultyLevel = "";
+    public string sequenceAttempted;
+    public string buttonMissed;
+    public string timeSpentInSequence = "";
+    public int totalSequencesAttemptedInRound;
+    public int totalSequencesCorrectInRound;
+    public float sequenceSuccessPercentageInRound;
+    public bool roundCompleted = false;
 
 
     public void SetSequenceSuccessPercentage()
     {
-        if (totalSequencesAttempted == 0)
+        if (totalSequencesAttemptedInRound == 0)
         {
-            sequenceSuccessPercentage = 0;
+            sequenceSuccessPercentageInRound = 0;
             return;
         }
             
-        sequenceSuccessPercentage = (float) Decimal.Divide(totalSequencesCorrect, totalSequencesAttempted);
+        sequenceSuccessPercentageInRound = (float) Decimal.Divide(totalSequencesCorrectInRound, totalSequencesAttemptedInRound);
     }
     
-    public Session(User user)
+    public Round(User user)
     {
         if (user == null) return;
         
         //Data from user
-        currentSession = user.totalSequencesAttempted + 1;
+        currentRound = user.totalRoundsAttempted + 1;
         userId = user.userId;
         
         SetStartTime();

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_ProjectFolder/Scenes/Cody_Prototype.unity
+    path: Assets/_ProjectFolder/Scenes/Final Cognitive.unity
     guid: 17c102a75a5c10547af39a951255dc7e
+  - enabled: 0
+    path: Assets/_ProjectFolder/Scenes/Kevin_PC.unity
+    guid: 44872f49c9bfe3f40af3c46a931e1f6d
   m_configObjects: {}
