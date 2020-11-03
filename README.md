@@ -1,5 +1,6 @@
 # ReGame Cognitive Project
 
+Unity Version: 2019.4.3f1
 This project is both a VR and PC application. Production scene is "Cognitive". 
 
 For the VR version:</br>
