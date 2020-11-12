@@ -59,10 +59,10 @@ Level 1
 If you ever want to change the predetermined sequences for the PC version you can go to the Scriptable Objects we have created for the level difficulties.
 You can find them at *Assets\_ProjectFolder\SciptableObjects\Difficulty*. In the Inspector you will see a button that will set them. On the difficulty scriptable objects you can also change the time limit per level. 
 
-Color hex codes used for each level:
+Color hex codes used for each level:</br>
 
-Blue (level 1) - #000CFF
-Green (level 2) - #00FF13 
-Red (level 3) - #FF0000
-Yellow (level 4) - #FCFF00
-Orange (level 5) - #FF9A00
+Blue (level 1) - #000CFF</br>
+Green (level 2) - #00FF13</br>
+Red (level 3) - #FF0000</br>
+Yellow (level 4) - #FCFF00</br>
+Orange (level 5) - #FF9A00</br>
