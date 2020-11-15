@@ -110,13 +110,11 @@ public class Difficulty : ScriptableObject
             for (int i = 0; i < baseSequence; i++)
             {
                 currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][i]]}] ";
-                //currentSequence += $"[{predeterminedSequences[x][i]}] ";
             }
         
             for (var j = 0; j < maxSequence; j++)
             {
                 currentSequence += $"[{sequenceColorReference[predeterminedSequences[x][j]]}] ";
-                //currentSequence += $"[{predeterminedSequences[x][j]}] ";
                 WriteString(currentSequence);
             }
             
@@ -145,7 +143,7 @@ public class Difficulty : ScriptableObject
         }
         else
         {
-            Debug.Log("File does not exist...Continuing...");
+            Debug.Log($"File at {path} does not exist.");
         }
     }
 }

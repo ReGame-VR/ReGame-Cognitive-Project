@@ -56,20 +56,14 @@ public class SimonGame : MonoBehaviour
     private const string POST_SCORE_TEXT = " right!";
     private const string UNKNOWN_BUTTON_MESSAGE = "[???]";
 
-    public delegate void StateHandler();
-    public delegate void DifficultyHandler(Difficulty difficulty);
-    public event DifficultyHandler DifficultyWasSet;
-    public event StateHandler RoundHasStarted;
-    public event StateHandler RoundHasEnded;
-    public event StateHandler AttemptHasStarted;
-    public event StateHandler AttemptHasEnded;
-    public event StateHandler ButtonWasPushed;
-    
-    public delegate void PracticeRoundAudio();
-    public event PracticeRoundAudio practiceAudio;
-    
-    public delegate void ButtonInstruction(Difficulty difficulty);
-    public event ButtonInstruction buttonInstruction;
+    public Action<Difficulty> DifficultyWasSet;
+    public Action RoundHasStarted;
+    public Action RoundHasEnded;
+    public Action AttemptHasStarted;
+    public Action AttemptHasEnded;
+    public Action ButtonWasPushed;
+    public Action practiceAudio;
+    public Action<Difficulty> buttonInstruction;
     
     
     void FixedUpdate()
@@ -119,8 +113,6 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
 
-        //StoreDifficultyLevel();
-        
         //Wait for game to end
         while (_isActive)
         {
@@ -156,8 +148,6 @@ public class SimonGame : MonoBehaviour
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
         
-        //StoreDifficultyLevel();
-        
         //Wait for game to end
         while (_isActive)
         {
@@ -174,8 +164,6 @@ public class SimonGame : MonoBehaviour
         {
             yield return new WaitForSeconds(CHECK_INTERVAL);
         }
-        
-        //StoreDifficultyLevel();
         
         //Wait for game to end
         while (_isActive)
@@ -345,8 +333,6 @@ public class SimonGame : MonoBehaviour
 
         _currentDifficulty = difficulty;
         
-        //StoreDifficultyLevel();
-
         DifficultyWasSet?.Invoke(difficulty);
     }
 
@@ -396,7 +382,6 @@ public class SimonGame : MonoBehaviour
         
         _currentRound.SetEndTime();
         _currentRound.timeSpentInSequence = CustomTextCanvas.FormatTimeToString(_timeInSequence);
-        _currentRound.roundCompleted = true;
 
         _currentUser.totalRoundsAttempted++;
     }

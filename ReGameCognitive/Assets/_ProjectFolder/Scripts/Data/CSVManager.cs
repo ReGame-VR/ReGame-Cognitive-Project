@@ -16,12 +16,6 @@ public class CSVManager : MonoBehaviour
 
     private void Awake()
     {
-        //Non-Quest version path
-        //_path = "Assets/Resources/" + REPORT_FILE_NAME;
-        
-        //Quest Path as of 07/28/2020
-        //_path = Application.persistentDataPath + "/" + REPORT_FILE_NAME;
-
         if (Application.isEditor)
         {
             _rootPath = "Assets/Resources/";

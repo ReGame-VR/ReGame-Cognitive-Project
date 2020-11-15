@@ -109,7 +109,7 @@ public class StudyManager : MonoBehaviour
 
     private void EndRound()
     {
-        StoreData();
+        //StoreData();
         if (_roundCsvManager) _roundCsvManager.AppendReport();
         
         _currentRound = null;

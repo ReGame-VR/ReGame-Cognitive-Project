@@ -18,7 +18,6 @@ public class Round
     public int totalSequencesAttemptedInRound;
     public int totalSequencesCorrectInRound;
     public float sequenceSuccessPercentageInRound;
-    public bool roundCompleted = false;
 
 
     public void SetSequenceSuccessPercentage()
