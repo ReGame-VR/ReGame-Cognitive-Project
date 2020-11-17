@@ -66,3 +66,19 @@ Green (level 2) - #00FF13</br>
 Red (level 3) - #FF0000</br>
 Yellow (level 4) - #FCFF00</br>
 Orange (level 5) - #FF9A00</br>
+</br>
+**DATA SHEET LEGEND**</br>
+
+**currentRound** - This is the total amount of rounds.</br>
+**difficultyLevel** - The current difficulty level. There are 5 levels.</br>
+**sequenceAttempted** - This is the sequence that was given to the player for them to replicate.</br>
+**buttonMissed** - If the player entered the sequence incorrectly it is displayed in this column. This allows
+you to identify the exact point the player entered the sequence incorrectly.</br>
+**timeSpentInSequence** - This is the total amount of time attempting the sequence. Timer starts when the
+“Begin” audio clip is played. This could possibly be used to show when the player is confused and
+possibly guessing if the total time taken seems significantly longer.</br>
+**totalSequencesAttemptedInRound** - This is the total amount of sequences attempted in the current
+round.</br>
+**totalSequencesCorrectInRound** - This is the total amount of sequences correct in the current round.</br>
+**sequenceSuccessPercentageInRound** - This is the success percentage in the current round. This
+resets after every round.</br>
