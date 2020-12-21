@@ -137,9 +137,9 @@ public class Difficulty : ScriptableObject
         
         if (File.Exists(path))
         {
-            Debug.Log("File Exists....Deleting to create new file....");
+            //Debug.Log("File Exists....Deleting to create new file....");
             File.Delete(path);
-            Debug.Log("Successfully deleted!");
+            //Debug.Log("Successfully deleted!");
         }
         else
         {
