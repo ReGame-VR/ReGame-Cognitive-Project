@@ -16,7 +16,7 @@ MonoBehaviour:
   numberOfButtons: 3
   baseSequence: 0
   maxSequence: 20
-  sessionTimeLimit: 30
+  sessionTimeLimit: 60
   colorString: TUTORIAL
   keyLetter: 
   levelColors: {fileID: 11400000, guid: d6d123d196f934f45a62815e4fd86158, type: 2}
