@@ -10,7 +10,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private VideoPanel videoPanel;
     [SerializeField] private OVRHeadsetDetection headsetDetection;
     [SerializeField] private InstructionPanel instructionPanel;
-    [SerializeField] private AudioSource distractionAudio;
     [SerializeField] public AudioSource auditoryStart;
     [SerializeField] public AudioSource instructionAudio;
     [SerializeField] public AudioClip practiceAudio;
@@ -29,8 +28,6 @@ public class AudioManager : MonoBehaviour
     {
         if (simonGame)
         {
-            simonGame.DifficultyWasSet += SetDistractions;
-            simonGame.RoundHasEnded += DisableDistractions;
             simonGame.practiceAudio += PlayPracticeAudio;
             videoPanel.videoAudio += PlayTutorialAudio;
             headsetDetection.headsetOn += PlayHeadsetOn;
@@ -42,28 +39,10 @@ public class AudioManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        simonGame.DifficultyWasSet -= SetDistractions;
-        simonGame.RoundHasEnded -= DisableDistractions;
         simonGame.practiceAudio -= PlayPracticeAudio;
         videoPanel.videoAudio -= PlayTutorialAudio;
         simonGame.buttonInstruction -= PlayLevelAudio;
         instructionPanel.finalInstructions -= PlayFinalInstructions;
-    }
-
-    private void SetDistractions(Difficulty difficulty)
-    {
-        if (!difficulty)
-            return;
-
-        if (difficulty.level == 5)
-        {
-            distractionAudio.Play();
-        }
-    }
-
-    private void DisableDistractions()
-    {
-        distractionAudio.Stop();
     }
 
     private void PlayPracticeAudio()
