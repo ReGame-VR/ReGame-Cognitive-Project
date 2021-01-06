@@ -30,8 +30,8 @@ public class AudioManager : MonoBehaviour
         {
             simonGame.practiceAudio += PlayPracticeAudio;
             videoPanel.videoAudio += PlayTutorialAudio;
-            headsetDetection.headsetOn += PlayHeadsetOn;
-            headsetDetection.headsetOff += PlayHeadsetOff;
+            headsetDetection.HeadsetWasMounted += PlayHeadsetOn;
+            headsetDetection.HeadsetWasUnmounted += PlayHeadsetOff;
             simonGame.buttonInstruction += PlayLevelAudio;
             instructionPanel.finalInstructions += PlayFinalInstructions;
         }
