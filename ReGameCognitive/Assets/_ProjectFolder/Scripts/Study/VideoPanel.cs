@@ -7,7 +7,6 @@ using UnityEngine.Video;
 
 public class VideoPanel : MonoBehaviour
 {
-    [SerializeField] private SimonGame simonGame;
     [SerializeField] private InputController inputController;
     [SerializeField] public bool videoCompletion = false;
     [SerializeField] private GameObject displayPrefab;
@@ -17,8 +16,9 @@ public class VideoPanel : MonoBehaviour
     [SerializeField] private double _elapsedTime = 0f;
     [SerializeField] private CustomTextCanvas customTextCanvas;
     
-    public delegate void VideoAudio();
-    public event VideoAudio videoAudio;
+    private bool HasVideoCompletedPlaying => _elapsedTime >= _videoClipLength;
+
+    public Action WasVrVideoActivated;
     
     private void Start()
     {
@@ -41,7 +41,7 @@ public class VideoPanel : MonoBehaviour
 
     private IEnumerator VrVideoActivator(float timeToWait)
     {
-        videoAudio?.Invoke();
+        WasVrVideoActivated?.Invoke();
         
         customTextCanvas.Enable();
         customTextCanvas.SetTitle("");
@@ -60,10 +60,10 @@ public class VideoPanel : MonoBehaviour
         {
             if (_elapsedTime >= _videoClipLength)
             {
-                customButton.ToggleOnTrigger();
+                customButton.Enable();
             }
             
-            if (customButton.trigger && (_elapsedTime >= _videoClipLength))
+            if (customButton.wasButtonActivated && HasVideoCompletedPlaying)
             {
                 videoCompletion = true;
             }
@@ -74,10 +74,10 @@ public class VideoPanel : MonoBehaviour
 
         customTextCanvas.SetBody("This is a practice round!");
         
-        customButton.ToggleOffTrigger();
+        customButton.Disable();
         displayPrefab.SetActive(false);
     }
-
+    
     private IEnumerator PcVideoActivator()
     {
         customTextCanvas.Enable();
@@ -104,7 +104,7 @@ public class VideoPanel : MonoBehaviour
 
         customTextCanvas.SetBody("This is a practice round!");
         
-        customButton.ToggleOffTrigger();
+        customButton.Disable();
         displayPrefab.SetActive(false);
         yield return null;
     }

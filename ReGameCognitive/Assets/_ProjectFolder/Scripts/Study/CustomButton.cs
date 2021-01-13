@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class CustomButton : MonoBehaviour
 {
-    [SerializeField] private float currentTime;
     [SerializeField] private float timeUntilActivation;
     [SerializeField] private float hapticsAmplitude;
     [SerializeField] private float hapticsFrequency;
@@ -15,12 +14,19 @@ public class CustomButton : MonoBehaviour
     [SerializeField] private MeshRenderer renderer;
     [SerializeField] private Color activationColor;
     [SerializeField] private InputController inputController;
-    public bool trigger = false;
     
+    public bool wasButtonActivated;
+    
+    private float _timer;
+    private Color _inactiveColor = Color.white;
+    
+    private bool HasTimeDelayElapsed => _timer >= timeUntilActivation;
+    private const float BUTTON_CHECK_INTERVAL_SECONDS = .5f;
 
-    private void Start()
+
+    private void Awake()
     {
-        ToggleOffTrigger();
+        Disable();
     }
 
     private void OnTriggerStay(Collider other)
@@ -38,48 +44,61 @@ public class CustomButton : MonoBehaviour
     {
         if (inputController.spacebarTrigger)
         {
-            trigger = true;
+            wasButtonActivated = true;
         }
     }
 
     private void VrTrigger(Collider other)
     {
-        if (currentTime >= timeUntilActivation)
+        if (HasTimeDelayElapsed)
         {
-            trigger = true;
+            wasButtonActivated = true;
         }
         
-        if (other.transform.name == leftHand.name && (currentTime < timeUntilActivation))
+        if (other.transform.name == leftHand.name && (_timer < timeUntilActivation))
         {
             ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, true);
-            currentTime += Time.deltaTime;
+            _timer += Time.deltaTime;
         }
         
-        if (other.transform.name == rightHand.name && (currentTime < timeUntilActivation))
+        if (other.transform.name == rightHand.name && (_timer < timeUntilActivation))
         {
             ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, false);
-            currentTime += Time.deltaTime;
+            _timer += Time.deltaTime;
         }
-        renderer.material.color = Color.Lerp(Color.white, activationColor, currentTime);
+        renderer.material.color = Color.Lerp(_inactiveColor, activationColor, _timer);
     }
-
+    
     private void ResetButton()
     {
-        trigger = false;
-        currentTime = 0;
-        renderer.material.color = Color.white;
+        wasButtonActivated = false;
+        _timer = 0;
+        renderer.material.color = _inactiveColor;
     }
 
-    public void ToggleOffTrigger()
+    public void Disable()
     {
         ResetButton();
         renderer.enabled = false;
         collider.enabled = false;
     }
     
-    public void ToggleOnTrigger()
+    public void Enable()
     {
         renderer.enabled = true;
         collider.enabled = true;
+    }
+
+    public IEnumerator WaitForButtonActivation()
+    {
+        ResetButton();
+        Enable();
+
+        while (!wasButtonActivated)
+        {
+            yield return new WaitForSeconds(BUTTON_CHECK_INTERVAL_SECONDS);
+        }
+        
+        Disable();
     }
 }

@@ -57,7 +57,7 @@ public class OVRHeadsetDetection : MonoBehaviour
         }
 
         customTextCanvas.SetBody("Touch the white circle to continue.");
-        customButton.ToggleOnTrigger();
+        customButton.Enable();
 
         while (!_headsetHasBeenMounted)
         {

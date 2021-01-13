@@ -11,6 +11,7 @@ public class StudyManager : MonoBehaviour
     [SerializeField] private InstructionPanel instructionPanel;
     [SerializeField] private OVRHeadsetDetection headsetDetection;
     [SerializeField] private UserTriggerActivation triggerActivation;
+    [SerializeField] private CustomButton customButton;
     [SerializeField] private GameObject vrRig;
     [SerializeField] private GameObject CameraRig;
     [SerializeField] private Difficulty tutorialDifficulty;
@@ -21,13 +22,12 @@ public class StudyManager : MonoBehaviour
     [SerializeField] private Difficulty level5;
     [SerializeField] private bool isVrVersion;
     
-
     private CSVManager _userCsvManager;
     private CSVManager _roundCsvManager;
     private User _currentUser;
     private Round _currentRound;
     private Difficulty _lastDifficultyChosen;
-
+    
 
     private void Awake()
     {
@@ -129,6 +129,8 @@ public class StudyManager : MonoBehaviour
     private IEnumerator StartStudyCoroutine()
     {
         if (!videoPanel || !simonGame) yield break;
+
+        yield return StartCoroutine(customButton.WaitForButtonActivation());                        //Delay before beginning video
 
         yield return StartCoroutine(videoPanel.Enable(isVrVersion));                        //Watch instruction video
         yield return StartCoroutine(simonGame.PlayTutorial(tutorialDifficulty)); //Play practice round

@@ -11,18 +11,18 @@ public class UserTriggerActivation : MonoBehaviour
 
     private IEnumerator TriggerActivation(float timeToWait)
     {
-        while (!customButton.trigger)
+        while (!customButton.wasButtonActivated)
         {
             yield return new WaitForSeconds(timeToWait);
         }
 
         instructionsPanelParent.SetActive(false);
-        customButton.ToggleOffTrigger();
+        customButton.Disable();
     } 
     
     public IEnumerator Enable()
     {
-        customButton.trigger = false;
+        customButton.wasButtonActivated = false;
         
         yield return StartCoroutine(TriggerActivation(intervalTime));
     }

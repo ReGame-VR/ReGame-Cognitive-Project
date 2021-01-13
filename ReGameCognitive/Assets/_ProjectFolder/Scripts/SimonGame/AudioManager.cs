@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         if (simonGame)
         {
             simonGame.practiceAudio += PlayPracticeAudio;
-            videoPanel.videoAudio += PlayTutorialAudio;
+            videoPanel.WasVrVideoActivated += PlayTutorialAudio;
             headsetDetection.HeadsetWasMounted += PlayHeadsetOn;
             headsetDetection.HeadsetWasUnmounted += PlayHeadsetOff;
             simonGame.buttonInstruction += PlayLevelAudio;
@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         simonGame.practiceAudio -= PlayPracticeAudio;
-        videoPanel.videoAudio -= PlayTutorialAudio;
+        videoPanel.WasVrVideoActivated -= PlayTutorialAudio;
         simonGame.buttonInstruction -= PlayLevelAudio;
         instructionPanel.finalInstructions -= PlayFinalInstructions;
     }
