@@ -55,6 +55,9 @@ public class SimonGame : MonoBehaviour
     private const string PRE_SCORE_TEXT = "Nice work! You got ";
     private const string POST_SCORE_TEXT = " right!";
     private const string UNKNOWN_BUTTON_MESSAGE = "[???]";
+    private const int TUTORIAL = 0;
+    
+    private bool IsTutorial => _currentDifficulty && _currentDifficulty.level == TUTORIAL;
 
     public Action<Difficulty> DifficultyWasSet;
     public Action RoundHasStarted;
@@ -420,12 +423,19 @@ public class SimonGame : MonoBehaviour
         _currentUser.totalSequencesCorrect++;
         _currentUser.SetSequenceSuccessPercentage();
 
+        SetScoreCanvasText();
+    }
+    
+    private void SetScoreCanvasText()
+    {
+        if (IsTutorial) return;
+
         var scoreText = PRE_SCORE_TEXT +
                         CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentageInRound) +
                         POST_SCORE_TEXT;
         if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
     }
-
+    
     private void StoreIncorrectSequence()
     {
         if (_currentRound == null || _currentUser == null) return;
@@ -448,10 +458,7 @@ public class SimonGame : MonoBehaviour
         
         _currentUser.SetSequenceSuccessPercentage();
 
-        var scoreText = PRE_SCORE_TEXT +
-                        CustomTextCanvas.FormatDecimalToPercent(_currentRound.sequenceSuccessPercentageInRound) +
-                        POST_SCORE_TEXT;
-        if (scoreCustomTextCanvas) scoreCustomTextCanvas.SetBody(scoreText);
+        SetScoreCanvasText();
     }
     
     private void StoreDifficultyLevel()

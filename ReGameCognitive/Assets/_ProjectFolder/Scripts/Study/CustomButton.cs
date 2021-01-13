@@ -98,7 +98,7 @@ public class CustomButton : MonoBehaviour
         {
             yield return new WaitForSeconds(BUTTON_CHECK_INTERVAL_SECONDS);
         }
-        
+
         Disable();
     }
 }
