@@ -21,13 +21,9 @@ public class CustomButton : MonoBehaviour
     private Color _inactiveColor = Color.white;
     
     private bool HasTimeDelayElapsed => _timer >= timeUntilActivation;
+    private bool IsActivationDelayActive => _timer < timeUntilActivation;
     private const float BUTTON_CHECK_INTERVAL_SECONDS = .5f;
 
-
-    private void Awake()
-    {
-        Disable();
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -55,13 +51,13 @@ public class CustomButton : MonoBehaviour
             wasButtonActivated = true;
         }
         
-        if (other.transform.name == leftHand.name && (_timer < timeUntilActivation))
+        if (other.transform.name == leftHand.name && IsActivationDelayActive)
         {
             ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, true);
             _timer += Time.deltaTime;
         }
         
-        if (other.transform.name == rightHand.name && (_timer < timeUntilActivation))
+        if (other.transform.name == rightHand.name && IsActivationDelayActive)
         {
             ControllerHaptics.ActivateHaptics(hapticsAmplitude, hapticsFrequency, false);
             _timer += Time.deltaTime;

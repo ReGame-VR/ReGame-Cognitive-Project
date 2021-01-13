@@ -7549,7 +7549,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689752076}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.022746205, y: 1.539943, z: 0.5932441}
+  m_LocalPosition: {x: -0.022746205, y: 1.6, z: 0.5932441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1312342687}
@@ -9581,7 +9581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044412741}
   m_LocalRotation: {x: -0, y: -0.92387956, z: 0.38268343, w: 0}
-  m_LocalPosition: {x: 0.025999993, y: -0.852, z: 0.20700002}
+  m_LocalPosition: {x: 0.025999993, y: -0.852, z: 0.15}
   m_LocalScale: {x: 0.0039999993, y: 0.004, z: 0.0039999997}
   m_Children:
   - {fileID: 1272595374}
@@ -11838,7 +11838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312342686}
   m_LocalRotation: {x: -0, y: -0.92387956, z: -0, w: -0.38268343}
-  m_LocalPosition: {x: 0.66125387, y: -0.356943, z: 0.2772441}
+  m_LocalPosition: {x: 0.66125387, y: -0.356943, z: 0.25}
   m_LocalScale: {x: 0.007, y: 0.007, z: 0.0049999994}
   m_Children:
   - {fileID: 1416025174}
@@ -12997,7 +12997,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404448100}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.34, y: -0.63, z: -0.398}
+  m_LocalPosition: {x: 0.331, y: -0.63, z: -0.28}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 1709475413}
@@ -13557,7 +13557,7 @@ MonoBehaviour:
   simonGamePanel: {fileID: 1445968374}
   ui: {fileID: 689752077}
   player: {fileID: 393434797}
-  distanceFromPlayer: 0.7
+  distanceFromPlayer: 0.55
   gamePanelModifier: 1.11
   uiPanelModifier: -0.09
   timeToWait: 0.5
@@ -15279,7 +15279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716845247}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.33099997, y: -0.62270004, z: 0.40199995}
+  m_LocalPosition: {x: -0.322, y: -0.62270004, z: 0.284}
   m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 0.19999999}
   m_Children: []
   m_Father: {fileID: 689752077}
@@ -15316,7 +15316,7 @@ SphereCollider:
   m_GameObject: {fileID: 1716845247}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -15327,7 +15327,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716845247}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -19442,7 +19442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2235975203494225550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.225, y: -0.28235, z: -0.898}
+  m_LocalPosition: {x: 0.22049999, y: -0.28235, z: -0.839}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 6170020211444834714}
@@ -19463,7 +19463,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2235975203494225550}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -19504,7 +19504,7 @@ SphereCollider:
   m_GameObject: {fileID: 2235975203494225550}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
