@@ -17,6 +17,7 @@ public class AdjustPanel : MonoBehaviour
     private float _uiPositionX;
     private float _simonGamePanelPositionX;
     private float _simonGamePanelPositionY;
+    private bool _adjustmentHasBeenDisabled;
 
 
     private void Awake()
@@ -62,6 +63,8 @@ public class AdjustPanel : MonoBehaviour
 
     private void MovePanel()
     {
+        if (_adjustmentHasBeenDisabled) return;
+        
         var playerPositionZ = player.position.z;
         
         var simonGamePanelAdjustedZ = playerPositionZ + distanceFromPlayer + gamePanelModifier;
@@ -71,5 +74,10 @@ public class AdjustPanel : MonoBehaviour
         var uiAdjustedZ = playerPositionZ + distanceFromPlayer + uiPanelModifier;
         var uiAdjustedPosition = new Vector3(_uiPositionX, _uiPositionY, uiAdjustedZ);
         ui.position = uiAdjustedPosition;
+    }
+
+    public void DisableAdjustment()
+    {
+        _adjustmentHasBeenDisabled = true;
     }
 }
