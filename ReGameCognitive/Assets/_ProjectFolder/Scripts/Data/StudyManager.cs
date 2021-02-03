@@ -11,6 +11,7 @@ public class StudyManager : MonoBehaviour
     [SerializeField] private InstructionPanel instructionPanel;
     [SerializeField] private OVRHeadsetDetection headsetDetection;
     [SerializeField] private UserTriggerActivation triggerActivation;
+    [SerializeField] private AdjustPanel adjustPanel;
     [SerializeField] private CustomButton customButton;
     [SerializeField] private GameObject vrRig;
     [SerializeField] private GameObject CameraRig;
@@ -135,6 +136,9 @@ public class StudyManager : MonoBehaviour
         yield return StartCoroutine(videoPanel.Enable(isVrVersion));                        //Watch instruction video
         yield return StartCoroutine(simonGame.PlayTutorial(tutorialDifficulty)); //Play practice round
         yield return StartCoroutine(headsetDetection.EnableDetection(isVrVersion));         //start checking for headset
+        
+        adjustPanel.DisableAdjustment();
+        
         yield return StartCoroutine(triggerActivation.Enable());                 //Wait for player to activate trigger
         yield return StartCoroutine(simonGame.PlayRound(level1));                //Play level 1
         yield return StartCoroutine(headsetDetection.EnableDetection(isVrVersion));         //start checking for headset

@@ -14726,6 +14726,7 @@ MonoBehaviour:
   instructionPanel: {fileID: 612547540}
   headsetDetection: {fileID: 1709475414}
   triggerActivation: {fileID: 1709475415}
+  adjustPanel: {fileID: 1445968378}
   customButton: {fileID: 1716845249}
   vrRig: {fileID: 1426075895}
   CameraRig: {fileID: 1893323259}

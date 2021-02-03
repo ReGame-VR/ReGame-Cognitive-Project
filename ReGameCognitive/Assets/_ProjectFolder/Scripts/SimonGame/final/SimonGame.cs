@@ -47,6 +47,7 @@ public class SimonGame : MonoBehaviour
     private bool _isVrVersion;
     private bool _usePredeterminedSequences;
     private bool _isReadyForKeyBoardInput;
+    private bool _isSequenceOver;
     
     private const int NULL_BUTTON_INDEX = -1;
     private const int WRONG_BUTTON_INDEX = 100;
@@ -56,7 +57,8 @@ public class SimonGame : MonoBehaviour
     private const string POST_SCORE_TEXT = " right!";
     private const string UNKNOWN_BUTTON_MESSAGE = "[???]";
     private const int TUTORIAL = 0;
-    
+    private const float END_SEQUENCE_BUFFER = .5f;
+
     private bool IsTutorial => _currentDifficulty && _currentDifficulty.level == TUTORIAL;
 
     public Action<Difficulty> DifficultyWasSet;
@@ -537,6 +539,8 @@ public class SimonGame : MonoBehaviour
 
     private IEnumerator StartNextAttempt(bool wasCorrect)
     {
+        StartCoroutine(EndSequenceCoroutine());
+        
         yield return new WaitForSeconds(timeCubeLit);
         
         StopAllFeedback();
@@ -556,6 +560,13 @@ public class SimonGame : MonoBehaviour
         AttemptHasStarted?.Invoke();
         
         StartCoroutine(PlaySequence());
+    }
+
+    private IEnumerator EndSequenceCoroutine()
+    {
+        _isSequenceOver = true;
+        yield return new WaitForSeconds(END_SEQUENCE_BUFFER);
+        _isSequenceOver = false;
     }
 
     private IEnumerator WrongResponse()
@@ -655,7 +666,7 @@ public class SimonGame : MonoBehaviour
         UpdateSessionTime();
         UpdateUserTime();
 
-        if (_timeRemaining <= 0)    //Restart from "Choose difficulty"
+        if (_timeRemaining <= 0 && _isSequenceOver)    //Restart from "Choose difficulty"
         {
             StopGame();
         }
