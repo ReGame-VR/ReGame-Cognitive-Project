@@ -667,7 +667,7 @@ public class SimonGame : MonoBehaviour
         
         UpdateSessionTime();
         UpdateUserTime();
-
+        
         if (_timeRemaining <= 0 && _isSequenceOver)    //Restart from "Choose difficulty"
         {
             StopGame();
