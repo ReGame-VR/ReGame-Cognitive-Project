@@ -661,7 +661,9 @@ public class SimonGame : MonoBehaviour
     {
         _timeRemaining -= Time.fixedDeltaTime;
         _timeInSequence += Time.fixedDeltaTime;
-        timerCustomTextCanvas.SetBody(CustomTextCanvas.FormatTimeToString(_timeRemaining));
+
+        var textTime = _timeRemaining < 0 ? 0 : _timeRemaining;
+        timerCustomTextCanvas.SetBody(CustomTextCanvas.FormatTimeToString(textTime));
         
         UpdateSessionTime();
         UpdateUserTime();
