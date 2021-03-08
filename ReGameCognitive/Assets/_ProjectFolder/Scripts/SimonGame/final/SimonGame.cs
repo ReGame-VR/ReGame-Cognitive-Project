@@ -10,6 +10,7 @@ public class SimonGame : MonoBehaviour
 {
     [SerializeField] private Feedback[] feedbacks;
     [SerializeField] private Feedback wrongFeedback;
+    [SerializeField] private Feedback correctFeedback;
     [SerializeField] private StartController startController;
     [SerializeField] private StopController stopController;
     [SerializeField] private InstructionPanel instructionPanel;
@@ -545,8 +546,9 @@ public class SimonGame : MonoBehaviour
         
         StopAllFeedback();
         DeactivateHands();
-        
+
         if (!wasCorrect) yield return StartCoroutine(WrongResponse());
+        else yield return StartCoroutine(CorrectResponse());
 
         yield return new WaitForSeconds(timeCubeLit);
         
@@ -576,6 +578,20 @@ public class SimonGame : MonoBehaviour
         for (int i = 0; i < _numberOfButtons; i++)
         {
             PlayFeedback(i, wrongFeedback, false);
+        }
+        
+        yield return new WaitForSeconds(timeCubeLit);
+        
+        SetupColors();
+    }
+    
+    private IEnumerator CorrectResponse()
+    {
+        yield return new WaitForSeconds(timeCubeLit);
+        
+        for (int i = 0; i < _numberOfButtons; i++)
+        {
+            PlayFeedback(i, correctFeedback, false);
         }
         
         yield return new WaitForSeconds(timeCubeLit);
